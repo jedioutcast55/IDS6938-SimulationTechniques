@@ -13,7 +13,7 @@ Compute the dy/dx
 */
 double df(double x, double y)            //function for defining dy/dx
 {
-    return (y * log(y)) / x;
+    return y - (1 / 2)*exp(x / 2)*sin(5 * x) + 5 * exp(x / 2)*cos(5 * x);
 }
 
 
@@ -22,7 +22,7 @@ Compute the exact answer
 */
 double exact(double x)            //function for defining dy/dx
 {
-    return pow(M_E, (x / 2));
+    return exp(x / 2)*sin(5 * x);
 }
 
 
@@ -92,10 +92,10 @@ std::string toString(double x, double y_euler, double y_midpoint, double y_RK4, 
 int main()
 {
 
-    double y_euler = M_E;
-	double y_midpoint = M_E;
-	double y_RK4 = M_E;
-    double x = 2.0;
+    double y_euler = 0.0;
+	double y_midpoint = 0.0;
+	double y_RK4 = 0.0;
+    double x = 0.0;
     double h = 0.1;
 
 	std::cout << std::fixed << std::showpoint;
@@ -108,7 +108,7 @@ int main()
 	//intial values
 	std::cout<< toString(x, y_euler, y_midpoint, y_RK4, exact(x), 10) << std::endl;
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 50; i++)
     {
 		y_euler = rk1(y_euler,h,x);  //caculate y_{i+1}
 		y_midpoint = rk2(y_midpoint, h, x);  //caculate y_{i+1}
