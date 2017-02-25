@@ -145,6 +145,7 @@ void onKeyboardCb(unsigned char key, int x, int y)
    else if (key == '4') mask = theJello.STRUCTURAL;
    else if (key == '5') mask = theJello.SHEAR;
    else if (key == '6') mask = theJello.BEND;
+   
 
    if (mask)
    {
@@ -343,6 +344,11 @@ int main(int argc, char **argv)
     glutAddMenuEntry("Shear Springs\t'5'", '5');
     glutAddMenuEntry("Bend Springs\t'6'", '6');
 
+	int worldMenu = glutCreateMenu(onMenuCb);
+	glutAddMenuEntry("Ground\t'10'", '10');
+	glutAddMenuEntry("Cylinders\t'11'", '11');
+	
+
     theMenu = glutCreateMenu(onMenuCb);
     glutAddMenuEntry("Start\t'>'", '>');
     glutAddMenuEntry("Pause\t'='", '=');
@@ -350,6 +356,7 @@ int main(int argc, char **argv)
     glutAddMenuEntry("Record\t'r'", 'r');
     glutAddSubMenu("Integration Type", intMenu);
     glutAddSubMenu("Draw Settings", displayMenu);
+	glutAddSubMenu("World Type", worldMenu);
     glutAddMenuEntry("_________________", -1);
     glutAddMenuEntry("Exit", 27);
     glutAttachMenu(GLUT_RIGHT_BUTTON);
