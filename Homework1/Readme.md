@@ -18,12 +18,14 @@ Part 1: Numberical Analysis of Integrarion Functions:
  
  Shown on below figure from WolframAlpha
 | Figure 1: Analytical Solution:   
-| ------------- 
-| ![](images/DifferentialEquationSolutionHW1Part1.PNG?raw=true)  
+| -------------|
+| ![](images/DifferentialEquationSolutionHW1Part1.PNG?raw=true) | 
 
  
  (b) Translate the mathematical formulas you now have into the df and exact.
-       The code can be found in the Lecture6 folder.  This is the code that I utilize to run the program to produce 
+       The code can be found in the Lecture6 folder.  Output file can be found in "...Homework1/DocumentaionSupport/NumericalMethodDataFile.txt"
+	   
+(c)  This is the code that I utilize to run the program to produce 
 	   RK1, RK2 and RK4, put the following results on a table.
 	   
 	   Results can be seen in the following table:
@@ -137,17 +139,50 @@ Part 1: Numberical Analysis of Integrarion Functions:
  
 | Figure 2: Graph comparison of Euler, Midpoint and RK4 method with the exact solution:   
 | ------------- 
-| ![](images/EulerMidpointRK4andExactResults.PNG?raw=true)
+| ![](images/EulerMidpointRK4andExactResults.PNG?raw=true)|
 	
-	
+
+(d) Plot the error percentages for RK1, RK2, and RK4.
+     %error = |exact - apporx|/exact
+	 
+	 
 | Figure 3: Erro percentage of the  Euler, Midpoint and RK4 method when compared to the exact solution:   
-| ------------- 
-| ![](images/EulerMidpointRK4andExactError.PNG?raw=true)
+| -------------|
+| ![](images/EulerMidpointRK4andExactError.PNG?raw=true)|
+
+
+(e) Vary the step size h = n, where you define three n valuse for x = <0.0, 10.0>.  I have selected the following values for n.
+     
+	 |h = n for n = 0.05|
+	 |h = n for n = 0.5  |
+	 |h = n for n = 1    |
+	 
+Program results can be seen in "...Homework1/DocumentaionSupport/NumericalMethodDataFile.txt"
 	
+| Figure 4: Graph comparison RK4 method running at different time steps h = 0.05, 0.5, and 1:   
+| -------------|
+| ![](images/RK4atTimeStpes_0.05_0.5_1.PNG?raw=true)|	
 	
+(f) Analysis of results:
+    
+	(1) Describe how varying the integration method changes the accuracy.
+	By varying the different integration methods and take the error percentage (|exact – approx.|/ exact) we can
+    determine which method is more accurate for a time step h = 0.1.                                                               
 	
+	(2) What happens as you increase the x value to the accuracy?
+	As we can see from the error percentage graph, the error fluctuation increases and become for frequent and 
+    some have large magnitudes.  It is very obvious on the Euler methods for x <0.0-10.0), less so on the other 
+    two methods.  But you can still see it on the Midpoint, on the RK4 is very stable (at h=0.1).                          
 	
+	(3) How does varying the step size effect the accuracy?
+	When a comparison of the RK4 method was taken with different time steps.  You can see that the higher the 
+    step (in this case h=1) veers away from the exact solution.  While the smaller the h is (h=0.05) much closer 
+	to the exact solution. In the graph presented RK4 for h = 0.05 cannot be seen as it is underneath the exact  
+	curve.                                                                                                                                                  
 	
+	(4) Which method is the most accurate and why (in particular explain what is taken to account in the solution)?
+	The most accurate method is RK4.  RK4 utilizes a higher order differential equation the both the Euler’s and 
+    Midpoint methods.  RK4 option take into account the error more accurately than the other two methods.     
 	
 	
 	
