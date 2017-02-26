@@ -21,14 +21,14 @@
 //double JelloMesh::g_structuralKd = 2.0; 
 //double JelloMesh::g_structuralKs = 10.0; // Review 
 //double JelloMesh::g_structuralKd = 2.0; 
-double JelloMesh::g_structuralKs = 7500.0; 
-double JelloMesh::g_structuralKd = 8.5;
+double JelloMesh::g_structuralKs = 6500.0; 
+double JelloMesh::g_structuralKd = 10.0;
 double JelloMesh::g_attachmentKs = 0.0;
 double JelloMesh::g_attachmentKd = 0.0;
-double JelloMesh::g_shearKs = 0.0;
-double JelloMesh::g_shearKd = 0.0;
-double JelloMesh::g_bendKs = 0.0;
-double JelloMesh::g_bendKd = 0.0;
+double JelloMesh::g_shearKs = 4500.0;
+double JelloMesh::g_shearKd = 9.5;
+double JelloMesh::g_bendKs = 4500.0;
+double JelloMesh::g_bendKd = 9.5;
 double JelloMesh::g_penaltyKs = 7500.0;
 double JelloMesh::g_penaltyKd = 8.5;
 
@@ -218,6 +218,38 @@ void JelloMesh::InitJelloMesh()
             }
         }
     }
+
+	// Setup shear springs
+	for (int i = 0; i < m_rows + 1; i++)
+	{
+		for (int j = 0; j < m_cols + 1; j++)
+		{
+			for (int k = 0; k < m_stacks + 1; k++)
+			{
+				if ((j < m_cols) && (i < m_rows)) AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j + 1, k));
+				if ((j > 0) && (j < (m_cols + 1)) && (i < 0 ) && (i < (m_rows + 1))) AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j - 1, k));
+				if ((j < m_cols) && (k < m_stacks)) AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i, j +1, k + 1));
+				if ((j > 0) && (j < (m_cols + 1)) && (k < 0) && (k < (m_stacks + 1))) AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i, j - 1, k + 1));
+				if ((i < m_rows) && (k < m_stacks)) AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j, k + 1));
+				if ((i > 0) && (i < (m_rows + 1)) && (k < 0) && (k < (m_stacks + 1))) AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i - 1, j, k + 1));
+				
+			}
+		}
+	}
+
+	// Setup bend springs
+	for (int i = 0; i < m_rows + 1; i++)
+	{
+		for (int j = 0; j < m_cols + 1; j++)
+		{
+			for (int k = 0; k < m_stacks + 1; k++)
+			{
+				if (i < (m_rows - 1)) AddBendSpring(GetParticle(g, i, j, k), GetParticle(g, i + 2, j, k));
+				if (j < (m_cols -1)) AddBendSpring(GetParticle(g, i, j, k), GetParticle(g, i, j + 2, k));			
+				if (k < (m_stacks - 1)) AddBendSpring(GetParticle(g, i, j, k), GetParticle(g, i, j, k + 2));
+			}
+		}
+	}
 
     // Init mesh geometry
     m_mesh.clear();
@@ -600,7 +632,6 @@ void JelloMesh::MidPointIntegrate(double dt)
 	ParticleGrid& source = m_vparticles;  // source is a ptr!
 
 	// Step 1
-	ParticleGrid accum1 = m_vparticles;
 	for (int i = 0; i < m_rows + 1; i++)
 	{
 		for (int j = 0; j < m_cols + 1; j++)
@@ -619,7 +650,6 @@ void JelloMesh::MidPointIntegrate(double dt)
 	ComputeForces(target);
 
 	// Step 2
-	ParticleGrid accum2 = m_vparticles;
 	for (int i = 0; i < m_rows + 1; i++)
 	{
 		for (int j = 0; j < m_cols + 1; j++)
