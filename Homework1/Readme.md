@@ -210,4 +210,10 @@ Program results can be seen in "...Homework1/DocumentaionSupport/NumericalMethod
        Jello stable?
     5) How would you model and simulate water (in terms of a continuous simulation)?
     
-    Part 4:
+ Part 4:
+    
+Youtube video showing different integration methods: (Euler, Midpoint, Leapfrog, Velocity Verlet, and RK4)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/CJfffxjUl7c" frameborder="0" allowfullscreen></iframe>
+
+This video shows that some time an error looks better than what was intended: Jello Cube Simulation with cylinders:
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hzupTzeKPPE" frameborder="0" allowfullscreen></iframe>
