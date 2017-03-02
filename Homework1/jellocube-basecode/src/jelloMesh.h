@@ -36,7 +36,7 @@ public:
     virtual float GetDepth() const;
 
     // Set/Get our numerical integration type
-    enum IntegrationType { EULER, MIDPOINT, RK4 };
+    enum IntegrationType { EULER, MIDPOINT, RK4, LEAPFROG, VELOCITYVERLET};
     virtual void SetIntegrationType(IntegrationType type);
     virtual IntegrationType GetIntegrationType() const;
 
@@ -84,6 +84,10 @@ protected:
 	virtual void EulerIntegrate(double dt);
 	virtual void MidPointIntegrate(double dt);
 	virtual void RK4Integrate(double dt);
+
+	// Other integration methods:
+	virtual void Leapfrog(double dt);
+	virtual void VelocityVerlet(double dt);
 
     enum Face {XLEFT, XRIGHT, YTOP, YBOTTOM, ZFRONT, ZBACK};
     class FaceMesh

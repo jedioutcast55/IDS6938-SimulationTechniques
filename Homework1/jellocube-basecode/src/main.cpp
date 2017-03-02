@@ -16,7 +16,7 @@
 JelloMesh theJello;
 Camera theCamera;
 World theWorld("../worlds/ground.xml");
-// World theWorld("../worlds/cylinders.xml");
+//World theWorld("../worlds/cylinders.xml");
 mmc::FpsTracker theFpsTracker;
 
 // UI Helpers
@@ -131,11 +131,13 @@ void onKeyboardCb(unsigned char key, int x, int y)
 {
    unsigned int mask = 0x0;
 
-   if (key == ' ') theCamera.reset();
+   if (key == ' ') theCamera.reset(); 
    else if (key == 27) exit(0); // ESC Key
    else if (key == '8') theJello.SetIntegrationType(JelloMesh::EULER);
    else if (key == '9') theJello.SetIntegrationType(JelloMesh::MIDPOINT);
    else if (key == '0') theJello.SetIntegrationType(JelloMesh::RK4);
+   else if (key == 'l') theJello.SetIntegrationType(JelloMesh::LEAPFROG);
+   else if (key == 'v') theJello.SetIntegrationType(JelloMesh::VELOCITYVERLET);
    else if (key == '>') isRunning = true;
    else if (key == '=') isRunning = false;
    else if (key == '<') theJello.Reset();
@@ -220,6 +222,8 @@ void drawOverlay()
      case JelloMesh::EULER: intstr = "Euler"; break;
      case JelloMesh::MIDPOINT: intstr = "Midpoint"; break;
      case JelloMesh::RK4: intstr = "RK4"; break;
+	 case JelloMesh::LEAPFROG: intstr = "Leapfrog"; break;
+	 case JelloMesh::VELOCITYVERLET: intstr = "VelocityVerlet"; break;
      }
 
      char info[1024];
@@ -336,6 +340,8 @@ int main(int argc, char **argv)
     glutAddMenuEntry("Euler\t'8'", '8');
     glutAddMenuEntry("Midpoint\t'9'", '9');
     glutAddMenuEntry("RK4\t'0'", '0');
+	glutAddMenuEntry("Leapfrog\t'l'", 'l');
+	glutAddMenuEntry("VelocityVerlet\t'v'", 'v');
 
     int displayMenu = glutCreateMenu(onMenuCb);
     glutAddMenuEntry("Mesh\t'1'", '1');
@@ -345,11 +351,6 @@ int main(int argc, char **argv)
     glutAddMenuEntry("Shear Springs\t'5'", '5');
     glutAddMenuEntry("Bend Springs\t'6'", '6');
 
-	int worldMenu = glutCreateMenu(onMenuCb);
-	glutAddMenuEntry("Ground\t'10'", '10');
-	glutAddMenuEntry("Cylinders\t'11'", '11');
-	
-
     theMenu = glutCreateMenu(onMenuCb);
     glutAddMenuEntry("Start\t'>'", '>');
     glutAddMenuEntry("Pause\t'='", '=');
@@ -357,7 +358,6 @@ int main(int argc, char **argv)
     glutAddMenuEntry("Record\t'r'", 'r');
     glutAddSubMenu("Integration Type", intMenu);
     glutAddSubMenu("Draw Settings", displayMenu);
-	glutAddSubMenu("World Type", worldMenu);
     glutAddMenuEntry("_________________", -1);
     glutAddMenuEntry("Exit", 27);
     glutAttachMenu(GLUT_RIGHT_BUTTON);

@@ -5,7 +5,10 @@ Roberto Cabrera
 
 This is the framework for homework #1. Please first read the [homework writeup](HomeWork%231.pdf).
 
-The assignment is due: Monday, February 27 at 11:59PM (EST)
+The assignment is due: Wednesday, March 1,  at 11:59PM (EST)
+
+Dr. Kyder: I am requesting to use one of the three days grace period for this assignment !!!!!!!!!!!!
+New deadline should be: Thursday, March 2, 2017 at 11:59PM (EST). Thank you.
 
 
 | undeformed jello  | deformed jello |

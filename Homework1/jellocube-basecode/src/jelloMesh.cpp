@@ -15,22 +15,25 @@
 //double JelloMesh::g_structuralKd = 50.0; 
 //double JelloMesh::g_structuralKs = 5000.0; // Review 
 //double JelloMesh::g_structuralKd = 2.0; 
-//double JelloMesh::g_structuralKs = 1000.0; // Review 
+//double JelloMesh::g_structuralKs = 1000.0; // Review  
 //double JelloMesh::g_structuralKd = 2.0; 
 //double JelloMesh::g_structuralKs = 500.0; // Review 
 //double JelloMesh::g_structuralKd = 2.0; 
 //double JelloMesh::g_structuralKs = 10.0; // Review 
 //double JelloMesh::g_structuralKd = 2.0; 
-double JelloMesh::g_structuralKs = 6500.0; 
-double JelloMesh::g_structuralKd = 10.0;
+double JelloMesh::g_structuralKs = 6000.0; 
+double JelloMesh::g_structuralKd = 10.51;
 double JelloMesh::g_attachmentKs = 0.0;
 double JelloMesh::g_attachmentKd = 0.0;
-double JelloMesh::g_shearKs = 4500.0;
-double JelloMesh::g_shearKd = 9.5;
-double JelloMesh::g_bendKs = 4500.0;
-double JelloMesh::g_bendKd = 9.5;
-double JelloMesh::g_penaltyKs = 7500.0;
-double JelloMesh::g_penaltyKd = 8.5;
+double JelloMesh::g_shearKs = 1375.0;
+double JelloMesh::g_shearKd = 12.856;
+double JelloMesh::g_bendKs = 1375.0;
+double JelloMesh::g_bendKd = 12.856;
+double JelloMesh::g_penaltyKs = 4000.0;
+double JelloMesh::g_penaltyKd = 10.51;
+// Coefficient of restititution;
+double r = 2.1;
+
 
 
 JelloMesh::JelloMesh() :     
@@ -226,16 +229,55 @@ void JelloMesh::InitJelloMesh()
 		{
 			for (int k = 0; k < m_stacks + 1; k++)
 			{
-				if ((j < m_cols) && (i < m_rows)) AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j + 1, k));
-				if ((j > 0) && (j < (m_cols + 1)) && (i < 0 ) && (i < (m_rows + 1))) AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j - 1, k));
-				if ((j < m_cols) && (k < m_stacks)) AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i, j +1, k + 1));
-				if ((j > 0) && (j < (m_cols + 1)) && (k < 0) && (k < (m_stacks + 1))) AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i, j - 1, k + 1));
-				if ((i < m_rows) && (k < m_stacks)) AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j, k + 1));
-				if ((i > 0) && (i < (m_rows + 1)) && (k < 0) && (k < (m_stacks + 1))) AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i - 1, j, k + 1));
-				
+				// Outside cubeFront phase of the mesh backlash spring
+				if ((j < m_cols) && (k < m_stacks)) // K cube face
+				{
+					AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i, j + 1, k + 1));
+					
+					if (i < m_rows)
+					{
+						AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j + 1, k + 1));
+					}
+				}
+				if ((k > 0) && (j < m_cols)) 
+				{
+					AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i, j + 1, k - 1));
+					
+					if (i < m_rows)
+					{
+						AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j + 1, k - 1));
+					}
+				}
+				// k cube face
+				if ((k < m_stacks) && (i < m_rows)) 
+				{
+					AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j, k + 1));
+				}
+				if ((k > 0) && (i < m_rows))  
+				{
+					AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j, k - 1));
+				} 
+				// j cube face
+				if ((j < m_cols) && (i < m_rows))
+				{
+					AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j + 1, k));
+				} 
+				if ((i > 0) && (j < m_cols))
+				{
+					AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i - 1, j + 1, k));
+
+					if (k < m_stacks)
+					{
+						AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i - 1, j + 1, k + 1));
+					}
+				} 
+				if ((i > 0) && (k > 0) && (j < m_cols))
+				{
+					AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i - 1, j + 1, k - 1));
+				}		
 			}
 		}
-	}
+	} 
 
 	// Setup bend springs
 	for (int i = 0; i < m_rows + 1; i++)
@@ -249,8 +291,8 @@ void JelloMesh::InitJelloMesh()
 				if (k < (m_stacks - 1)) AddBendSpring(GetParticle(g, i, j, k), GetParticle(g, i, j, k + 2));
 			}
 		}
-	}
-
+	}  
+	
     // Init mesh geometry
     m_mesh.clear();
     m_mesh.push_back(FaceMesh(*this,XLEFT));
@@ -430,6 +472,8 @@ void JelloMesh::Update(double dt, World& world, const vec3& externalForces)
     case EULER: EulerIntegrate(dt); break;
     case MIDPOINT: MidPointIntegrate(dt); break;
     case RK4: RK4Integrate(dt); break;
+	case LEAPFROG: Leapfrog(dt); break;
+	case VELOCITYVERLET: VelocityVerlet(dt); break;
     }
 }
 
@@ -454,12 +498,27 @@ void JelloMesh::CheckForCollisions(ParticleGrid& grid, const World& world)
                     if (world.m_shapes[i]->GetType() == World::CYLINDER && 
                         CylinderIntersection(p, (World::Cylinder*) world.m_shapes[i], intersection))
                     {
-                        m_vcontacts.push_back(intersection);
+						if (intersection.m_type == COLLISION)
+						{
+							m_vcollisions.push_back(intersection);
+						}
+						else if (intersection.m_type == CONTACT)
+						{
+							m_vcontacts.push_back(intersection);
+						}
                     }
                     else if (world.m_shapes[i]->GetType() == World::GROUND && 
                         FloorIntersection(p, intersection))
                     {
-                        m_vcontacts.push_back(intersection);
+						if (intersection.m_type == COLLISION)
+						{
+							m_vcollisions.push_back(intersection);
+						}
+						else if (intersection.m_type == CONTACT)
+						{
+							m_vcontacts.push_back(intersection);
+						}
+                       
                     }
                 }
             }
@@ -516,16 +575,25 @@ void JelloMesh::ResolveContacts(ParticleGrid& grid)
        const Intersection& contact = m_vcontacts[i];
        Particle& p = GetParticle(grid, contact.m_p);
        vec3 normal = contact.m_normal; 
-
-	   // Coefficient of restititution;
-	   double r = 1.0;
+	   float dist = abs(contact.m_distance);
+	   
 
         // TODO
 
 	   // Establish newParticle contact the ground
 	   // v' = v - 2(v * N) N * r
-	   p.velocity = p.velocity - ((2 * p.velocity * normal) * (normal * r));
-	   p.position = p.position + (contact.m_distance * normal);  // Only interested in the position on the vertical axis.
+	   //p.velocity = p.velocity - ((2 * p.velocity * normal) * (normal * r));
+	  // p.position = p.position + (contact.m_distance * normal);  
+
+	   double elastic = g_penaltyKs * (contact.m_distance);
+	   double dampening = g_penaltyKd * dist;
+	   vec3 normalizedPosition = normal * contact.m_distance / abs(contact.m_distance);
+
+	   //if ((p.velocity * normal) < 0.0)
+	   //{
+	       p.force = p.force + (elastic + dampening) * normalizedPosition;
+	       p.velocity = p.velocity - (contact.m_normal * dist);
+	   //}
 	  
     }
 }
@@ -539,13 +607,20 @@ void JelloMesh::ResolveCollisions(ParticleGrid& grid)
         vec3 normal = result.m_normal;
         float dist = result.m_distance;
 
+		
+
         // TODO
 		// If Velocity is moving into the collision threshold (towards the surface), apply the force
-		if (pt.velocity * normal < 0.0)
+		/* if (pt.velocity * normal < 0.0)
 		{
 			pt.force = pt.force + (-(g_penaltyKs * (dist * normal.Normalize()) + g_penaltyKd * (pt.velocity * normal.Normalize()) * normal.Normalize()));
-		}
+		} */
+		
 
+		
+			// v' = v - 2(v * N) N * r
+			pt.velocity = pt.velocity - ((2 * pt.velocity * normal) * (normal * r)); // reduce speed
+			//pt.position = pt.position + (result.m_distance * normal);
 	}
 }
 
@@ -553,14 +628,15 @@ bool JelloMesh::FloorIntersection(Particle& p, Intersection& intersection)
 {
     // TODO
 	bool collisionContact = false;
-	double collisionBoxThreshold = 0.2;
+	double collisionBoxThreshold = 0.1;
+
 	// Need to check for contact to the ground first otherwise it will never be executed:
 	if (p.position[1] < 0.0)
 	{
 		// Build intersection for contact with the ground:
 		intersection.m_p = p.index;
 		intersection.m_normal = vec3(0.0, 1.0, 0.0);
-		intersection.m_distance = (0.0 -p.position[1]);  // distance from the ground
+		intersection.m_distance = (0.0 - p.position[1]) ;  // distance from the ground
 		intersection.m_type = CONTACT;
 
 		collisionContact = true;
@@ -571,7 +647,7 @@ bool JelloMesh::FloorIntersection(Particle& p, Intersection& intersection)
 		// Build intersection for collision to the ground:
 		intersection.m_p = p.index;
 		intersection.m_normal = vec3(0.0, 1.0, 0.0);
-		intersection.m_distance = (collisionBoxThreshold - p.position[1]);  // distance from the collision box threshold.
+		intersection.m_distance = p.position[1];  // distance from the collision box threshold.
 		intersection.m_type = COLLISION;
 
 		collisionContact = true;
@@ -596,6 +672,103 @@ bool JelloMesh::CylinderIntersection(Particle& p, World::Cylinder* cylinder,
     // TODO
     return false;
 }
+
+// Other integration method Leapfrog.
+void JelloMesh::Leapfrog(double dt)
+{
+	// TODO
+	ParticleGrid& source = m_vparticles;  // source is a ptr!
+	ParticleGrid target = m_vparticles; // copy data
+
+	for (int i = 0; i < m_rows + 1; i++)
+	{
+		for (int j = 0; j < m_cols + 1; j++)
+		{
+			for (int k = 0; k < m_stacks + 1; k++)
+			{
+				//Update the particales velicity and position
+				Particle& t = GetParticle(target, i, j, k);
+
+				// Calculate velocity hafl of step v(i+(0.5)) = vi + ai * dt + 0.5
+				t.velocity = t.velocity + (t.force * (1.0 / t.mass) *(dt * 0.5));
+
+				//Calculate the next position: x(i+1) = xi + v(i + 0.5) * dt
+				t.position = t.position + (t.velocity * dt);
+
+			}
+		}
+	}
+
+	// Since we need the acceleration for the next step and it is base on x(i + 1) then we use the target
+	ComputeForces(target);  // Compute force to get F(i + 1) to get a (i+1).
+
+	for (int i = 0; i < m_rows + 1; i++)
+	{
+		for (int j = 0; j < m_cols + 1; j++)
+		{
+			for (int k = 0; k < m_stacks + 1; k++)
+			{
+				//Update the particales velicity and position
+				Particle& s = GetParticle(source, i, j, k);
+				Particle& t = GetParticle(target, i, j, k);
+
+				// Calculate velocity hafl of step v(i+ 1) = v(i + 0.5) + a(i + 1) * dt + 0.5
+				s.velocity = t.velocity + (t.force * (1.0/t.mass) * dt * 0.5);  // calculated in target, indicate
+
+				//Calculate the next position: x(i+1) = xi + v(i + 0.5) * dt
+				s.position = t.position; // calculated already in target.
+
+			}
+		}
+	}
+}
+
+// Other integration method VelocityVerlet 
+void JelloMesh::VelocityVerlet(double dt)
+{
+	// TODO
+	ParticleGrid& source = m_vparticles;  // source is a ptr!
+	ParticleGrid target = m_vparticles; // copy data
+
+	for (int i = 0; i < m_rows + 1; i++)
+	{
+		for (int j = 0; j < m_cols + 1; j++)
+		{
+			for (int k = 0; k < m_stacks + 1; k++)
+			{
+				//Update the particales velicity and position
+				Particle& t = GetParticle(target, i, j, k);
+
+				//Calculate the next position: x(t + dt) = x(t) + v(t) * dt + 0.5 * a(t) * dt *dt
+				t.position = t.position + (t.velocity * dt) + (0.5 * (t.force * (1.0/t.mass)) * dt * dt);
+
+			}
+		}
+	}
+
+	// Since we need the acceleration for the next step and it is base on x(t + dt) then we use the target
+	ComputeForces(target);  // Compute force to get F(t + dt) to get a (t+dt).
+
+	for (int i = 0; i < m_rows + 1; i++)
+	{
+		for (int j = 0; j < m_cols + 1; j++)
+		{
+			for (int k = 0; k < m_stacks + 1; k++)
+			{
+				//Update the particales velicity and position
+				Particle& s = GetParticle(source, i, j, k);
+				Particle& t = GetParticle(target, i, j, k);
+
+				// Calculate velocity hafl of step v(t + dt) = v(t) + 0.5 *(a(t) + a(t + dt)) * dt 
+				s.velocity = s.velocity + (0.5 * ((s.force * (1.0 / s.mass)) + (t.force * (1.0 / t.mass))) * dt);  // calculated in target, indicate
+
+				s.position = t.position; // calculated already in target.
+
+			}
+		}
+	}
+}
+
 
 void JelloMesh::EulerIntegrate(double dt)
 {
