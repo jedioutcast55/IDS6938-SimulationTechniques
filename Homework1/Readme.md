@@ -214,9 +214,9 @@ Program results can be seen in "...Homework1/DocumentaionSupport/NumericalMethod
     
 Youtube video showing different integration methods: (Euler, Midpoint, Leapfrog, Velocity Verlet, and RK4)
 
-[![Jello Cube showing different integration method](JelloCubeDifferentIntegrationMethods.PNG)](https://youtu.be/CJfffxjUl7c)
+[![Jello Cube showing different integration method]((images/JelloCubeDifferentIntegrationMethods.PNG)](https://youtu.be/CJfffxjUl7c)
 
 This video shows that some time an error looks better than what was intended: Jello Cube Simulation with cylinders:
 
-[![Jello Cube Implosion](JelloCubeImplosion.PNG)](https://youtu.be/hzupTzeKPPE)
+[![Jello Cube Implosion]((images/JelloCubeImplosion.PNG)](https://youtu.be/hzupTzeKPPE)
 
