@@ -17,28 +17,27 @@ New deadline should be: Thursday, March 2, 2017 at 11:59PM (EST). Thank you.
 
 Part 1: Numberical Analysis of Integrarion Functions:
  (a) Solve for the exact symbolic (analytical solution).
- 
- 
+
+
  Shown on below figure from WolframAlpha
-| Figure 1: Analytical Solution:   
+| Figure 1: Analytical Solution:
 
-| ![](images/DifferentialEquationSolutionHW1Part1.PNG?raw=true) | 
+| ![](images/DifferentialEquationSolutionHW1Part1.PNG?raw=true) |
 
- 
+
  (b) Translate the mathematical formulas you now have into the df and exact.
-       The code can be found in the Lecture6 folder.  Output file can be found in "...Homework1/DocumentaionSupport/NumericalMethodDataFile.txt"
-	   
-(c)  This is the code that I utilize to run the program to produce 
+       The code can be found in the Lecture6-Solution folder.  Output file can be found in "...Homework1/DocumentaionSupport/NumericalMethodDataFile.txt"
+
+(c)  This is the code that I utilize to run the program to produce
 	   RK1, RK2 and RK4, put the following results on a table.
-	   
 	   Results can be seen in the following table:
-	   
-	| x |	|y (Euler)|	|y (midpoint)|	|y (RK44)|	|EXACT|
-	|----| |----------|	|----------|	|----------|	|----------|
-	|0.0|	|0|	        |0|	        |0|	        |0|
-	|0.1|	|0.5|			|0.5090369272|	|0.5040147599|	|0.5040062116|
-	|0.2|	|0.9860882804|	|0.9418917554|	|0.9299833736|	|0.9299692608|
-	|0.3|	|1.336761843|	|1.178280127|	|1.158938591|	|1.158923832|
+
+	| x |	|y (Euler)|	|y (midpoint)|	|y (RK44)|	  |EXACT|
+	|----| |----------|	 |----------|	  |----------|    |----------|
+	|0.0|	|0|	        |0|	           |0|	         |0|
+	|0.1|	|0.5|		  |0.5090369272|	|0.5040147599|  |0.5040062116|
+	|0.2|	|0.9860882804| |0.9418917554|	|0.9299833736|  |0.9299692608|
+	|0.3|	|1.336761843|  |1.178280127|	 |1.158938591|   |1.158923832|
 	|0.4|	|1.453584287|	|1.136380907|	|1.110627992|	|1.110618385|
 	|0.5|	|1.28927035|	|0.7981592984|	|0.7684526188|	|0.7684534442|
 	|0.6|	|0.8654303303|	|0.2207680347|	|0.1904774691|	|0.1904920858|
@@ -139,58 +138,76 @@ Part 1: Numberical Analysis of Integrarion Functions:
 
 
 
- 
-| Figure 2: Graph comparison of Euler, Midpoint and RK4 method with the exact solution:   
-| ------------- 
+
+| Figure 2: Graph comparison of Euler, Midpoint and RK4 method with the exact solution:
+| -------------
 | ![](images/EulerMidpointRK4andExactResults.PNG?raw=true)|
-	
+
 
 (d) Plot the error percentages for RK1, RK2, and RK4.
      %error = |exact - apporx|/exact
-	 
-	 
+
+
 | Figure 3: Error percentage of the  Euler, Midpoint and RK4 method when compared to the exact solution:   
 | -------------|
 | ![](images/EulerMidpointRK4andExactError.PNG?raw=true)|
 
 
 (e) Vary the step size h = n, where you define three n valuse for x = <0.0, 10.0>.  I have selected the following values for n.
-     
+
 	 |h = n for n = 0.05|
-	 |h = n for n = 0.5  |
-	 |h = n for n = 1    |
-	 
+	 |h = n for n = 0.5 |
+	 |h = n for n = 1   |
+
 Program results can be seen in "...Homework1/DocumentaionSupport/NumericalMethodDataFile.txt"
-	
-| Figure 4: Graph comparison RK4 method running at different time steps h = 0.05, 0.5, and 1:   
+
+| Figure 4: Graph comparison RK4 method running at different time steps h = 0.05, 0.5, and 1:
 | -------------|
-| ![](images/RK4atTimeStpes_0.05_0.5_1.PNG?raw=true)|	
-	
+| ![](images/RK4atTimeStpes_0.05_0.5_1.PNG?raw=true)|
+
 (f) Analysis of results:
-    
+
 	(1) Describe how varying the integration method changes the accuracy.
 	By varying the different integration methods and take the error percentage (|exact – approx.|/ exact) we can
-    determine which method is more accurate for a time step h = 0.1.                                                               
-	
+    determine which method is more accurate for a time step h = 0.1.
+
 	(2) What happens as you increase the x value to the accuracy?
-	As we can see from the error percentage graph, the error fluctuation increases and become for frequent and 
-    some have large magnitudes.  It is very obvious on the Euler methods for x <0.0-10.0), less so on the other 
-    two methods.  But you can still see it on the Midpoint, on the RK4 is very stable (at h=0.1).                          
-	
+	As we can see from the error percentage graph, the error fluctuation increases and become for frequent and
+    some have large magnitudes.  It is very obvious on the Euler methods for x <0.0-10.0), less so on the other
+    two methods.  But you can still see it on the Midpoint, on the RK4 is very stable (at h=0.1).
+
 	(3) How does varying the step size effect the accuracy?
-	When a comparison of the RK4 method was taken with different time steps.  You can see that the higher the 
-    step (in this case h=1) veers away from the exact solution.  While the smaller the h is (h=0.05) much closer 
-	to the exact solution. In the graph presented RK4 for h = 0.05 cannot be seen as it is underneath the exact  
-	curve.                                                                                                                                                  
-	
+	When a comparison of the RK4 method was taken with different time steps.  You can see that the higher the
+    step (in this case h=1) veers away from the exact solution.  While the smaller the h is (h=0.05) much closer
+	to the exact solution. In the graph presented RK4 for h = 0.05 cannot be seen as it is underneath the exact
+	curve.
+
 	(4) Which method is the most accurate and why (in particular explain what is taken to account in the solution)?
-	The most accurate method is RK4.  RK4 utilizes a higher order differential equation the both the Euler’s and 
-    Midpoint methods.  RK4 option take into account the error more accurately than the other two methods.     
-	
-	
-	
-	
-	
-	
-	
-	
+	The most accurate method is RK4.  RK4 utilizes a higher order differential equation the both the Euler’s and
+    Midpoint methods.  RK4 option take into account the error more accurately than the other two methods.
+
+    Part 2: Programming a Jello Cube
+	- Forward Euler, midpoint integration, and RK4 - The following functions have been implemented on the jello cube
+	  in File jelloMesh.cpp:
+      Implemented JelloMesh::Euler()
+      Implemented JelloMesh::MidpointIntegration()
+      Implemented JelloMesh::RK4Integration()
+
+	-  Particle forces other than gravity:                                                                                      The following function has been implemented on the jello cube in File jelloMesh.cpp:
+	   Implemented spring forces in JelloMesh::ComputeForces(ParticleGrid& grid)
+
+	- Collision and penetration detection.
+	  The following functions have been implemented on the jello cube                                                           in File jelloMesh.cpp:                                                                                                   Implement JelloMesh::ResolveContacts(ParticleGrid& grid)                                                                 Implement JelloMesh::ResolveCollisions(ParticleGrid& grid)
+
+    - Extra springs.                                                                                                           The following functions have been implemented on the jello cube                                                           in File jelloMesh.cpp:                                                                                                    Modify JelloMesh::InitJelloMesh() to add springs.
+
+	- Implementing 2 features on the extra features list.                                                                       Different and more stable integration methods. Verlet, Velocity Verlet, Leapfrog, or                                     Symplectic. I have decided to implement two new enumeration methods.  These methods can be found in jelloMesh.cpp:       Implemented JelloMesh::Leapfrog()                                                                                         Implemented JelloMesh::VelocityVerlet()                                                                                   Implemented JelloMesh::VelocityVerlet()
+
+    Part 3:                                                                                                                   1) What is the effect of the Ks and Kd parameters on the jello? .                                                         2) What are the benefits and the drawbacks of the collision system used here? What are some different ways in which          it could be improved?
+	3) What are some example systems you could model with Mass-spring simulations? Explain
+       how you would you construct the model.
+    4) Does the jello behave realistically? What integration method did you choose to make the
+       Jello stable?
+    5) How would you model and simulate water (in terms of a continuous simulation)?
+    
+    Part 4:
