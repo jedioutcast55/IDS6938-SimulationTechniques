@@ -73,7 +73,7 @@ Part 1: Numberical Analysis of Integrarion Functions:
 	|3.6|	|1.836719894|	|-4.275713547|	|-4.543483006|	|-4.543208093|
 	|3.7|	|4.244893938|	|-1.877962749|	|-2.178355567|	|-2.178114923|
 	|3.8|	|7.765893459|	|1.356347703|	|1.001862248|	|1.002063203|
-	|3.9|	|11.797567|		|4.68431418|		|4.255978576|	|4.256150562|
+	|3.9|	|11.797567|		|4.68431418|	|4.255978576|	|4.256150562|
 	|4.0|	|15.56128357|	|7.261608412|	|6.745634215|	|6.745803673|
 	|4.1|	|18.28779237|	|8.351461123|	|7.743070647|	|7.743275262|
 	|4.2|	|19.42038688|	|7.527669226|	|6.8319912|		|6.832272103|
@@ -97,7 +97,7 @@ Part 1: Numberical Analysis of Integrarion Functions:
 	|6.0|	|48.91085718|	|-16.33276767|	|-19.84783646|	|-19.84514567|
 	|6.1|	|56.34331178|	|-12.91820728|	|-16.74997531|	|-16.74715483|
 	|6.2|	|69.24521405|	|-4.730353493|	|-8.971708122|	|-8.968807967|
-	|6.3|	|86.770879|		|6.71462731|		|1.956659048|	|1.959633321|
+	|6.3|	|86.770879|		|6.71462731|	|1.956659048|	|1.959633321|
 	|6.4|	|106.976805|	|18.90583913|	|13.52479088|	|13.52789171|
 	|6.5|	|127.2308958|	|28.88713582|	|22.79198022|	|22.79531867|
 	|6.6|	|144.845701|	|33.9802905|	|27.1065171|	|27.11024922|
@@ -218,6 +218,8 @@ Program results can be seen in "...Homework1/DocumentaionSupport/NumericalMethod
             sophisticated integration methods.  This is because the forces applied immediately push the particle above
             the object as lesser integration methods may produce a higher error rate that the system may not be able to
             handle.
+      -     A way to improve could be by increasing the time step on the integration method, however this comes at a 	
+            processing penalty.
 
 	3) What are some example systems you could model with Mass-spring simulations? Explain
        how you would you construct the model.
@@ -243,7 +245,8 @@ Program results can be seen in "...Homework1/DocumentaionSupport/NumericalMethod
     and provide a simple integral to be use with RK4.  The particles will be in contact with each other and when contact
     occurs the program will need to check for the forces and apply accordingly.  [1] Exploring the internet I saw a
     demonstration for Position Based Fluids which what it seem particle simulation in order to simulate water.
-    (https://www.youtube.com/watch?v=6WZZARzpckw).
+Water simulation with Position Base Fluids
+https://www.youtube.com/watch?v=6WZZARzpckw
 
  Part 4:
 
@@ -259,11 +262,14 @@ This youtube video shows the jello cube interactive with cylinders:
 [![Jello Cube Implosion](images/JelloCubeWithCylinders.PNG?raw=true)](https://youtu.be/hzPipVr6Hlk)
 
 Citations & acknowledgements:
-•	IDS6938 classmates: Some of us got together on a Monday and discussed how to proceed on the homework.  Also after class.  My apologies from not knowing all your names.
-•	Dr. Kider, Jello Cube infrastructure, code snipped provided through piazza. And code Dr. Kider work with other students, and presented during class.
+•	IDS6938 classmates: Some of us got together on a Monday and discussed how to proceed on the homework.  Also after 
+    class.  My apologies from not knowing all your names.
+•	Dr. Kider, Jello Cube infrastructure, code snipped provided through piazza. And code Dr. Kider work with other      
+    students, and presented during class.
 •	Leapfrog information gathered from at https://en.wikipedia.org/wiki/Leapfrog_integration
 •	Velocity Verlet information gathered from wikipedia at https://en.wikipedia.org/wiki/Verlet_integration
-•	[1] http://kotaku.com/mind-blowingly-perfect-water-simulation-is-now-a-realit-477865450, (Article) Mind-Blowingly Perfect Water Simulation Is now a Reality
+•	[1] http://kotaku.com/mind-blowingly-perfect-water-simulation-is-now-a-realit-477865450, (Article) Mind-Blowingly  
+    Perfect Water Simulation Is now a Reality
 
 
 
