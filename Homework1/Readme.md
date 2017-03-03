@@ -211,15 +211,13 @@ Program results can be seen in "...Homework1/DocumentaionSupport/NumericalMethod
        reduces.
 
     2) What are the benefits and the drawbacks of the collision system used here? What are some different ways in which          it could be improved?
-       -	This system uses a hard collision system, which provides a force and velocity in the opposite direction when
+       -	This system uses a soft collision system, which provides a sprint force in the opposite direction when
             the particle hit beyond the object.
        -	The advantage is the algorithm can be easily implemented and would not produce.
-       -	One disadvantage of the Hard Collision system is that it can become more easily unstable with less
-            sophisticated integration methods.  This is because the forces applied immediately push the particle above
-            the object as lesser integration methods may produce a higher error rate that the system may not be able to
-            handle.
-      -     A way to improve could be by increasing the time step on the integration method, however this comes at a 	
-            processing penalty.
+       -	One disadvantage of the soft Collision system is that may look less realistic when interacting with the 
+       -	surface as it will take some iteration to get above the object.
+      -     A way to improve could be by increasing the time step on the integration method will reduce the amount of 
+      -     error as well, however this comes at a processing penalty.
 
 	3) What are some example systems you could model with Mass-spring simulations? Explain
        how you would you construct the model.
