@@ -36,6 +36,7 @@ double r = 2.1;
 
 
 
+
 JelloMesh::JelloMesh() :     
     m_integrationType(JelloMesh::RK4), m_drawflags(MESH | STRUCTURAL),
     m_cols(0), m_rows(0), m_stacks(0), m_width(0.0), m_height(0.0), m_depth(0.0)
@@ -222,76 +223,84 @@ void JelloMesh::InitJelloMesh()
         }
     }
 
-	// Setup shear springs
-	for (int i = 0; i < m_rows + 1; i++)
+	if (useShearSprings)
 	{
-		for (int j = 0; j < m_cols + 1; j++)
+		// Setup shear springs
+		for (int i = 0; i < m_rows + 1; i++)
 		{
-			for (int k = 0; k < m_stacks + 1; k++)
+			for (int j = 0; j < m_cols + 1; j++)
 			{
-				// Outside cubeFront phase of the mesh backlash spring
-				if ((j < m_cols) && (k < m_stacks)) // K cube face
+				for (int k = 0; k < m_stacks + 1; k++)
 				{
-					AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i, j + 1, k + 1));
-					
-					if (i < m_rows)
+					// Outside cubeFront phase of the mesh backlash spring
+					if ((j < m_cols) && (k < m_stacks)) // K cube face
 					{
-						AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j + 1, k + 1));
-					}
-				}
-				if ((k > 0) && (j < m_cols)) 
-				{
-					AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i, j + 1, k - 1));
-					
-					if (i < m_rows)
-					{
-						AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j + 1, k - 1));
-					}
-				}
-				// k cube face
-				if ((k < m_stacks) && (i < m_rows)) 
-				{
-					AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j, k + 1));
-				}
-				if ((k > 0) && (i < m_rows))  
-				{
-					AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j, k - 1));
-				} 
-				// j cube face
-				if ((j < m_cols) && (i < m_rows))
-				{
-					AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j + 1, k));
-				} 
-				if ((i > 0) && (j < m_cols))
-				{
-					AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i - 1, j + 1, k));
+						AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i, j + 1, k + 1));
 
-					if (k < m_stacks)
-					{
-						AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i - 1, j + 1, k + 1));
+						/*if (i < m_rows)
+						{
+							AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j + 1, k + 1));
+						}*/
 					}
-				} 
-				if ((i > 0) && (k > 0) && (j < m_cols))
-				{
-					AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i - 1, j + 1, k - 1));
-				}		
+					if ((k > 0) && (j < m_cols))
+					{
+						AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i, j + 1, k - 1));
+
+						/*if (i < m_rows)
+						{
+							AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j + 1, k - 1));
+						}*/
+					}
+					// k cube face
+					if ((k < m_stacks) && (i < m_rows))
+					{
+						AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j, k + 1));
+					}
+					if ((k > 0) && (i < m_rows))
+					{
+						AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j, k - 1));
+					}
+					// j cube face
+					if ((j < m_cols) && (i < m_rows))
+					{
+						AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i + 1, j + 1, k));
+					}
+					if ((i > 0) && (j < m_cols))
+					{
+						AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i - 1, j + 1, k));
+
+						/*if (k < m_stacks)
+						{
+							AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i - 1, j + 1, k + 1));
+						}*/
+					}
+					if ((i > 0) && (k > 0) && (j < m_cols))
+					{
+						AddShearSpring(GetParticle(g, i, j, k), GetParticle(g, i - 1, j + 1, k - 1));
+					}
+				}
 			}
 		}
-	} 
+	}
 
-	// Setup bend springs
-	for (int i = 0; i < m_rows + 1; i++)
+
+	if (useBendSpring)
 	{
-		for (int j = 0; j < m_cols + 1; j++)
+		// Setup bend springs
+		for (int i = 0; i < m_rows + 1; i++)
 		{
-			for (int k = 0; k < m_stacks + 1; k++)
+			for (int j = 0; j < m_cols + 1; j++)
 			{
-				if (i < (m_rows - 1)) AddBendSpring(GetParticle(g, i, j, k), GetParticle(g, i + 2, j, k));
-				if (j < (m_cols -1)) AddBendSpring(GetParticle(g, i, j, k), GetParticle(g, i, j + 2, k));			
-				if (k < (m_stacks - 1)) AddBendSpring(GetParticle(g, i, j, k), GetParticle(g, i, j, k + 2));
+				for (int k = 0; k < m_stacks + 1; k++)
+				{
+					if (i < (m_rows - 1)) AddBendSpring(GetParticle(g, i, j, k), GetParticle(g, i + 2, j, k));
+					if (j < (m_cols - 1)) AddBendSpring(GetParticle(g, i, j, k), GetParticle(g, i, j + 2, k));
+					if (k < (m_stacks - 1)) AddBendSpring(GetParticle(g, i, j, k), GetParticle(g, i, j, k + 2));
+				}
 			}
 		}
-	}  
+	}
+
 	
     // Init mesh geometry
     m_mesh.clear();
@@ -579,21 +588,14 @@ void JelloMesh::ResolveContacts(ParticleGrid& grid)
 	   
 
         // TODO
-
-	   // Establish newParticle contact the ground
-	   // v' = v - 2(v * N) N * r
-	   //p.velocity = p.velocity - ((2 * p.velocity * normal) * (normal * r));
-	  // p.position = p.position + (contact.m_distance * normal);  
-
-	   double elastic = g_penaltyKs * (contact.m_distance);
+       double elastic = g_penaltyKs * (contact.m_distance);
 	   double dampening = g_penaltyKd * dist;
 	   vec3 normalizedPosition = normal * contact.m_distance / abs(contact.m_distance);
 
-	   //if ((p.velocity * normal) < 0.0)
-	   //{
+	   
 	       p.force = p.force + (elastic + dampening) * normalizedPosition;
-	       p.velocity = p.velocity - (contact.m_normal * dist);
-	   //}
+	       //p.velocity = p.velocity - (contact.m_normal * dist);
+	   
 	  
     }
 }
@@ -607,20 +609,9 @@ void JelloMesh::ResolveCollisions(ParticleGrid& grid)
         vec3 normal = result.m_normal;
         float dist = result.m_distance;
 
+		// v' = v - 2(v * N) N * r
+		pt.velocity = pt.velocity - ((2 * pt.velocity * normal) * (normal * r)); // reduce speed
 		
-
-        // TODO
-		// If Velocity is moving into the collision threshold (towards the surface), apply the force
-		/* if (pt.velocity * normal < 0.0)
-		{
-			pt.force = pt.force + (-(g_penaltyKs * (dist * normal.Normalize()) + g_penaltyKd * (pt.velocity * normal.Normalize()) * normal.Normalize()));
-		} */
-		
-
-		
-			// v' = v - 2(v * N) N * r
-			pt.velocity = pt.velocity - ((2 * pt.velocity * normal) * (normal * r)); // reduce speed
-			//pt.position = pt.position + (result.m_distance * normal);
 	}
 }
 
@@ -647,16 +638,12 @@ bool JelloMesh::FloorIntersection(Particle& p, Intersection& intersection)
 		// Build intersection for collision to the ground:
 		intersection.m_p = p.index;
 		intersection.m_normal = vec3(0.0, 1.0, 0.0);
-		intersection.m_distance = p.position[1];  // distance from the collision box threshold.
+		intersection.m_distance = collisionBoxThreshold + p.position[1];  // distance from the collision box threshold.
 		intersection.m_type = COLLISION;
 
 		collisionContact = true;
 	}
 	
-	else
-	{
-		collisionContact = false;
-	}
 
 	return collisionContact;
 }
@@ -669,8 +656,31 @@ bool JelloMesh::CylinderIntersection(Particle& p, World::Cylinder* cylinder,
     vec3 cylinderAxis = cylinderEnd - cylinderStart;
     double cylinderRadius = cylinder->r; 
 
+	bool contactCollision = false;
+	double cylinderThreshold = 0.1;
+
     // TODO
-    return false;
+	// Always check for contact first.
+	if ((((p.position - cylinderStart) * cylinderAxis.Normalize()) * cylinderAxis.Normalize() + (cylinderStart - p.position)).Length() < cylinderRadius)
+	{
+		result.m_distance = cylinderRadius - ((p.position - cylinderStart) * cylinderAxis.Normalize() * cylinderAxis.Normalize() + (cylinderStart - p.position)).Length();
+		result.m_normal = -((p.position - cylinderStart) * (cylinderAxis).Normalize() * (cylinderAxis).Normalize() + (cylinderStart - p.position)).Normalize();
+		result.m_p = p.index;
+		result.m_type = CONTACT;
+			
+		contactCollision = true;  // Contact with cylinder
+	}
+	else if (((p.position - cylinderStart) * (cylinderAxis).Normalize() * (cylinderAxis).Normalize() + (cylinderStart - p.position)).Length() - cylinderRadius < cylinderThreshold)
+	{
+		result.m_distance = cylinderThreshold + cylinderRadius - (((p.position - cylinderStart) * (cylinderAxis).Normalize()) * (cylinderAxis).Normalize() + (cylinderStart - p.position)).Length();
+		result.m_normal = -((p.position - cylinderStart) * (cylinderAxis).Normalize() * (cylinderAxis).Normalize() + (cylinderStart - p.position)).Normalize();
+		result.m_p = p.index;
+		result.m_type = COLLISION;
+			
+		contactCollision = true;  // Collision with cylinder
+	}
+	
+	return contactCollision;
 }
 
 // Other integration method Leapfrog.

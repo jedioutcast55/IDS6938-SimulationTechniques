@@ -203,20 +203,67 @@ Program results can be seen in "...Homework1/DocumentaionSupport/NumericalMethod
 
 	- Implementing 2 features on the extra features list.                                                                       Different and more stable integration methods. Verlet, Velocity Verlet, Leapfrog, or                                     Symplectic. I have decided to implement two new enumeration methods.  These methods can be found in jelloMesh.cpp:       Implemented JelloMesh::Leapfrog()                                                                                         Implemented JelloMesh::VelocityVerlet()                                                                                   Implemented JelloMesh::VelocityVerlet()
 
-    Part 3:                                                                                                                   1) What is the effect of the Ks and Kd parameters on the jello? .                                                         2) What are the benefits and the drawbacks of the collision system used here? What are some different ways in which          it could be improved?
+    Part 3:                                                                                                                   1) What is the effect of the Ks and Kd parameters on the jello?
+       As describer Ks is the elastic constant and Kd is the dampening constant.  Ks or the elastic constant is
+       considered the stiffness of the spring.  The more stiffness is applied (Ks constant is larger) there is more of a
+       bounce effect when forces are applied.  Kd as part of the dampening which reduces the time of the effect as Kd
+       increases.  If Ks increases the jello cube tend to bounce faster, when Kd increase the time for which bounces
+       reduces.
+
+    2) What are the benefits and the drawbacks of the collision system used here? What are some different ways in which          it could be improved?
+       -	This system uses a hard collision system, which provides a force and velocity in the opposite direction when
+            the particle hit beyond the object.
+       -	The advantage is the algorithm can be easily implemented and would not produce.
+       -	One disadvantage of the Hard Collision system is that it can become more easily unstable with less
+            sophisticated integration methods.  This is because the forces applied immediately push the particle above
+            the object as lesser integration methods may produce a higher error rate that the system may not be able to
+            handle.
+
 	3) What are some example systems you could model with Mass-spring simulations? Explain
        how you would you construct the model.
+       As discussed in class the mass-spring there are a number examples of mass-spring simulations
+	•	Hair
+	•	Grass
+	•	Fur
+	•	Clothing
+	•	Deformable shapes
+    -	Similar as to what we do in the Jello cube. Produce a mesh like structure with the shape o of the object in
+    -	question and then link them via structural, shear and bending forces.  The applying external forces when there
+    -	are interaction with other objects.
+
     4) Does the jello behave realistically? What integration method did you choose to make the
        Jello stable?
+       -	As for my simulation is getting close to behave realistically, but still there are some more refinements to
+       -	make to as close to realism as possible.
+       -	I use the RK4 integration method.  This method provides a higher order integration which reduces the error
+       -	rate when compared to the exact solution.
+
     5) How would you model and simulate water (in terms of a continuous simulation)?
-    
+    I would use particle simulation.  In this case very similar to our current simulation.  Utilizing the fluid equation
+    and provide a simple integral to be use with RK4.  The particles will be in contact with each other and when contact
+    occurs the program will need to check for the forces and apply accordingly.  [1] Exploring the internet I saw a
+    demonstration for Position Based Fluids which what it seem particle simulation in order to simulate water.
+    (https://www.youtube.com/watch?v=6WZZARzpckw).
+
  Part 4:
-    
+
 Youtube video showing different integration methods: (Euler, Midpoint, Leapfrog, Velocity Verlet, and RK4)
 
-[![Jello Cube showing different integration method]((images/JelloCubeDifferentIntegrationMethods.PNG)](https://youtu.be/CJfffxjUl7c)
+[![Jello Cube showing different integration method](images/JelloCubeDifferentIntegrationMethods.PNG?raw=true)](https://youtu.be/CJfffxjUl7c)
 
 This video shows that some time an error looks better than what was intended: Jello Cube Simulation with cylinders:
 
-[![Jello Cube Implosion]((images/JelloCubeImplosion.PNG)](https://youtu.be/hzupTzeKPPE)
+[![Jello Cube Implosion](images/JelloCubeImplosion.PNG?raw=true)](https://youtu.be/hzupTzeKPPE)
+
+This youtube video shows the jello cube interactive with cylinders:
+[![Jello Cube Implosion](images/JelloCubeWithCylinders.PNG?raw=true)](https://youtu.be/hzPipVr6Hlk)
+
+Citations & acknowledgements:
+•	IDS6938 classmates: Some of us got together on a Monday and discussed how to proceed on the homework.  Also after class.  My apologies from not knowing all your names.
+•	Dr. Kider, Jello Cube infrastructure, code snipped provided through piazza. And code Dr. Kider work with other students, and presented during class.
+•	Leapfrog information gathered from at https://en.wikipedia.org/wiki/Leapfrog_integration
+•	Velocity Verlet information gathered from wikipedia at https://en.wikipedia.org/wiki/Verlet_integration
+•	[1] http://kotaku.com/mind-blowingly-perfect-water-simulation-is-now-a-realit-477865450, (Article) Mind-Blowingly Perfect Water Simulation Is now a Reality
+
+
 

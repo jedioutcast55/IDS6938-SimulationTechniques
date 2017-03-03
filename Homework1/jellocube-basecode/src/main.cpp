@@ -15,8 +15,8 @@
 
 JelloMesh theJello;
 Camera theCamera;
-World theWorld("../worlds/ground.xml");
-//World theWorld("../worlds/cylinders.xml");
+//World theWorld("../worlds/ground.xml");
+World theWorld("../worlds/cylinders.xml");
 mmc::FpsTracker theFpsTracker;
 
 // UI Helpers
@@ -148,8 +148,11 @@ void onKeyboardCb(unsigned char key, int x, int y)
    else if (key == '4') mask = theJello.STRUCTURAL;
    else if (key == '5') mask = theJello.SHEAR;
    else if (key == '6') mask = theJello.BEND;
+   else if (key == 'q') theJello.useShearSprings = true;
+   else if (key == 'a') theJello.useShearSprings = false;
+   else if (key == 'w') theJello.useBendSpring = true;
+   else if (key == 's') theJello.useBendSpring = false;
    
-
    if (mask)
    {
        if (theJello.GetDrawFlags() & mask)
@@ -358,6 +361,10 @@ int main(int argc, char **argv)
     glutAddMenuEntry("Record\t'r'", 'r');
     glutAddSubMenu("Integration Type", intMenu);
     glutAddSubMenu("Draw Settings", displayMenu);
+	glutAddMenuEntry("ToogleONShearForce\t'q'", 'q');
+	glutAddMenuEntry("ToogleOFFShearForce\t'a'", 'a');
+	glutAddMenuEntry("ToogleONBendForce\t'w'", 'w');
+	glutAddMenuEntry("ToogleOFFSBendForce\t's'", 's');
     glutAddMenuEntry("_________________", -1);
     glutAddMenuEntry("Exit", 27);
     glutAttachMenu(GLUT_RIGHT_BUTTON);

@@ -50,6 +50,11 @@ public:
     int GetIndex(int i, int j, int k) const;
     void GetCell(int idx, int& i, int &j, int &k) const;
 
+	// Set Springs
+	bool useShearSprings = true;
+	bool useBendSpring = true;
+
+
 
 protected:
 
