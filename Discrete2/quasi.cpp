@@ -37,6 +37,14 @@ void getNDimQuasiRandomNumber(int *seed, int dim_number, float *r)
 
 int main()
 {
+	unsigned int N = 100000;  // number of values generated
+
+	// Requests sample size from the command line:
+	std::cout << "Please enter the sample size N: ";
+	std::cin >> N;
+	std::cout << std::endl;
+
+
 	r = new float[DIM_MAX];
 
 	//use a random device
@@ -52,7 +60,7 @@ int main()
 
 
 	// 3) Play with N
-	unsigned int N = 100000;  // number of values generated
+	//unsigned int N = 100000;  // number of values generated
 	double randomValue;
 	std::map<int, int> hist; //Counts of discrete values
 	std::vector<double> raw; //raw random values 
@@ -79,14 +87,20 @@ int main()
 
 	// Print Results to File
 	std::ofstream myfile;
-	myfile.open("histogram_results.txt");
+	myfile.open("QuasiSobolo_histogram_results.txt");
+
+	myfile << "Sample size N: " << N << std::endl;
+
 	for (auto p : hist) {
 		myfile << std::fixed << std::setprecision(1) << std::setw(2)
 			<< p.first << "\t" << p.second << std::endl;
 	}
 	myfile.close();
 
-	myfile.open("raw_results.txt");
+	myfile.open("QuasiSobolo_raw_results.txt");
+
+	myfile << "Sample size N: " << N << std::endl;
+
 	for (auto p : raw) {
 		myfile << std::fixed << std::setprecision(5) << std::setw(2)
 			<< p << std::endl;
@@ -95,7 +109,10 @@ int main()
 
 
 	//if you choose to write useful stats here
-	myfile.open("useful_stats.txt");
+	myfile.open("QuasiSobolo_useful_stats.txt");
+
+	myfile << "Sample size N: " << N << std::endl;
+
 	double sum = std::accumulate(raw.begin(), raw.end(), 0.0);
 	double mean = sum / raw.size();
 	myfile << "mean: " << mean << std::endl;
