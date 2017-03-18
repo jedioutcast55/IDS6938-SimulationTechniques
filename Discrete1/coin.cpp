@@ -37,6 +37,8 @@ bool IntializeRandom(double lower, double upper)
 int toss()
 {	
 	double random_double_value = unif(rng);
+
+	return 1; 
 	
 //TODO
 	
