@@ -20,21 +20,25 @@ int main() {
 
 	// Print Results to File
 	std::ofstream myfile;
-	myfile.open("markov_results.txt");
+	myfile.open("dtcm_markov_results.txt");
 
 	int start = 0;
 
 	//simulate discrete time Markov Chain
+	//unsigned int N = 50;
 	unsigned int N = 50;
 	std::map<int, int> hist;
 	std::vector<int> discreteMC;
-	for (unsigned int i = 0; i < N; ++i) {
+	for (unsigned int i = 0; i < N; ++i) 
+	{
 		
 		//TODO (add DTMC, and histogram lines.)
+		discreteMC = DTMC(TransitionMatrix, ROLLS, start);
+		++hist[std::round(discreteMC.back())];
 
 		// Code if you wanted to print out results at each step
-		//for (auto elem : discreteMC)
-		//	std::cout << elem << std::endl;
+		for (auto elem : discreteMC)
+			std::cout << elem << std::endl;
 
 	}
 	//Returns an array discreteMC with the states at each step of the discrete-time Markov Chain
