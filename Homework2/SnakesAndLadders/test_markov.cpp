@@ -44,38 +44,83 @@ bool checkTransitionMatrix(Eigen::MatrixXf *eigenMatrix)
 	return matrixCheck;
 }
 
-int main(){
-
-	SetTransitionMatrix();
-
-	bool matrixHealth = false;
-
-	
-
-	std::cout << std::endl;
-	std::cout << "The number of rows: " << TransitionMatrix.rows() << std::endl;
-	std::cout << "The number of columns: " << TransitionMatrix.cols() << std::endl;
-	std::cout << std::endl;
-
-	// Check the matrix
-	matrixHealth = checkTransitionMatrix(&TransitionMatrix);
-
-
-	int rows = TransitionMatrix.rows();
-	int columns = TransitionMatrix.cols();
-
-	for (int m = 0; m < rows; m++)
+void printMatrixToTheScreen(int maxRows, int maxColumns, Eigen::MatrixXf *matrix)
+{
+	for (int m = 0; m < maxRows; m++)
 	{
 
-		for (int n = 0; n < columns; n++)
+		for (int n = 0; n < maxColumns; n++)
 		{
-			std::cout << TransitionMatrix(m, n) << " ";
+			std::cout << (*matrix)(m, n) << " ";
 		}
-		
+
 		std::cout << std::endl;
 	}
 
 	std::cout << std::endl;
+
+}
+
+void vectorMatrixMultiplication(bool matrixHealth, int rows, std::ofstream *file, Eigen::MatrixXf *matrixPTR)
+{
+	std::list<Eigen::VectorXf> listVectorXf;
+	// If we have a vlid matrix:
+	if (matrixHealth)
+	{
+		for (int i = 0; i < rows; i++)
+		{
+			v = v.transpose() * (*matrixPTR);
+
+			// Input all data into a structure:
+			listVectorXf.push_back(v);
+		}
+
+		for (auto p : listVectorXf)
+		{
+			std::cout << p.transpose();
+
+			// Print vector to file.
+			for (int k = 0; k < size; k++)
+			{
+				(*file) << p.transpose()(k) << "\t";
+			}
+
+			(*file) << std::endl;
+			//myfile << p.transpose() << std::endl;
+			//myfile << std::endl;
+			//std::cout << std::endl;
+		}
+	}
+	else
+	{
+		std::cout << std::endl;
+		std::cout << "Not a well form matrix  !!!!!!!!!!!!!!!!!!" << std::endl;
+		std::cout << std::endl;
+	}
+
+}
+
+int main(){
+
+	SetTransitionMatrix();
+
+	SetShootsLaddersTransitionMatrix();
+
+	bool nullGameHealth = false;
+
+	bool snakeLaddersMatrixHealth = false;
+
+	int rows = 0;
+
+	// Check the matrix
+	nullGameHealth = checkTransitionMatrix(&TransitionMatrix);
+	snakeLaddersMatrixHealth = checkTransitionMatrix(&ShootsLaddersTransitionMatrix);
+
+   
+	// Print the matrix to the screen
+	printMatrixToTheScreen(TransitionMatrix.rows(), TransitionMatrix.cols(), &TransitionMatrix);
+
+	printMatrixToTheScreen(ShootsLaddersTransitionMatrix.rows(), ShootsLaddersTransitionMatrix.cols(), &ShootsLaddersTransitionMatrix);
 
 	//Output Vector
 	v.setZero();
@@ -88,29 +133,15 @@ int main(){
 
    // TODO add Markov vector - Matrix multiplication
 
-	std::list<Eigen::VectorXf> listVectorXf;
-	// If we have a vlid matrix:
-	if (matrixHealth)
-	{
-		for (int i = 0; i < rows; i++)
-		{
-			v = v.transpose() * TransitionMatrix;
+	// Set rows
+	rows = TransitionMatrix.rows();
 
-			// Input all data into a structure:
-			listVectorXf.push_back(v);
-		}
+	// Open file to print:
+	// Print Results to File
+	std::ofstream myfile;
+	myfile.open("markov_results.txt");
 
-		// Print Results to File
-		std::ofstream myfile;
-		myfile.open("markov_results.txt");
-
-		for (auto p : listVectorXf)
-		{
-			std::cout << p.transpose();
-			myfile << p.transpose() << std::endl;
-			myfile << std::endl;
-			std::cout << std::endl;
-		}
+	vectorMatrixMultiplication(nullGameHealth, rows, &myfile, &TransitionMatrix);
 
 		//for (int i = 0; i < rows; i++)
 		//{
@@ -122,19 +153,6 @@ int main(){
 		//myfile << v << std::endl;  //this is just a sample, becareful how you print to file so you can mine useful stats
 
 		myfile.close();
-	}
-	else
-	{
-		std::cout << std::endl;
-		std::cout << "The health of the matrix is: " << matrixHealth << std::endl;
-		std::cout << "No appropriate matrix" << std::endl;
-		std::cout << std::endl;
-	}
-
 	
-	
-	
-
-
   return 1;
 }
