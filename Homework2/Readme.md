@@ -39,10 +39,47 @@ I will be using the following pseudo-random geneartor number engines:
  3) minstd_rand
  4) ranlux48
  5) Quasi-sobolo
- The code use for this part resides under the Discrete2 folder.  The code for the first four engines resides in random.cpp and for Quadi-sobolo it start on quasi.cpp.
-
-
-
+ The code use for this part resides under the Discrete2 folder.  The code for the first four engines resides in random.cpp and for Quadi-sobolo it start on quasi.cpp.  For the uniformity test I will be using the chi-square test (Chapter 2 RANDOM NUMBERS).
+ 
+ 1) mt19937_64
+ ![](HW2Data/Part1/MT19937_64_Histogram.PNG?raw=true)
+ Figure 1: Shows the histrogram for pseudo-random number generator mt19937_64 uniformity for sample size of 100000.
+ 
+ For the chi-square test for uniformity is a goodness-of-fit test.  Using the null hypothesis, H0 Data came from a uniform [0,100] distribution. Ha: It did no come from this distribution.using a 95% confidence interval and using excel functions CHIINV() to attained a critical value and comparing with the summation of (Expected Values - Observer Values) Square divided by Expected Values.  Is this value is greated than the critical value then the null hypothesis will be rejected.  This method is use to approximate within confidence level of 95% that the random number generators approximate uniformity.  The next figure shows the result for the pseudo-random number generator mt19937_64.
+ 
+ ![](HW2Data/Part1/mt19937_64_chi_square_test.PNG?raw=true)
+ Figure 2: MT19937_64 Chi-square test result.
+ The complete calculation can be found in IDS6938-SimulationTechniques\Homework2\HW2Data\Part1\Part1_pseudoRandomNumbersGenerator_MT19937_64.xlsx
+    
+ 2) knuth_b
+  ![](HW2Data/Part1/Knuth_b_Histogram.PNG?raw=true)
+ Figure 1: Shows the histrogram for pseudo-random number generator knuth_b uniformity for sample size of 100000.
+ 
+  ![](HW2Data/Part1/Knuth_b_chi_square_test.PNG?raw=true)
+ Figure 2: knuth_b Chi-square test result.
+ The complete calculation can be found in IDS6938-SimulationTechniques\Homework2\HW2Data\Part1\Part1_pseudoRandomNumbersGenerator_Knuth_b.xlsx
+ 
+ 3) minstd_rand
+  ![](HW2Data/Part1/Minstd_rand_Histogram.PNG?raw=true)
+ Figure 1: Shows the histrogram for pseudo-random number generator minstd_rand uniformity for sample size of 100000.
+ 
+  ![](HW2Data/Part1/Minstd_rand_chi_square_test.PNG?raw=true)
+ Figure 2: minstd_rand Chi-square test result.
+ The complete calculation can be found in IDS6938-SimulationTechniques\Homework2\HW2Data\Part1\Part1_pseudoRandomNumbersGenerator_Minstd_rand.xlsx
+ 4) ranlux48
+   ![](HW2Data/Part1/Ranlux48_Histogram.PNG?raw=true)
+ Figure 1: Shows the histrogram for pseudo-random number generator ranlux48 uniformity for sample size of 100000.
+ 
+  ![](HW2Data/Part1/Ranlux_chi_square_test.PNG?raw=true)
+ Figure 2: ranlux48 Chi-square test result.
+ The complete calculation can be found in IDS6938-SimulationTechniques\Homework2\HW2Data\Part1\Part1_pseudoRandomNumbersGenerator_Ranlux48.xlsx
+ 5) Quasi-sobolo 
+ ![](HW2Data/Part1/Quasi_sobolo_Histogram.PNG?raw=true)
+ Figure 1: Shows the histrogram for pseudo-random number generator Quasi-sobolo uniformity for sample size of 100000.
+ 
+  ![](HW2Data/Part1/Quasi_sobolo_chi_square_test.PNG?raw=true)
+ Figure 2: Quasi-sobolo Chi-square test result.
+ The complete calculation can be found in IDS6938-SimulationTechniques\Homework2\HW2Data\Part1\Part1_pseudoRandomNumbersGenerator_QuasiSobolo.xlsx
 
 * **(b) - 2pts:**  Vary *N* (amount of samples). How do things change.
 * **(c) - 3pts:** Fix a random engine of your choice from part (a), and now vary five different [distributions](http://www.cplusplus.com/reference/random/) for just the psedo-random numbers. Again, analyze your results with graphs and statistics of choice.
@@ -137,3 +174,6 @@ If you feel like going beyond the scope of the assignment, you should consider i
 * **(10 Points)** - Setup up SmartGrid or a Microgrid System that creates resources of power from wind, solar, and electric grid. Set up various devices in your house to draw power. [Reference 1](http://www.sciencedirect.com/science/article/pii/S1877050916301740),   [Reference 2](http://www.tandfonline.com/doi/full/10.1080/19401493.2013.866695?src=recsys&).
 * **(25 Points)** - Set up a discrete simulation of your choice that uses an approved real-time data source and visualizes the results. (See instructor for approval).
 * **(N Points)** - You are welcome to make suggestions for a feature of your own choosing, but they must be approved by instructor before implementing.
+
+** Citations: **
+Chapter 2 RANDOM NUMBERS. (n.d.). Retrieved March 11, 2017, from https://www.usna.edu/Users/math/dphillip/sa421.s16/chapter02.pdf
