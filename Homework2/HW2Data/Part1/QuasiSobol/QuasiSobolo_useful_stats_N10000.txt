@@ -1,0 +1,3 @@
+Sample size N: 10000
+mean: 49.99276
+stdev: 28.86762

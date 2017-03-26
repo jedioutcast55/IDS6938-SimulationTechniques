@@ -53,36 +53,85 @@ I will be using the following pseudo-random geneartor number engines:
     
  2) knuth_b
   ![](HW2Data/Part1/Knuth_b_Histogram.PNG?raw=true)
- Figure 1: Shows the histrogram for pseudo-random number generator knuth_b uniformity for sample size of 100000.
+ Figure 3: Shows the histrogram for pseudo-random number generator knuth_b uniformity for sample size of 100000.
  
   ![](HW2Data/Part1/Knuth_b_chi_square_test.PNG?raw=true)
- Figure 2: knuth_b Chi-square test result.
+ Figure 4: knuth_b Chi-square test result.
  The complete calculation can be found in IDS6938-SimulationTechniques\Homework2\HW2Data\Part1\Part1_pseudoRandomNumbersGenerator_Knuth_b.xlsx
  
  3) minstd_rand
   ![](HW2Data/Part1/Minstd_rand_Histogram.PNG?raw=true)
- Figure 1: Shows the histrogram for pseudo-random number generator minstd_rand uniformity for sample size of 100000.
+ Figure 5: Shows the histrogram for pseudo-random number generator minstd_rand uniformity for sample size of 100000.
  
   ![](HW2Data/Part1/Minstd_rand_chi_square_test.PNG?raw=true)
- Figure 2: minstd_rand Chi-square test result.
+ Figure 6: minstd_rand Chi-square test result.
  The complete calculation can be found in IDS6938-SimulationTechniques\Homework2\HW2Data\Part1\Part1_pseudoRandomNumbersGenerator_Minstd_rand.xlsx
  4) ranlux48
    ![](HW2Data/Part1/Ranlux48_Histogram.PNG?raw=true)
- Figure 1: Shows the histrogram for pseudo-random number generator ranlux48 uniformity for sample size of 100000.
+ Figure 7: Shows the histrogram for pseudo-random number generator ranlux48 uniformity for sample size of 100000.
  
   ![](HW2Data/Part1/Ranlux_chi_square_test.PNG?raw=true)
- Figure 2: ranlux48 Chi-square test result.
+ Figure 8: ranlux48 Chi-square test result.
  The complete calculation can be found in IDS6938-SimulationTechniques\Homework2\HW2Data\Part1\Part1_pseudoRandomNumbersGenerator_Ranlux48.xlsx
  5) Quasi-sobolo 
  ![](HW2Data/Part1/Quasi_sobolo_Histogram.PNG?raw=true)
- Figure 1: Shows the histrogram for pseudo-random number generator Quasi-sobolo uniformity for sample size of 100000.
+ Figure 9: Shows the histrogram for pseudo-random number generator Quasi-sobolo uniformity for sample size of 100000.
  
   ![](HW2Data/Part1/Quasi_sobolo_chi_square_test.PNG?raw=true)
- Figure 2: Quasi-sobolo Chi-square test result.
+ Figure 10: Quasi-sobolo Chi-square test result.
  The complete calculation can be found in IDS6938-SimulationTechniques\Homework2\HW2Data\Part1\Part1_pseudoRandomNumbersGenerator_QuasiSobolo.xlsx
 
 * **(b) - 2pts:**  Vary *N* (amount of samples). How do things change.
+Following are the graphics for all the previous pseudo-random engines with varying samples.  The samples use N as 100, 1000, and 10000.  With uniform distribution of numbers from 0 - 100.
+ 1) mt19937_64
+ ![](HW2Data/Part1/MT19937_DifferentSamples.PNG?raw=true)
+ Figure 11: Pseudo Random Number Generator mt19937_64 with varying samples of 100, 1000, and 10000.
+ 
+ 2) knuth_b
+ ![](HW2Data/Part1/Knuth_B_DifferentSamples.PNG?raw=true)
+ Figure 12: Pseudo Random Number Generator mt19937_64 with varying samples of 100, 1000, and 10000.
+ 
+ 3) minstd_rand
+ ![](HW2Data/Part1/Minstd_rand_DifferentSamples.PNG?raw=true)
+ Figure 13: Pseudo Random Number Generator mt19937_64 with varying samples of 100, 1000, and 10000.
+ 
+ 4) ranlux48
+ ![](HW2Data/Part1/Ranlux48_DifferentSamples.PNG?raw=true)
+ Figure 14: Pseudo Random Number Generator mt19937_64 with varying samples of 100, 1000, and 10000.
+ 
+ 5) Quasi-sobolo
+ ![](HW2Data/Part1/QuasiSobolo_DifferentSamples.PNG?raw=true)
+ Figure 15: Pseudo Random Number Generator mt19937_64 with varying samples of 100, 1000, and 10000.
+ 
+ It can be seen the pseudo number generators you can start to see some patterns, speacially when start the number of samples.  
+
 * **(c) - 3pts:** Fix a random engine of your choice from part (a), and now vary five different [distributions](http://www.cplusplus.com/reference/random/) for just the psedo-random numbers. Again, analyze your results with graphs and statistics of choice.
+The pseudo-number generator to be use is mt19937_64.  With this engine the following distritubions:
+  1) Normal Distribution
+     ![](HW2Data/Part1/MT19937_NormalDistribution.PNG?raw=true)
+     Figure 16: Historgram of Pseudo-Random Number Generator MT19937_64, sample size of 10000, and normal distribution    
+     mean set to 50.0 and std distribution of 12.5.
+     
+  2) Chi Square Distribution
+   ![](HW2Data/Part1/MT19937_ChiSquareDistribution.PNG?raw=true)
+     Figure 17: Historgram of Pseudo-Random Number Generator MT19937_64, sample size of 10000, and chi-square 
+     distribution mean set to 50.0.
+     
+  3) Bernoulli Distribution
+  ![](HW2Data/Part1/MT19937_BernoulliDistribution.PNG?raw=true)
+     Figure 18: Historgram of Pseudo-Random Number Generator MT19937_64, sample size of 10000, and bernoulli distribution 
+     with a 50/50 (0.5) distribution.
+     
+  4) Poisson Distribution
+  ![](HW2Data/Part1/MT19937_PoissonDistribution.PNG?raw=true)
+     Figure 19: Historgram of Pseudo-Random Number Generator MT19937_64, sample size of 10000, and poisson distribution 
+     with a mean of 50.0.
+     
+  5) Geometric Distribution
+  ![](HW2Data/Part1/MT19937_GeometricDistribution.PNG?raw=true)
+     Figure 20: Historgram of Pseudo-Random Number Generator MT19937_64, sample size of 10000, and geometric distribution 
+     with a mean of 50.0.
+
 * **(d)- 4pts:** Generate random numbers in two-dimensions for a unit square. Plot the results for the different random number engines. The vertical axis should vary N in increasing order. The horizontal axis should show of the random number engines.
 * **(e)- 4pts:** Generate random numbers in two-dimensions for a unit square. Plot the results for the different distributions. The vertical axis should vary N in increasing order. The horizontal axis should show of the random number engines. (See [Random Numbers Webcourse page](https://webcourses.ucf.edu/courses/1246518/pages/random-numbers?module_item_id=10541423) for a rough idea what you should produce.)
 * **(f)- 4pts:** Repeat parts (d) and (e) with a unit circle.
