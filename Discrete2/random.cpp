@@ -103,8 +103,8 @@ int main()
 	double x;
 	double y;
 
-	/*double radius;
-	double angleTheta;*/
+	double radius;
+	double angleTheta;
 
 	//std::map<int, int> hist; //Counts of discrete values
 	//std::vector<double> raw; //raw random values 
@@ -116,16 +116,16 @@ int main()
 
 	for (unsigned int i = 0; i < N; ++i) {
 		// randomValue = generator();
-		/*radius = generator();
+		radius = generator();
 		angleTheta = (2 * M_PI * generator());
 
 
 		x = (radius * cos(angleTheta));
-		y = (radius * sin(angleTheta));*/
+		y = (radius * sin(angleTheta));
 
 
-		x = generator();
-		y = generator();
+		//x = generator();
+		//y = generator();
 
 		//++hist[std::round(randomValue)]; // count the values
 		//raw.push_back(randomValue);  //push the raw values

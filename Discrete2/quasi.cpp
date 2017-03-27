@@ -12,6 +12,9 @@
 
 #include "sobol.hpp"
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+
 # define DIM_MAX 2
 
 int dim_num = 1;
@@ -67,20 +70,23 @@ int main()
 	//double randomValue;
 	//std::map<int, int> hist; //Counts of discrete values
 	//std::vector<double> raw; //raw random values 
-	std::vector<double> xValues;
+	//std::vector<double> xValues;
 	
 	double x = 0;
 	double y = 0;
+
+	double radius;
+	double angleTheta;
+
 	// A two dimensional object:
 	std::multimap<double, double> raw;
 	
 
 
-	for (unsigned int i = 0; i < N; ++i) {
+	/*for (unsigned int i = 0; i < N; ++i) {
 		//randomValue = 0 + getQuasiRandomNumber(&seed) * 100;	
-
 		x = 0 + getQuasiRandomNumber(&seed);
-		y = 0.0;
+		y = 0.0;		
 		
 		//++hist[std::round(randomValue)]; // count the values
 		//raw.push_back(randomValue);  //push the raw values
@@ -91,20 +97,31 @@ int main()
 	}
 
 
+	// Added for Unit square:
 	for (auto p : xValues)
 	{
-		//randomValue = 0 + getQuasiRandomNumber(&seed) * 100;
 	
 		y = 0 + getQuasiRandomNumber(&newSeed);
 
-		//++hist[std::round(randomValue)]; // count the values
-		//raw.push_back(randomValue);  //push the raw values
+		raw.insert(std::pair<double, double>(p, y));    
+	}*/
 
-		// The correspondent to each key is the y value
-		raw.insert(std::pair<double, double>(p, y));
-		
-	    
+
+	// Do this for Unit Circle:
+	for (unsigned int i = 0; i < N; ++i) 
+	{
+		radius = 0 + getQuasiRandomNumber(&seed);
+		angleTheta = (2 * M_PI * (0 + getQuasiRandomNumber(&newSeed)));
+
+
+		x = (radius * cos(angleTheta));
+		y = (radius * sin(angleTheta));
+
+		raw.insert(std::pair<double, double>(x, y));
+	
 	}
+
+
 	//for (auto p : hist) {
 
 		// Uncomment if you want to see the values
