@@ -32,14 +32,14 @@ int main()
 	std::random_device rd;
 
 	// 1) Change random number generators
-	std::mt19937_64 engine(rd());
-	engineSelection = 1;
+	//std::mt19937_64 engine(rd());
+	//engineSelection = 1;
 	//std::knuth_b engine(rd());
-	//engineSelection = 2;
+    //engineSelection = 2;
 	//std::minstd_rand engine(rd());
 	//engineSelection = 3;
-	//std::ranlux48 engine(rd());
-	//engineSelection = 4;
+	std::ranlux48 engine(rd());
+	engineSelection = 4;
 
 	// Setting the string file names according to pseudo-random engine:
 	switch (engineSelection)
@@ -82,14 +82,14 @@ int main()
 
 
 	//  2) - Change distribution types
-	//std::uniform_real_distribution<> dist(0, 1);  // example of a uniform distribution
+	std::uniform_real_distribution<> dist(0, 1);  // example of a uniform distribution
 	//std::uniform_real_distribution<> dist(0, 100);  // example of a uniform distribution
-	//std::normal_distribution<> dist(50, 10);    // example of a normal distribution
-	std::normal_distribution<> dist(0,0.33);    // example of a normal distribution
+	//std::normal_distribution<> dist(50, 12.5);    // example of a normal distribution
+	//std::normal_distribution<> dist(0,0.33);    // example of a normal distribution
 	//std::chi_squared_distribution <double> dist(50.0);
 	//std::bernoulli_distribution dist(0.5);
 	//std::poisson_distribution<int> dist(50.0);
-	//std::geometric_distribution<int> dist(0.5);
+	//std::geometric_distribution<int> dist(0.1);
 
 
 	auto generator = std::bind(dist, engine);
@@ -100,10 +100,10 @@ int main()
 	double x;
 	double y;
 
-	double radius;
-	double angleTheta;
+	/*double radius;
+	double angleTheta;*/
 
-	std::map<int, int> hist; //Counts of discrete values
+	//std::map<int, int> hist; //Counts of discrete values
 	//std::vector<double> raw; //raw random values 
 	
 
@@ -112,13 +112,18 @@ int main()
 
 
 	for (unsigned int i = 0; i < N; ++i) {
-		//randomValue = generator();
-		radius = generator();
+		// randomValue = generator();
+		/*radius = generator();
 		angleTheta = (2 * M_PI * generator());
 
+
 		x = (radius * cos(angleTheta));
-		y = (radius * sin(angleTheta));
-		
+		y = (radius * sin(angleTheta));*/
+
+
+		x = generator();
+		y = generator();
+
 		//++hist[std::round(randomValue)]; // count the values
 		//raw.push_back(randomValue);  //push the raw values
 
@@ -130,17 +135,17 @@ int main()
 
 	}
 
-	for (auto p : hist) {
+	/*for (auto p : hist) {
 		
 		// Uncomment if you want to see the values
 		//std::cout << std::fixed << std::setprecision(1) << std::setw(2)
 		//	<< p.first << " -  "<< p.second << std::endl;
 
-		//std::cout << std::fixed << std::setprecision(1) << std::setw(2)
-		//	<< p.first << "  " << std::string(p.second / (N/500), '*') << std::endl;
+		std::cout << std::fixed << std::setprecision(1) << std::setw(2)
+			<< p.first << "  " << std::string(p.second / (N/500), '*') << std::endl;
 
 	}
-
+*/
 
 	// Print Results to File
 	std::ofstream myfile;
@@ -158,11 +163,20 @@ int main()
 
 	myfile << "Sample size N: " << N << std::endl;
 
-	for (auto p : raw) {
+	for (auto p : raw) 
+	{
 		myfile << std::fixed << std::setprecision(5) << std::setw(2)
 			<< p.first << "\t" << p.second << std::endl;
 	}
 	myfile.close();
+
+
+	/*for (auto p : raw)
+	{
+		myfile << std::fixed << std::setprecision(5) << std::setw(2)
+			<< p << std::endl;
+	}
+	myfile.close();*/
 
 
 	//if you choose to write useful stats here

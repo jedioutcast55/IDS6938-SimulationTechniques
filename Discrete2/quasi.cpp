@@ -61,33 +61,44 @@ int main()
 
 	// 3) Play with N
 	//unsigned int N = 100000;  // number of values generated
-	double randomValue;
-	std::map<int, int> hist; //Counts of discrete values
-	std::vector<double> raw; //raw random values 
+	//double randomValue;
+	//std::map<int, int> hist; //Counts of discrete values
+	//std::vector<double> raw; //raw random values 
+
+	double x = 0;
+	double y = 0;
+	// A two dimensional object:
+	std::multimap<double, double> raw;
 
 
 	for (unsigned int i = 0; i < N; ++i) {
-		randomValue = 0 + getQuasiRandomNumber(&seed) * 100;
+		//randomValue = 0 + getQuasiRandomNumber(&seed) * 100;
 
-		++hist[std::round(randomValue)]; // count the values
-		raw.push_back(randomValue);  //push the raw values
+		x = 0 + getQuasiRandomNumber(&seed);
+		y = 0 + getQuasiRandomNumber(&seed);
+
+		//++hist[std::round(randomValue)]; // count the values
+		//raw.push_back(randomValue);  //push the raw values
+
+		// The correspondent to each key is the y value
+		raw.insert(std::pair<double, double>(x, y));
 	}
 
-	for (auto p : hist) {
+	//for (auto p : hist) {
 
 		// Uncomment if you want to see the values
 		//std::cout << std::fixed << std::setprecision(1) << std::setw(2)
 		//	<< p.first << " -  "<< p.second << std::endl;
 
-		std::cout << std::fixed << std::setprecision(1) << std::setw(2)
-			<< p.first << "  " << std::string(p.second / (N / 500), '*') << std::endl;
+		//std::cout << std::fixed << std::setprecision(1) << std::setw(2)
+		//	<< p.first << "  " << std::string(p.second / (N / 500), '*') << std::endl;
 
-	}
+	//}
 
 
 	// Print Results to File
 	std::ofstream myfile;
-	myfile.open("QuasiSobolo_histogram_results.txt");
+	/*myfile.open("QuasiSobolo_histogram_results.txt");
 
 	myfile << "Sample size N: " << N << std::endl;
 
@@ -95,21 +106,27 @@ int main()
 		myfile << std::fixed << std::setprecision(1) << std::setw(2)
 			<< p.first << "\t" << p.second << std::endl;
 	}
-	myfile.close();
+	myfile.close(); */
 
 	myfile.open("QuasiSobolo_raw_results.txt");
 
 	myfile << "Sample size N: " << N << std::endl;
 
-	for (auto p : raw) {
+	/*for (auto p : raw) {
 		myfile << std::fixed << std::setprecision(5) << std::setw(2)
 			<< p << std::endl;
+	} */
+
+	for (auto p : raw)
+	{
+		myfile << std::fixed << std::setprecision(5) << std::setw(2)
+			<< p.first << "\t" << p.second << std::endl;
 	}
 	myfile.close();
 
 
 	//if you choose to write useful stats here
-	myfile.open("QuasiSobolo_useful_stats.txt");
+	/*myfile.open("QuasiSobolo_useful_stats.txt");
 
 	myfile << "Sample size N: " << N << std::endl;
 
@@ -126,6 +143,6 @@ int main()
 	myfile << "stdev: " << stdev << std::endl;
 	std::cout << "stdev: " << stdev << std::endl;
 
-	myfile.close();
+	myfile.close(); */
 
 }
