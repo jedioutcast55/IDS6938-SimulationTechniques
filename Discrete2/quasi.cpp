@@ -47,15 +47,18 @@ int main()
 
 	r = new float[DIM_MAX];
 
+	int newSeed = 0;
+
 	//use a random device
 	std::random_device rd;
 	// Another seed intialization routine (this is just here for future reference for you.)
 	// initialize the random number generator with time-dependent seed
-	//uint64_t timeSeed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+	uint64_t timeSeed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
 	//std::seed_seq ss{ uint32_t(timeSeed & 0xffffffff), uint32_t(timeSeed >> 32) };
 	// 2 different ways to get a random starting seed
 	//seed = rd();
-	//seed = ss;
+	//srand(time(NULL));
+	newSeed = rd()/1000.0;
 
 
 
@@ -64,26 +67,44 @@ int main()
 	//double randomValue;
 	//std::map<int, int> hist; //Counts of discrete values
 	//std::vector<double> raw; //raw random values 
-
+	std::vector<double> xValues;
+	
 	double x = 0;
 	double y = 0;
 	// A two dimensional object:
 	std::multimap<double, double> raw;
+	
 
 
 	for (unsigned int i = 0; i < N; ++i) {
-		//randomValue = 0 + getQuasiRandomNumber(&seed) * 100;
+		//randomValue = 0 + getQuasiRandomNumber(&seed) * 100;	
 
 		x = 0 + getQuasiRandomNumber(&seed);
-		y = 0 + getQuasiRandomNumber(&seed);
+		y = 0.0;
+		
+		//++hist[std::round(randomValue)]; // count the values
+		//raw.push_back(randomValue);  //push the raw values
+
+		// The correspondent to each key is the y value
+		 //raw.insert(std::pair<double, double>(x, y));
+		xValues.push_back(x);
+	}
+
+
+	for (auto p : xValues)
+	{
+		//randomValue = 0 + getQuasiRandomNumber(&seed) * 100;
+	
+		y = 0 + getQuasiRandomNumber(&newSeed);
 
 		//++hist[std::round(randomValue)]; // count the values
 		//raw.push_back(randomValue);  //push the raw values
 
 		// The correspondent to each key is the y value
-		raw.insert(std::pair<double, double>(x, y));
+		raw.insert(std::pair<double, double>(p, y));
+		
+	    
 	}
-
 	//for (auto p : hist) {
 
 		// Uncomment if you want to see the values

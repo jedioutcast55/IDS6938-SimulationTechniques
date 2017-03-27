@@ -82,14 +82,17 @@ int main()
 
 
 	//  2) - Change distribution types
-	std::uniform_real_distribution<> dist(0, 1);  // example of a uniform distribution
+	//std::uniform_real_distribution<> dist(0, 1);  // example of a uniform distribution
 	//std::uniform_real_distribution<> dist(0, 100);  // example of a uniform distribution
 	//std::normal_distribution<> dist(50, 12.5);    // example of a normal distribution
-	//std::normal_distribution<> dist(0,0.33);    // example of a normal distribution
+	//std::normal_distribution<> dist(0.5,0.33);    // example of a normal distribution
 	//std::chi_squared_distribution <double> dist(50.0);
+	//std::chi_squared_distribution <double> dist(0.5);
 	//std::bernoulli_distribution dist(0.5);
 	//std::poisson_distribution<int> dist(50.0);
-	//std::geometric_distribution<int> dist(0.1);
+	//std::poisson_distribution<int> dist(0.5);
+	//std::geometric_distribution<int> dist(0.99);
+	std::binomial_distribution<int> dist(1, 0.5);
 
 
 	auto generator = std::bind(dist, engine);
