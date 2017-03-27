@@ -133,8 +133,45 @@ The pseudo-number generator to be use is mt19937_64.  With this engine the follo
      with a mean of 50.0.
 
 * **(d)- 4pts:** Generate random numbers in two-dimensions for a unit square. Plot the results for the different random number engines. The vertical axis should vary N in increasing order. The horizontal axis should show of the random number engines.
+
+![](HW2Data/Part1/UnitSquareUniformDistribution.PNG?raw=true)
+Figure 21: Comparison graph of pseudo-random number generators - mt19937_64, knuth_b, minstd_rand, ranlux48, and Quasi-sobolo with a uniform distribution.
+
 * **(e)- 4pts:** Generate random numbers in two-dimensions for a unit square. Plot the results for the different distributions. The vertical axis should vary N in increasing order. The horizontal axis should show of the random number engines. (See [Random Numbers Webcourse page](https://webcourses.ucf.edu/courses/1246518/pages/random-numbers?module_item_id=10541423) for a rough idea what you should produce.)
+
+This section will show the different engines with different distribution:
+1) Normal Distribution:
+![](HW2Data/Part1/UnitSquareNormalDistribution.PNG?raw=true)
+Figure 22: Comparison graph of pseudo-random number generators - mt19937_64, knuth_b, minstd_rand, and ranlux48 with a normal distribution.
+2) Chi-square Distribution:
+![](HW2Data/Part1/UnitSquareChiSquareDistribution.PNG?raw=true)
+Figure 23: Comparison graph of pseudo-random number generators - mt19937_64, knuth_b, minstd_rand, and ranlux48 with a Chi-square  distribution.
+3) Poisson Distribution:
+![](HW2Data/Part1/UnitSquarePoissonDistribution.PNG?raw=true)
+Figure 24: Comparison graph of pseudo-random number generators - mt19937_64, knuth_b, minstd_rand, and ranlux48 with a Poisson distribution.
+4) Binomial Distribution
+![](HW2Data/Part1/UnitSquareBinomialDistribution.PNG?raw=true)
+Figure 25: Comparison graph of pseudo-random number generators - mt19937_64, knuth_b, minstd_rand, and ranlux48 with a Binomial distribution.
+
+
 * **(f)- 4pts:** Repeat parts (d) and (e) with a unit circle.
+
+![](HW2Data/Part1/UnitCircleUniformDistribution.PNG?raw=true)
+Figure 26: Comparison graph of pseudo-random number generators - mt19937_64, knuth_b, minstd_rand, ranlux48, and Quasi-sobolo with a uniform distribution.
+
+This section will show the different engines with different distribution:
+1) Normal Distribution:
+![](HW2Data/Part1/UnitCircleNormalDistribution.PNG?raw=true)
+Figure 27: Comparison graph of pseudo-random number generators - mt19937_64, knuth_b, minstd_rand, and ranlux48 with a normal distribution.
+2) Chi-square Distribution:
+![](HW2Data/Part1/UnitCircleChiSquareDistribution.PNG?raw=true)
+Figure 28: Comparison graph of pseudo-random number generators - mt19937_64, knuth_b, minstd_rand, and ranlux48 with a Chi-square  distribution.
+3) Poisson Distribution:
+![](HW2Data/Part1/UnitCirclePoissonDistribution.PNG?raw=true)
+Figure 29: Comparison graph of pseudo-random number generators - mt19937_64, knuth_b, minstd_rand, and ranlux48 with a Poisson distribution.
+4) Binomial Distribution
+![](HW2Data/Part1/UnitCircleBinomialDistribution.PNG?raw=true)
+Figure 30: Comparison graph of pseudo-random number generators - mt19937_64, knuth_b, minstd_rand, and ranlux48 with a Binomial distribution.
 
 ##Part 2 - Snakes and Ladders (Discrete Event Markov Chains and Monte Carlo Simulations) (30 pts)
 
