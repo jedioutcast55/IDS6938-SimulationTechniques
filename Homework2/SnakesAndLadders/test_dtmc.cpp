@@ -17,6 +17,7 @@
 int main() {
 
 	SetTransitionMatrix();
+	SetShootsLaddersTransitionMatrix();
 
 	// Print Results to File
 	std::ofstream myfile;
@@ -26,19 +27,31 @@ int main() {
 
 	//simulate discrete time Markov Chain
 	//unsigned int N = 50;
-	unsigned int N = 50;
+	unsigned int N = 1000;
 	std::map<int, int> hist;
 	std::vector<int> discreteMC;
 	for (unsigned int i = 0; i < N; ++i) 
 	{
 		
 		//TODO (add DTMC, and histogram lines.)
-		discreteMC = DTMC(TransitionMatrix, ROLLS, start);
+		//discreteMC = DTMC(TransitionMatrix, ROLLS, start);
+		discreteMC = DTMC(ShootsLaddersTransitionMatrix, ROLLS, start);
 		++hist[std::round(discreteMC.back())];
+
+		myfile << "Run: " << i << ":" << "\t";
 
 		// Code if you wanted to print out results at each step
 		for (auto elem : discreteMC)
-			std::cout << elem << std::endl;
+		{
+			std::cout << elem << "\t";
+			myfile << elem << "\t";
+			
+		}
+
+		std::cout << std::endl;
+		myfile << std::endl;
+
+			
 
 	}
 	//Returns an array discreteMC with the states at each step of the discrete-time Markov Chain

@@ -12,6 +12,23 @@
 #include <list>
 
 
+
+// Save Game Matrix to file
+void saveGameMatrixToFile(std::ofstream *file, Eigen::MatrixXf *matrixPTR)
+{
+	// 
+	(*file) << "Game Matrix" << std::endl;
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			(*file) << (*matrixPTR)(i, j) << "\t";
+		}
+		(*file) << std::endl;
+	}
+
+	(*file) << std::endl;
+}
 // Check that each row in a Eigen Matrix equates to one.
 bool checkTransitionMatrix(Eigen::MatrixXf *eigenMatrix)
 {
@@ -75,6 +92,7 @@ void vectorMatrixMultiplication(bool matrixHealth, int rows, std::ofstream *file
 			listVectorXf.push_back(v);
 		}
 
+		(*file) << "Game Matrix Probability" << std::endl;
 		for (auto p : listVectorXf)
 		{
 			std::cout << p.transpose();
@@ -141,7 +159,13 @@ int main(){
 	std::ofstream myfile;
 	myfile.open("markov_results.txt");
 
-	vectorMatrixMultiplication(nullGameHealth, rows, &myfile, &TransitionMatrix);
+	//saveGameMatrixToFile(&myfile, &TransitionMatrix);
+	//vectorMatrixMultiplication(nullGameHealth, rows, &myfile, &TransitionMatrix);
+
+	saveGameMatrixToFile(&myfile, &ShootsLaddersTransitionMatrix);
+	vectorMatrixMultiplication(snakeLaddersMatrixHealth, size, &myfile, &ShootsLaddersTransitionMatrix);
+
+
 
 		//for (int i = 0; i < rows; i++)
 		//{
