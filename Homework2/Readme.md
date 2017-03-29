@@ -273,3 +273,6 @@ If you feel like going beyond the scope of the assignment, you should consider i
 
 ** Citations: **
 Chapter 2 RANDOM NUMBERS. (n.d.). Retrieved March 11, 2017, from https://www.usna.edu/Users/math/dphillip/sa421.s16/chapter02.pdf
+
+O'Neill, M. (n.d.). Using the PCG C Implementation. Retrieved March 29, 2017, from http://www.pcg-random.org/using-pcg-cpp.html
+
