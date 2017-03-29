@@ -2,11 +2,13 @@
 
 ## IDS6938-Simulation Techniques - [University of Central Florida](http://www.ist.ucf.edu/grad/)
 
+** Student: Roberto Cabrera
+
 [University of Central Florida](http://www.ist.ucf.edu/grad/)
 This is the framework for homework #2. 
 
 The assignment is due: **Tuesday, March 28 at 11:59PM (EST)**
-Dr. Kider: I am requesting one day extension.  My new date will be ** Wednesday, March 29, 2016 at 11:59 (EST) **
+Dr. Kider: I am requesting one day extension.  My new date will be ** Wednesday, March 29, 2016 at 11:59 (EST) **  This will be my second day of the three day grace period you offer early in the semester.
 
 asdfasdf
 sadfsad
@@ -190,8 +192,16 @@ The game is **memoryless** - your progression to the next position is independen
 <BR>![](images/null.png?raw=true)<BR>
 From state 0 it is equally probable of landing on squares 1-6. From state 1 t is equally probable of landing on squares 2-7, and so on. Create this transition matrix. The end is trickier, we will consider any roll past 100 a win case. (Opposed to rolling exactly onto square 100.) Confirm you have a well formed stochastic matrix (Write checks for confirming each row of T sums to one and all elements are non-negative). The Transition Matrix methods can be found in the TransitionMatrix.h file.
 
-* **(b) Simulate and analyze the results of Null State Game - 10pts:** What is the modal number of moves required by a single player to finish the game? We will be simulating the game two different ways. **(1) Markov Chain**: The game can be analyzed with a row vector, *v* with 101 components, representing the probabilities that the player is on each of the positions. V(0) is (1,0,0,...,0) since we know we start at square 0. v evolves by: <BR>![](images/prob.png?raw=true)<BR>
+	* The transition matrix for the null game is written in the function SetTransitionMatrix() in the file 		TransitionMatrix.h.  This file can be found IDS6938-SimulationTechniques\Homework2\SnakesAndLadders.  The check that each row within the transition matrix summ up to 1 is done by the function: bool checkTransitionMatrix(Eigen::MatrixXf *eigenMatrix).  This function can be found in test_markov.cpp.
+
+* **(b) Simulate and analyze the results of Null State Game - 10pts:** What is the modal number of moves required by a single player to finish the game? We will be simulating the game two different ways. 
+
+	* **(1) Markov Chain**: The game can be analyzed with a row vector, *v* with 101 components, representing the probabilities that the player is on each of the positions. V(0) is (1,0,0,...,0) since we know we start at square 0. v evolves by: <BR>![](images/prob.png?raw=true)<BR>
 For this part (1) use the *Markov project* in the Snake and Ladders starter code.<BR>
+
+	* To do the vector multiplication and get the probability matrix for the null game I created the function void vectorMatrixMultiplication(bool matrixHealth, int rows, std::ofstream *file, Eigen::MatrixXf *matrixPTR).  This function is found in test_makov.cpp.  Raw data  for the Markov simulation can be found in IDS6938-SimulationTechniques\Homework2\HW2Data\Part2\NullGame\Markov
+
+
 **(2) Monte Carlo**: he will will use a monte carlo process to solve our Discrete Time Markov Chains. Here (2) use the DTMC project, and utilize the DTMC method similar to what we did in class. <BR><BR>Produce graphs to analyze the results and show how the game evolves over time for both methods. Plot useful statistics of the results such as percentage chance of finishing the game in n-moves, cumulative probability of finishing the game in n-moves, and other ways to convey useful information of the results.
 
 * **(c) Simulate and analyze the results of Snakes and Ladders -10pts:**  Construct a new transition matrix based on the table:
