@@ -81,7 +81,7 @@ int main(int argc, char* argv[])
 	   Boarding_Queue.initialize();
 	   Boarding_Queue.set_seed(rd(), rd());  // I set the fisrt one for testing, the others you should use two random seeds (rd(), rd())
 
-	   std::cout << std::endl;
+	   /*std::cout << std::endl;
 	   std::cout << "IDGate within confidence Interval: " << IDGateQueue.is_within_confidence_interval() << endl;
 	   std::cout << "MetalScreening_1_Queue within confidence Interval: " << MetalScreening_1_Queue.is_within_confidence_interval() << endl;
 	   std::cout << "MetalScreening_2_Queue within confidence Interval: " << MetalScreening_2_Queue.is_within_confidence_interval() << endl;
@@ -92,7 +92,7 @@ int main(int argc, char* argv[])
 	   std::cout << "MetalScreening_2_Queue within error range: " << MetalScreening_2_Queue.is_within_error_range(0.002) << endl;
 	   std::cout << "MetalScreening_3_Queue within error range: " << MetalScreening_3_Queue.is_within_error_range(0.002) << endl;
 	   std::cout << "Boarding_Queue within error range: " << Boarding_Queue.is_within_error_range(0.002) << endl;
-	   std::cout << std::endl;
+	   std::cout << std::endl;*/
 
 
    for (; 
