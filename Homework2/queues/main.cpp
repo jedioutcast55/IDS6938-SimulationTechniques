@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
 	   IDGateQueue.set_file_names("01_IDGateQueue_log.txt", "01_IDGateQueue_wait.txt", "01_IDGateQueue_service.txt");
 	   IDGateQueue.set_lambda(6);  // for this assignement this is set to a variable from the for loop.
 	   IDGateQueue.set_mu(53);
-	   IDGateQueue.autogenerate_new_arrivals(true);
+	   //IDGateQueue.autogenerate_new_arrivals(true);
 	   IDGateQueue.initialize();
 	   IDGateQueue.set_seed(1, rd());  // I set the fisrt one for testing, the others you should use two random seeds (rd(), rd())
 
@@ -52,7 +52,7 @@ int main(int argc, char* argv[])
 	   MetalScreening_1_Queue.set_mu(20);
 	   MetalScreening_1_Queue.autogenerate_new_arrivals(false);
 	   MetalScreening_1_Queue.initialize();
-	   MetalScreening_1_Queue.set_seed(1, (rd(), rd()));  // I set the fisrt one for testing, the others you should use two random seeds (rd(), rd())
+	   MetalScreening_1_Queue.set_seed(rd(), rd());  // I set the fisrt one for testing, the others you should use two random seeds (rd(), rd())
 
 	   // Third Queue - Represents The second station of metal screening at the airport
 	   MM1_Queue MetalScreening_2_Queue;
@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
 	   MetalScreening_2_Queue.set_mu(20);
 	   MetalScreening_2_Queue.autogenerate_new_arrivals(false);
 	   MetalScreening_2_Queue.initialize();
-	   MetalScreening_2_Queue.set_seed(1, (rd(), rd()));  // I set the fisrt one for testing, the others you should use two random seeds (rd(), rd())
+	   MetalScreening_2_Queue.set_seed(rd(), rd());  // I set the fisrt one for testing, the others you should use two random seeds (rd(), rd())
 
 	   // Fourth Queue - Represents The third station of metal screening at the airport
 	   MM1_Queue MetalScreening_3_Queue;
@@ -70,16 +70,16 @@ int main(int argc, char* argv[])
 	   MetalScreening_3_Queue.set_mu(20);
 	   MetalScreening_3_Queue.autogenerate_new_arrivals(false);
 	   MetalScreening_3_Queue.initialize();
-	   MetalScreening_3_Queue.set_seed(1, (rd(), rd()));  // I set the fisrt one for testing, the others you should use two random seeds (rd(), rd())
+	   MetalScreening_3_Queue.set_seed(rd(), rd());  // I set the fisrt one for testing, the others you should use two random seeds (rd(), rd())
 
 	   // Fifth Queue - Represents The boarding the airplane queue
 	   MM1_Queue Boarding_Queue;
 	   Boarding_Queue.set_file_names("01_Boarding_Queue_log.txt", "01_Boarding_Queue_wait.txt", "01_Boarding_Queue_service.txt");
 	   Boarding_Queue.set_lambda(6);  // for this assignement this is set to a variable from the for loop.
 	   Boarding_Queue.set_mu(80);
-	   Boarding_Queue.autogenerate_new_arrivals(false);
+	   //Boarding_Queue.autogenerate_new_arrivals(false);
 	   Boarding_Queue.initialize();
-	   Boarding_Queue.set_seed(1, (rd(), rd()));  // I set the fisrt one for testing, the others you should use two random seeds (rd(), rd())
+	   Boarding_Queue.set_seed(rd(), rd());  // I set the fisrt one for testing, the others you should use two random seeds (rd(), rd())
 
 	   std::cout << std::endl;
 	   std::cout << "IDGate within confidence Interval: " << IDGateQueue.is_within_confidence_interval() << endl;
@@ -101,9 +101,10 @@ int main(int argc, char* argv[])
        ;)
    {
 	   Customer cust = IDGateQueue.process_next_event();    // =  TODO: process next event;
-	   Customer cust2 = IDGateQueue.process_next_event();   // =  TODO: process next event;
-	   Customer cust3 = IDGateQueue.process_next_event();   // =  TODO: process next event;
-	   Customer cust4 = IDGateQueue.process_next_event();   // =  TODO: process next event;
+	   Customer cust2 = MetalScreening_1_Queue.process_next_event();   // =  TODO: process next event;
+	   Customer cust3 = MetalScreening_2_Queue.process_next_event();   // =  TODO: process next event;
+	   Customer cust4 = MetalScreening_3_Queue.process_next_event();   // =  TODO: process next event;
+	   Customer cust5 = Boarding_Queue.process_next_event();
 	   //TODO: one more process_next_event for the last object.
 
        if (cust.get_type() == Customer::COMPLETED())

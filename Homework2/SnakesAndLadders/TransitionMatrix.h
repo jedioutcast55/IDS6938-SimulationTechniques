@@ -6,7 +6,8 @@ Eigen::MatrixXf ShootsLaddersTransitionMatrix(size, size);
 Eigen::VectorXf v(size);
 Eigen::VectorXf v_ShootsLadder(size);
 
-unsigned int ROLLS = 50; //TODO
+//unsigned int ROLLS = 44; //TODO
+unsigned int ROLLS = 101;
 
 double prob = (1.0/6.0) ;  //TODO
 
@@ -89,55 +90,55 @@ void SetShootsLaddersTransitionMatrix()
 		if (ShootsLaddersTransitionMatrix(i, 3) > 0)  // This is a ladder
 		{
 			ShootsLaddersTransitionMatrix(i, 3) = 0;
-			ShootsLaddersTransitionMatrix(i, 19) = prob;
+			ShootsLaddersTransitionMatrix(i, 19) = (ShootsLaddersTransitionMatrix(i, 19) + prob);
 		}
 
 		if (ShootsLaddersTransitionMatrix(i, 15) > 0)  // This is a ladder
 		{
 			ShootsLaddersTransitionMatrix(i, 15) = 0;
-			ShootsLaddersTransitionMatrix(i, 37) = prob;
+			ShootsLaddersTransitionMatrix(i, 37) = (ShootsLaddersTransitionMatrix(i, 37) + prob);
 		}
 
 		if (ShootsLaddersTransitionMatrix(i, 22) > 0)  // This is a ladder
 		{
 			ShootsLaddersTransitionMatrix(i, 22) = 0;
-			ShootsLaddersTransitionMatrix(i, 42) = prob;
+			ShootsLaddersTransitionMatrix(i, 42) = (ShootsLaddersTransitionMatrix(i, 42) + prob);
 		}
 
 		if (ShootsLaddersTransitionMatrix(i, 25) > 0)  // This is a ladder
 		{
 			ShootsLaddersTransitionMatrix(i, 25) = 0;
-			ShootsLaddersTransitionMatrix(i, 64) = prob;
+			ShootsLaddersTransitionMatrix(i, 64) = (ShootsLaddersTransitionMatrix(i, 64) + prob);
 		}
 
 		if (ShootsLaddersTransitionMatrix(i, 41) > 0)  // This is a ladder
 		{
 			ShootsLaddersTransitionMatrix(i, 41) = 0;
-			ShootsLaddersTransitionMatrix(i, 73) = prob;
+			ShootsLaddersTransitionMatrix(i, 73) = (ShootsLaddersTransitionMatrix(i, 73) + prob);
 		}
 
 		if (ShootsLaddersTransitionMatrix(i, 53) > 0)  // This is a ladder
 		{
 			ShootsLaddersTransitionMatrix(i, 53) = 0;
-			ShootsLaddersTransitionMatrix(i, 74) = prob;
+			ShootsLaddersTransitionMatrix(i, 74) = (ShootsLaddersTransitionMatrix(i, 74) + prob);
 		}
 
 		if (ShootsLaddersTransitionMatrix(i, 63) > 0)  // This is a ladder
 		{
 			ShootsLaddersTransitionMatrix(i, 63) = 0;
-			ShootsLaddersTransitionMatrix(i, 86) = prob;
+			ShootsLaddersTransitionMatrix(i, 86) = (ShootsLaddersTransitionMatrix(i, 86) + prob);
 		}
 
 		if (ShootsLaddersTransitionMatrix(i, 76) > 0)  // This is a ladder
 		{
 			ShootsLaddersTransitionMatrix(i, 76) = 0;
-			ShootsLaddersTransitionMatrix(i, 91) = prob;
+			ShootsLaddersTransitionMatrix(i, 91) = (ShootsLaddersTransitionMatrix(i, 91) + prob);
 		}
 
 		if (ShootsLaddersTransitionMatrix(i, 84) > 0)  // This is a ladder
 		{
 			ShootsLaddersTransitionMatrix(i, 84) = 0;
-			ShootsLaddersTransitionMatrix(i, 98) = prob;
+			ShootsLaddersTransitionMatrix(i, 98) = (ShootsLaddersTransitionMatrix(i, 98) + prob);
 		}
 
 
@@ -145,55 +146,55 @@ void SetShootsLaddersTransitionMatrix()
 		if (ShootsLaddersTransitionMatrix(i, 11) > 0)  // This is a Snake
 		{
 			ShootsLaddersTransitionMatrix(i, 11) = 0;
-			ShootsLaddersTransitionMatrix(i, 7) = prob;
+			ShootsLaddersTransitionMatrix(i, 7) = (ShootsLaddersTransitionMatrix(i, 7) + prob);
 		}
 
 		if (ShootsLaddersTransitionMatrix(i, 18) > 0)  // This is a Snake
 		{
 			ShootsLaddersTransitionMatrix(i, 18) = 0;
-			ShootsLaddersTransitionMatrix(i, 13) = prob;
+			ShootsLaddersTransitionMatrix(i, 13) = (ShootsLaddersTransitionMatrix(i, 13) + prob);
 		}
 
 		if (ShootsLaddersTransitionMatrix(i, 28) > 0)  // This is a Snake
 		{
 			ShootsLaddersTransitionMatrix(i, 28) = 0;
-			ShootsLaddersTransitionMatrix(i, 12) = prob;
+			ShootsLaddersTransitionMatrix(i, 12) = (ShootsLaddersTransitionMatrix(i, 12) + prob);
 		}
 
 		if (ShootsLaddersTransitionMatrix(i, 36) > 0)  // This is a Snake
 		{
 			ShootsLaddersTransitionMatrix(i, 36) = 0;
-			ShootsLaddersTransitionMatrix(i, 34) = prob;
+			ShootsLaddersTransitionMatrix(i, 34) = (ShootsLaddersTransitionMatrix(i, 34) + prob);
 		}
 
 		if (ShootsLaddersTransitionMatrix(i, 47) > 0)  // This is a Snake
 		{
 			ShootsLaddersTransitionMatrix(i, 47) = 0;
-			ShootsLaddersTransitionMatrix(i, 26) = prob;
+			ShootsLaddersTransitionMatrix(i, 26) = (ShootsLaddersTransitionMatrix(i, 26) + prob);
 		}
 
 		if (ShootsLaddersTransitionMatrix(i, 77) > 0)  // This is a Snake
 		{
 			ShootsLaddersTransitionMatrix(i, 77) = 0;
-			ShootsLaddersTransitionMatrix(i, 16) = prob;
+			ShootsLaddersTransitionMatrix(i, 16) = (ShootsLaddersTransitionMatrix(i, 16) + prob);
 		}
 
 		if (ShootsLaddersTransitionMatrix(i, 83) > 0)  // This is a Snake
 		{
 			ShootsLaddersTransitionMatrix(i, 83) = 0;
-			ShootsLaddersTransitionMatrix(i, 39) = prob;
+			ShootsLaddersTransitionMatrix(i, 39) = (ShootsLaddersTransitionMatrix(i, 39) + prob);
 		}
 
 		if (ShootsLaddersTransitionMatrix(i, 92) > 0)  // This is a Snake
 		{
 			ShootsLaddersTransitionMatrix(i, 92) = 0;
-			ShootsLaddersTransitionMatrix(i, 75) = prob;
+			ShootsLaddersTransitionMatrix(i, 75) = (ShootsLaddersTransitionMatrix(i, 75) + prob);
 		}
 
 		if (ShootsLaddersTransitionMatrix(i, 99) > 0)  // This is a Snake
 		{
 			ShootsLaddersTransitionMatrix(i, 99) = 0;
-			ShootsLaddersTransitionMatrix(i, 70) = prob;
+			ShootsLaddersTransitionMatrix(i, 70) = (ShootsLaddersTransitionMatrix(i, 70) + prob);
 		}
 	
 	}

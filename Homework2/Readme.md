@@ -2,11 +2,15 @@
 
 ## IDS6938-Simulation Techniques - [University of Central Florida](http://www.ist.ucf.edu/grad/)
 
+** Student: Roberto Cabrera
+
 [University of Central Florida](http://www.ist.ucf.edu/grad/)
 This is the framework for homework #2. 
 
 The assignment is due: **Tuesday, March 28 at 11:59PM (EST)**
-Dr. Kider: I am requesting one day extension.  My new date will be ** Wednesday, March 29, 2016 at 11:59 (EST) **
+Dr. Kider: I am requesting two day extension.  
+
+My new date will be ** Thursday, March 30, 2017 at 11:59PM (EST) **  This will use the remaining days for the three day grace period you provided early in the semester.
 
 asdfasdf
 sadfsad
@@ -133,8 +137,45 @@ The pseudo-number generator to be use is mt19937_64.  With this engine the follo
      with a mean of 50.0.
 
 * **(d)- 4pts:** Generate random numbers in two-dimensions for a unit square. Plot the results for the different random number engines. The vertical axis should vary N in increasing order. The horizontal axis should show of the random number engines.
+
+![](HW2Data/Part1/UnitSquareUniformDistribution.PNG?raw=true)
+Figure 21: Comparison graph of pseudo-random number generators - mt19937_64, knuth_b, minstd_rand, ranlux48, and Quasi-sobolo with a uniform distribution.
+
 * **(e)- 4pts:** Generate random numbers in two-dimensions for a unit square. Plot the results for the different distributions. The vertical axis should vary N in increasing order. The horizontal axis should show of the random number engines. (See [Random Numbers Webcourse page](https://webcourses.ucf.edu/courses/1246518/pages/random-numbers?module_item_id=10541423) for a rough idea what you should produce.)
+
+This section will show the different engines with different distribution:
+1) Normal Distribution:
+![](HW2Data/Part1/UnitSquareNormalDistribution.PNG?raw=true)
+Figure 22: Comparison graph of pseudo-random number generators - mt19937_64, knuth_b, minstd_rand, and ranlux48 with a normal distribution.
+2) Chi-square Distribution:
+![](HW2Data/Part1/UnitSquareChiSquareDistribution.PNG?raw=true)
+Figure 23: Comparison graph of pseudo-random number generators - mt19937_64, knuth_b, minstd_rand, and ranlux48 with a Chi-square  distribution.
+3) Poisson Distribution:
+![](HW2Data/Part1/UnitSquarePoissonDistribution.PNG?raw=true)
+Figure 24: Comparison graph of pseudo-random number generators - mt19937_64, knuth_b, minstd_rand, and ranlux48 with a Poisson distribution.
+4) Binomial Distribution
+![](HW2Data/Part1/UnitSquareBinomialDistribution.PNG?raw=true)
+Figure 25: Comparison graph of pseudo-random number generators - mt19937_64, knuth_b, minstd_rand, and ranlux48 with a Binomial distribution.
+
+
 * **(f)- 4pts:** Repeat parts (d) and (e) with a unit circle.
+
+![](HW2Data/Part1/UnitCircleUniformDistribution.PNG?raw=true)
+Figure 26: Comparison graph of pseudo-random number generators - mt19937_64, knuth_b, minstd_rand, ranlux48, and Quasi-sobolo with a uniform distribution.
+
+This section will show the different engines with different distribution:
+1) Normal Distribution:
+![](HW2Data/Part1/UnitCircleNormalDistribution.PNG?raw=true)
+Figure 27: Comparison graph of pseudo-random number generators - mt19937_64, knuth_b, minstd_rand, and ranlux48 with a normal distribution.
+2) Chi-square Distribution:
+![](HW2Data/Part1/UnitCircleChiSquareDistribution.PNG?raw=true)
+Figure 28: Comparison graph of pseudo-random number generators - mt19937_64, knuth_b, minstd_rand, and ranlux48 with a Chi-square  distribution.
+3) Poisson Distribution:
+![](HW2Data/Part1/UnitCirclePoissonDistribution.PNG?raw=true)
+Figure 29: Comparison graph of pseudo-random number generators - mt19937_64, knuth_b, minstd_rand, and ranlux48 with a Poisson distribution.
+4) Binomial Distribution
+![](HW2Data/Part1/UnitCircleBinomialDistribution.PNG?raw=true)
+Figure 30: Comparison graph of pseudo-random number generators - mt19937_64, knuth_b, minstd_rand, and ranlux48 with a Binomial distribution.
 
 ##Part 2 - Snakes and Ladders (Discrete Event Markov Chains and Monte Carlo Simulations) (30 pts)
 
@@ -153,9 +194,26 @@ The game is **memoryless** - your progression to the next position is independen
 <BR>![](images/null.png?raw=true)<BR>
 From state 0 it is equally probable of landing on squares 1-6. From state 1 t is equally probable of landing on squares 2-7, and so on. Create this transition matrix. The end is trickier, we will consider any roll past 100 a win case. (Opposed to rolling exactly onto square 100.) Confirm you have a well formed stochastic matrix (Write checks for confirming each row of T sums to one and all elements are non-negative). The Transition Matrix methods can be found in the TransitionMatrix.h file.
 
-* **(b) Simulate and analyze the results of Null State Game - 10pts:** What is the modal number of moves required by a single player to finish the game? We will be simulating the game two different ways. **(1) Markov Chain**: The game can be analyzed with a row vector, *v* with 101 components, representing the probabilities that the player is on each of the positions. V(0) is (1,0,0,...,0) since we know we start at square 0. v evolves by: <BR>![](images/prob.png?raw=true)<BR>
+	* The transition matrix for the null game is written in the function SetTransitionMatrix() in the file 		TransitionMatrix.h.  This file can be found IDS6938-SimulationTechniques\Homework2\SnakesAndLadders.  The check that each row within the transition matrix summ up to 1 is done by the function: bool checkTransitionMatrix(Eigen::MatrixXf *eigenMatrix).  This function can be found in test_markov.cpp.
+
+* **(b) Simulate and analyze the results of Null State Game - 10pts:** What is the modal number of moves required by a single player to finish the game? We will be simulating the game two different ways. 
+
+	* **(1) Markov Chain**: The game can be analyzed with a row vector, *v* with 101 components, representing the probabilities that the player is on each of the positions. V(0) is (1,0,0,...,0) since we know we start at square 0. v evolves by: <BR>![](images/prob.png?raw=true)<BR>
 For this part (1) use the *Markov project* in the Snake and Ladders starter code.<BR>
+
+	* To do the vector multiplication and get the probability matrix for the null game I created the function void vectorMatrixMultiplication(bool matrixHealth, int rows, std::ofstream *file, Eigen::MatrixXf *matrixPTR).  This function is found in test_makov.cpp.  Raw data  for the Markov simulation can be found in IDS6938-SimulationTechniques\Homework2\HW2Data\Part2\NullGame\Markov
+
+From the Probability distribution matrix from the Null game produce the following statistics:
+
+![](HW2Data/Part2/NullGame/Markov/NullGameMarkovStatistics.PNG?raw=true)
+Figure 30: Null Game finishing the game in n-moves and cummulative probability of finishing the game in n-moves.
+
+
 **(2) Monte Carlo**: he will will use a monte carlo process to solve our Discrete Time Markov Chains. Here (2) use the DTMC project, and utilize the DTMC method similar to what we did in class. <BR><BR>Produce graphs to analyze the results and show how the game evolves over time for both methods. Plot useful statistics of the results such as percentage chance of finishing the game in n-moves, cumulative probability of finishing the game in n-moves, and other ways to convey useful information of the results.
+
+Using the null game transition matrix to run the software for a sample size of 1000.  Using the DTMC project to run a simulation which simulates running the null game a thousand times.  Code found in IDS6938-SimulationTechniques\Homework2\SnakesAndLadders.
+
+The modal can be found using the results of the DTMC results.  This game a modal for 
 
 * **(c) Simulate and analyze the results of Snakes and Ladders -10pts:**  Construct a new transition matrix based on the table:
 
@@ -176,6 +234,8 @@ Ladders From  | Ladders To | |  Snakes From  | Snakes To
 
 Run the same simulation and analyze your results similar to part (b) for the proper game of *Snakes and Ladders* for both methods. How often are the snakes and ladders used, how do the probability of finishing change, etc? What is the maximum and expected amount of moves for the game? Use charts and graphs to illustrate these points.
 * **(d) Think - 0pts:** If these games are built entirely on chance, do they require any strategy? Is it really a *game*, would you rather play games of chance or games of strategy?
+
+This is a phylosophical question.  As such is a simple answer.  Why we play a game?  Most people play games for entertainment.  So if it gives you entertainement it provided its purspose wheter it is considered a game or not.
 
 
 ##Part 3 - Discrete Event Simulation - Queue Simulation (30 pts)
@@ -226,3 +286,6 @@ If you feel like going beyond the scope of the assignment, you should consider i
 
 ** Citations: **
 Chapter 2 RANDOM NUMBERS. (n.d.). Retrieved March 11, 2017, from https://www.usna.edu/Users/math/dphillip/sa421.s16/chapter02.pdf
+
+O'Neill, M. (n.d.). Using the PCG C Implementation. Retrieved March 29, 2017, from http://www.pcg-random.org/using-pcg-cpp.html
+

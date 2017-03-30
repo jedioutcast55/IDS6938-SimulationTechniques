@@ -10,6 +10,9 @@
 #include <functional> 
 #include <numeric>  
 
+// PGC random engine
+#include "pcg_random.hpp"
+
 #define _USE_MATH_DEFINES
 #include <math.h>
 
@@ -31,6 +34,10 @@ int main()
 	//use a random device
 	std::random_device rd;
 
+	// Seed with a real random value, if available
+	pcg_extras::seed_seq_from<std::random_device> seed;
+
+
 	// 1) Change random number generators
 	//std::mt19937_64 engine(rd());
 	//engineSelection = 1;
@@ -38,8 +45,11 @@ int main()
     //engineSelection = 2;
 	//std::minstd_rand engine(rd());
 	//engineSelection = 3;
-	std::ranlux48 engine(rd());
-	engineSelection = 4;
+	//std::ranlux48 engine(rd());
+	//engineSelection = 4;
+
+	pcg64 engine(seed);
+	engineSelection = 5;
 
 	// Setting the string file names according to pseudo-random engine:
 	switch (engineSelection)
@@ -64,6 +74,11 @@ int main()
 		rawFileName = "ranlux48_raw_results.txt";
 		usefulDataFileName = "ranlux48_useful_stats.txt";
 		break;
+	case 5:
+		histogramFileName = "pcg_histogram_results.txt";
+		rawFileName = "pcg_raw_results.txt";
+		usefulDataFileName = "pcg_useful_stats.txt";
+		break;
 	default:
 		histogramFileName = "histogram_results.txt";
 		rawFileName = "raw_results.txt";
@@ -82,14 +97,17 @@ int main()
 
 
 	//  2) - Change distribution types
-	std::uniform_real_distribution<> dist(0, 1);  // example of a uniform distribution
-	//std::uniform_real_distribution<> dist(0, 100);  // example of a uniform distribution
+	//std::uniform_real_distribution<> dist(0, 1);  // example of a uniform distribution
+	std::uniform_real_distribution<> dist(0, 100);  // example of a uniform distribution
 	//std::normal_distribution<> dist(50, 12.5);    // example of a normal distribution
-	//std::normal_distribution<> dist(0,0.33);    // example of a normal distribution
+	//std::normal_distribution<> dist(0.5,0.33);    // example of a normal distribution
 	//std::chi_squared_distribution <double> dist(50.0);
+	//std::chi_squared_distribution <double> dist(0.5);
 	//std::bernoulli_distribution dist(0.5);
 	//std::poisson_distribution<int> dist(50.0);
-	//std::geometric_distribution<int> dist(0.1);
+	//std::poisson_distribution<int> dist(0.5);
+	//std::geometric_distribution<int> dist(0.99);
+//std::binomial_distribution<int> dist(1, 0.5);
 
 
 	auto generator = std::bind(dist, engine);
@@ -100,8 +118,8 @@ int main()
 	double x;
 	double y;
 
-	/*double radius;
-	double angleTheta;*/
+	double radius;
+	double angleTheta;
 
 	//std::map<int, int> hist; //Counts of discrete values
 	//std::vector<double> raw; //raw random values 
@@ -113,16 +131,16 @@ int main()
 
 	for (unsigned int i = 0; i < N; ++i) {
 		// randomValue = generator();
-		/*radius = generator();
+		radius = generator();
 		angleTheta = (2 * M_PI * generator());
 
 
 		x = (radius * cos(angleTheta));
-		y = (radius * sin(angleTheta));*/
+		y = (radius * sin(angleTheta));
 
 
-		x = generator();
-		y = generator();
+		//x = generator();
+		//y = generator();
 
 		//++hist[std::round(randomValue)]; // count the values
 		//raw.push_back(randomValue);  //push the raw values

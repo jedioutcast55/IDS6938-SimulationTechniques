@@ -79,9 +79,9 @@ void MM1_Queue::initialize()
       expected_server_utilization_ = (lambda_/mu_);   // p = lambda/u
       expected_idle_prob_ = 1.0 - expected_server_utilization_;  // 1 - p
       expected_queue_length_ = ((expected_server_utilization_ * expected_server_utilization_)/(expected_idle_prob_));   // Lq = p square / 1 - p
-      expected_number_customers_ = expected_server_utilization_/ expected_idle_prob_;  // p / (1 - p)
-      expected_waiting_time_  = expected_server_utilization_ / (lambda_ - mu_);  // p / (lambda - u)
-      expected_response_time_ = 1.0 / (lambda_ - mu_);  // 1 / (lambda - u)
+      expected_number_customers_ = expected_server_utilization_/ (expected_idle_prob_);  // p / (1 - p)
+      expected_waiting_time_  = expected_server_utilization_ / (mu_ - lambda_);  // p / (u -lambda)
+      expected_response_time_ = 1.0 / (mu_ - lambda_);  // 1 / (u - lambda )
       // ------------------------------------------------
 
       rnd_arrival.set_rate(lambda_);
