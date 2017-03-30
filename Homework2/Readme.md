@@ -8,7 +8,7 @@
 This is the framework for homework #2. 
 
 The assignment is due: **Tuesday, March 28 at 11:59PM (EST)**
-Dr. Kider: I am requesting one day extension.  My new date will be ** Wednesday, March 29, 2016 at 11:59 (EST) **  This will be my second day of the three day grace period you offer early in the semester.
+Dr. Kider: I am requesting two day extension.  My new date will be ** Thursday, March 30, 2017 at 11:59 (EST) **  This will be my remaining days for the three day grace period you provided early in the semester.
 
 asdfasdf
 sadfsad
@@ -201,8 +201,17 @@ For this part (1) use the *Markov project* in the Snake and Ladders starter code
 
 	* To do the vector multiplication and get the probability matrix for the null game I created the function void vectorMatrixMultiplication(bool matrixHealth, int rows, std::ofstream *file, Eigen::MatrixXf *matrixPTR).  This function is found in test_makov.cpp.  Raw data  for the Markov simulation can be found in IDS6938-SimulationTechniques\Homework2\HW2Data\Part2\NullGame\Markov
 
+From the Probability distribution matrix from the Null game produce the following statistics:
+
+![](HW2Data/Part2/NullGame/Markov/NullGameMarkovStatistics.PNG?raw=true)
+Figure 30: Null Game finishing the game in n-moves and cummulative probability of finishing the game in n-moves.
+
 
 **(2) Monte Carlo**: he will will use a monte carlo process to solve our Discrete Time Markov Chains. Here (2) use the DTMC project, and utilize the DTMC method similar to what we did in class. <BR><BR>Produce graphs to analyze the results and show how the game evolves over time for both methods. Plot useful statistics of the results such as percentage chance of finishing the game in n-moves, cumulative probability of finishing the game in n-moves, and other ways to convey useful information of the results.
+
+Using the null game transition matrix to run the software for a sample size of 1000.  Using the DTMC project to run a simulation which simulates running the null game a thousand times.  Code found in IDS6938-SimulationTechniques\Homework2\SnakesAndLadders.
+
+The modal can be found using the results of the DTMC results.  This game a modal for 
 
 * **(c) Simulate and analyze the results of Snakes and Ladders -10pts:**  Construct a new transition matrix based on the table:
 
@@ -223,6 +232,8 @@ Ladders From  | Ladders To | |  Snakes From  | Snakes To
 
 Run the same simulation and analyze your results similar to part (b) for the proper game of *Snakes and Ladders* for both methods. How often are the snakes and ladders used, how do the probability of finishing change, etc? What is the maximum and expected amount of moves for the game? Use charts and graphs to illustrate these points.
 * **(d) Think - 0pts:** If these games are built entirely on chance, do they require any strategy? Is it really a *game*, would you rather play games of chance or games of strategy?
+
+This is a phylosophical question.  As such is a simple answer.  Why we play a game?  Most people play games for entertainment.  So if it gives you entertainement it provided its purspose wheter it is considered a game or not.
 
 
 ##Part 3 - Discrete Event Simulation - Queue Simulation (30 pts)
