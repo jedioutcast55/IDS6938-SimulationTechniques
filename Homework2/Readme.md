@@ -177,6 +177,9 @@ Figure 29: Comparison graph of pseudo-random number generators - mt19937_64, knu
 ![](HW2Data/Part1/UnitCircleBinomialDistribution.PNG?raw=true)
 Figure 30: Comparison graph of pseudo-random number generators - mt19937_64, knuth_b, minstd_rand, and ranlux48 with a Binomial distribution.
 
+Evaluation:
+At the beginning the quasi-sobolo shows more uniformity in the historgram as we can see in latter graphs patterns are shown more pronounce than other engines.  We were not able to reject any of the engines Ho hipothesis with 95% confidence .  So there is no evidence any of the engines are not uniform.  This test was done using the uniform distribution.  I was not able to use quasi-sobolo for other distributions, however MT19937 hold better in multiple distributions and when compare using the unit square and the unit circle.
+
 ##Part 2 - Snakes and Ladders (Discrete Event Markov Chains and Monte Carlo Simulations) (30 pts)
 
 We all love board games. A board game can be viewed mathematically as a Markov chain, where the probability of moving to the next position depends only on the position you are currently at and the chances provided by tossing a dice. For this part of the homework we will simulate the game "*Snakes and Ladders*" (This goes by other names: Chutes and Ladders, Moksha Patam but all essentially the same gameplay.)
@@ -208,7 +211,7 @@ For this part (1) use the *Markov project* in the Snake and Ladders starter code
 From the Probability distribution matrix of the Null game produce the following statistics:
 
 ![](HW2Data/Part2/NullGame/Markov/NullGameMarkovStatistics.PNG?raw=true)
-Figure 30: Null Game finishing the game in n-moves and cummulative probability of finishing the game in n-moves. Data use is from the Probability Distribution Matrix.
+Figure 31: Null Game finishing the game in n-moves and cummulative probability of finishing the game in n-moves. Data use is from the Probability Distribution Matrix.
 
 
 **(2) Monte Carlo**: he will will use a monte carlo process to solve our Discrete Time Markov Chains. Here (2) use the DTMC project, and utilize the DTMC method similar to what we did in class. <BR><BR>Produce graphs to analyze the results and show how the game evolves over time for both methods. Plot useful statistics of the results such as percentage chance of finishing the game in n-moves, cumulative probability of finishing the game in n-moves, and other ways to convey useful information of the results.
@@ -221,8 +224,8 @@ The data file for Null Game dtcm exist in IDS6938-SimulationTechniques\Homework2
 
 From the raw data analysis we found the modal # to finish the game is 28.  The data also provided the number the percentage of the number of moves necessary to finish the game as well as it cummulative percentage shown in figure 31.
 
-![](HW2Data/Part2/NullGame/Markov/NullGameMarkovStatistics.PNG?raw=true)
-Figure 31: Null Game finishing the game in n-moves and cummulative probability of finishing the game in n-moves. Data use is from the DTCM simulation results.
+![](HW2Data/Part2/NullGame/MonteCarlo/NullGameDTMCStatistics.PNG?raw=true)
+Figure 32: Null Game finishing the game in n-moves and cummulative probability of finishing the game in n-moves. Data use is from the DTCM simulation results.
 
 * **(c) Simulate and analyze the results of Snakes and Ladders -10pts:**  Construct a new transition matrix based on the table:
 
@@ -243,14 +246,14 @@ Ladders From  | Ladders To | |  Snakes From  | Snakes To
 
 Run the same simulation and analyze your results similar to part (b) for the proper game of *Snakes and Ladders* for both methods. How often are the snakes and ladders used, how do the probability of finishing change, etc? What is the maximum and expected amount of moves for the game? Use charts and graphs to illustrate these points.
 
-	* To do the vector multiplication and get the probability matrix for the Snake and Ladders game, Use the function void vectorMatrixMultiplication(bool matrixHealth, int rows, std::ofstream *file, Eigen::MatrixXf *matrixPTR).  This function is found in test_markov.cpp.  In IDS6938-SimulationTechniques\Homework2\HW2Data\Part2\SnakeAndLadders\Markov there are two files:
-	1) SnakeAndLadders_markov_results.txt - Raw data file produce by the code.
-    2) SnakeAndLadders_Markov_DataAnalysis.xlsx - Using the raw data file, use to analyse and create graphics.
+* To do the vector multiplication and get the probability matrix for the Snake and Ladders game, Use the function void vectorMatrixMultiplication(bool matrixHealth, int rows, std::ofstream *file, Eigen::MatrixXf *matrixPTR).  This function is found in test_markov.cpp.  In IDS6938-SimulationTechniques\Homework2\HW2Data\Part2\SnakeAndLadders\Markov there are two files:
+1) SnakeAndLadders_markov_results.txt - Raw data file produce by the code.
+2) SnakeAndLadders_Markov_DataAnalysis.xlsx - Using the raw data file, use to analyse and create graphics.  Transition Matrix and Probability distribution matrix.
 
 From the Probability distribution matrix of the Snake and Ladders game produce the following statistics:
 
-![](HW2Data/Part2/SnakeAndLadders/Markov/NullGameMarkovStatistics.PNG?raw=true)
-Figure 32: Snakes and Ladders Game finishing the game in n-moves and cummulative probability of finishing the game in n-moves. Data use is from the Probability Distribution Matrix.
+![](HW2Data/Part2/SnakeAndLadders/Markov/SnakeAndLaddersMarkovStatistics.PNG?raw=true)
+Figure 33: Snakes and Ladders Game finishing the game in n-moves and cummulative probability of finishing the game in n-moves. Data use is from the Probability Distribution Matrix.
 
 Using the Snakes and Ladders game transition matrix to run the software for a sample size of 1000.  Using the DTMC project to run a simulation which simulates running the Snakes and Ladders game a thousand times.  Code found in IDS6938-SimulationTechniques\Homework2\SnakesAndLadders.  The main exist in test_dtcm.cpp.
 
@@ -260,17 +263,18 @@ The data file for Snakes and Ladders Game for DTCM exist in IDS6938-SimulationTe
 3) SnakeAndLadders_dtcm_markov_300_results.txt
 4) ShootsAndLadders_Data_300_rolls.xlsx
 
-From the raw data analysis we found the modal # to finish the game is 16.  The data also provided the number the percentage of the number of moves necessary to finish the game as well as it cummulative percentage shown in figure 33.
+From the raw data analysis we found the modal # to finish the game is 16.  The data also provided the number the percentage of the number of moves necessary to finish the game as well as it cummulative percentage shown in figure 34.
 
 
-![](HW2Data/Part2/SnakeAndLadders/MonteCarloDTCMN/ullGameMarkovStatistics.PNG?raw=true)
-Figure 33: Snakes and Ladders Game finishing the game in n-moves and cummulative probability of finishing the game in n-moves. Data use is from the DTCM simulation results.
+![](HW2Data/Part2/SnakeAndLadders/MonteCarloDTCM/SnakeAndLaddersDTMCStatistics.PNG?raw=true)
+Figure 34: Snakes and Ladders Game finishing the game in n-moves and cummulative probability of finishing the game in n-moves. Data use is from the DTCM simulation results.
 
 In a run which included a 1000 samples and rolls 300, the results show that the maximum number of moves needed to win the game was 160.
 
+It would probably be better to increase the number of simulations for DTMC, to smooth out some of the the data.
 
-![](HW2Data/Part2/SnakeAndLadders/MonteCarloDTCMN/ullGameMarkovStatistics.PNG?raw=true)
-Figure 34: Shows the utilization of snake and ladders.
+![](HW2Data/Part2/SnakeAndLadders/MonteCarloDTCM/SnakeandLaddersUsage.PNG?raw=true)
+Figure 35: Shows the utilization of snake and ladders.
 
 * **(d) Think - 0pts:** If these games are built entirely on chance, do they require any strategy? Is it really a *game*, would you rather play games of chance or games of strategy?
 
