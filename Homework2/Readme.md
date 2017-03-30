@@ -8,7 +8,9 @@
 This is the framework for homework #2. 
 
 The assignment is due: **Tuesday, March 28 at 11:59PM (EST)**
-Dr. Kider: I am requesting two day extension.  My new date will be ** Thursday, March 30, 2017 at 11:59 (EST) **  This will be my remaining days for the three day grace period you provided early in the semester.
+Dr. Kider: I am requesting two day extension.  
+
+My new date will be ** Thursday, March 30, 2017 at 11:59 (EST) **  This will be my remaining days for the three day grace period you provided early in the semester.
 
 asdfasdf
 sadfsad
