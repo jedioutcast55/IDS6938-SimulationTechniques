@@ -7,7 +7,7 @@ Eigen::VectorXf v(size);
 Eigen::VectorXf v_ShootsLadder(size);
 
 //unsigned int ROLLS = 44; //TODO
-unsigned int ROLLS = 101;
+unsigned int ROLLS = 300;
 
 double prob = (1.0/6.0) ;  //TODO
 

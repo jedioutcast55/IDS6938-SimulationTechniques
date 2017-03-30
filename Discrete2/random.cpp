@@ -11,7 +11,7 @@
 #include <numeric>  
 
 // PGC random engine
-#include "pcg_random.hpp"
+//#include "pcg_random.hpp" - did not work
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -35,12 +35,12 @@ int main()
 	std::random_device rd;
 
 	// Seed with a real random value, if available
-	pcg_extras::seed_seq_from<std::random_device> seed;
+	//pcg_extras::seed_seq_from<std::random_device> seed;
 
 
 	// 1) Change random number generators
-	//std::mt19937_64 engine(rd());
-	//engineSelection = 1;
+	std::mt19937_64 engine(rd());
+	engineSelection = 1;
 	//std::knuth_b engine(rd());
     //engineSelection = 2;
 	//std::minstd_rand engine(rd());
@@ -48,8 +48,8 @@ int main()
 	//std::ranlux48 engine(rd());
 	//engineSelection = 4;
 
-	pcg64 engine(seed);
-	engineSelection = 5;
+	//pcg64 engine(seed);
+	//engineSelection = 5;
 
 	// Setting the string file names according to pseudo-random engine:
 	switch (engineSelection)
