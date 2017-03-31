@@ -329,7 +329,7 @@ The location of the anylogic model C:\RCP\UCF\IDS6938\MyRepository\IDS6938-Simul
  
 This is the implementation from the extra poinst to be executed for this report * **(10 Points)** - Add a 3D visualization to AnyLogic for Part 3.
 
-[![Anylogic Representation of 3d Model](HW2Data/Part3/AnyLogicModel/AnalyticsModel3DView.PNG?raw=true)](https://youtu.be/jtH7AAflDsg)
+[![Anylogic Representation of 3d Model](HW2Data/Part3/AnyLogicModel/AnalyticsModel3DView.PNG?raw=true)](https://youtu.be/jtH7AAf1Dsg)
 
 ##Part 5 - Final Report (10 pts)
 Write up the results to the previous sections in the main *readme.md* in your forked repository. Turn in the URL for your fork in webcourses. Be visual. The report should contain the graphs and analysis requested. I have high expectations for the documentation here and you should allot the proper time to compose the writeup.
