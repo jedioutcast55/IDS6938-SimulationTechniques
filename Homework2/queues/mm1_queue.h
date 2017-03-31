@@ -8,6 +8,10 @@
 #ifndef MM1_QUEUE_HPP
 #define MM1_QUEUE_HPP
 
+#ifndef LOG_ENABLED
+#define LOG_ENABLED    6
+#endif
+
 /* Header files needed for this program */
 #include <iostream>
 #include <vector>
@@ -17,7 +21,7 @@
 #include <fstream>
 
 /* Enable or disable the creation of the log file with detailed output */
-#undef LOG_ENABLED
+//#undef LOG_ENABLED
 
 class MM1_Queue {
 /*

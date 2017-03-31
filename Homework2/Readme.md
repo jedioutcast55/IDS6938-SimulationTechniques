@@ -177,6 +177,9 @@ Figure 29: Comparison graph of pseudo-random number generators - mt19937_64, knu
 ![](HW2Data/Part1/UnitCircleBinomialDistribution.PNG?raw=true)
 Figure 30: Comparison graph of pseudo-random number generators - mt19937_64, knuth_b, minstd_rand, and ranlux48 with a Binomial distribution.
 
+Evaluation:
+At the beginning the quasi-sobolo shows more uniformity in the historgram as we can see in latter graphs patterns are shown more pronounce than other engines.  We were not able to reject any of the engines Ho hipothesis with 95% confidence .  So there is no evidence any of the engines are not uniform.  This test was done using the uniform distribution.  I was not able to use quasi-sobolo for other distributions, however MT19937 hold better in multiple distributions and when compare using the unit square and the unit circle.
+
 ##Part 2 - Snakes and Ladders (Discrete Event Markov Chains and Monte Carlo Simulations) (30 pts)
 
 We all love board games. A board game can be viewed mathematically as a Markov chain, where the probability of moving to the next position depends only on the position you are currently at and the chances provided by tossing a dice. For this part of the homework we will simulate the game "*Snakes and Ladders*" (This goes by other names: Chutes and Ladders, Moksha Patam but all essentially the same gameplay.)
@@ -201,19 +204,28 @@ From state 0 it is equally probable of landing on squares 1-6. From state 1 t is
 	* **(1) Markov Chain**: The game can be analyzed with a row vector, *v* with 101 components, representing the probabilities that the player is on each of the positions. V(0) is (1,0,0,...,0) since we know we start at square 0. v evolves by: <BR>![](images/prob.png?raw=true)<BR>
 For this part (1) use the *Markov project* in the Snake and Ladders starter code.<BR>
 
-	* To do the vector multiplication and get the probability matrix for the null game I created the function void vectorMatrixMultiplication(bool matrixHealth, int rows, std::ofstream *file, Eigen::MatrixXf *matrixPTR).  This function is found in test_makov.cpp.  Raw data  for the Markov simulation can be found in IDS6938-SimulationTechniques\Homework2\HW2Data\Part2\NullGame\Markov
+	* To do the vector multiplication and get the probability matrix for the null game, I created the function void vectorMatrixMultiplication(bool matrixHealth, int rows, std::ofstream *file, Eigen::MatrixXf *matrixPTR).  This function is found in test_makov.cpp.  In IDS6938-SimulationTechniques\Homework2\HW2Data\Part2\NullGame\Markov there are two files:
+	1) NullGame_markov_results.txt - Raw data file produce by the code.
+    2) NullsGameMarkovData.xlsx - Using the raw data file, use to analyse and create graphics.
 
-From the Probability distribution matrix from the Null game produce the following statistics:
+From the Probability distribution matrix of the Null game produce the following statistics:
 
 ![](HW2Data/Part2/NullGame/Markov/NullGameMarkovStatistics.PNG?raw=true)
-Figure 30: Null Game finishing the game in n-moves and cummulative probability of finishing the game in n-moves.
+Figure 31: Null Game finishing the game in n-moves and cummulative probability of finishing the game in n-moves. Data use is from the Probability Distribution Matrix.
 
 
 **(2) Monte Carlo**: he will will use a monte carlo process to solve our Discrete Time Markov Chains. Here (2) use the DTMC project, and utilize the DTMC method similar to what we did in class. <BR><BR>Produce graphs to analyze the results and show how the game evolves over time for both methods. Plot useful statistics of the results such as percentage chance of finishing the game in n-moves, cumulative probability of finishing the game in n-moves, and other ways to convey useful information of the results.
 
-Using the null game transition matrix to run the software for a sample size of 1000.  Using the DTMC project to run a simulation which simulates running the null game a thousand times.  Code found in IDS6938-SimulationTechniques\Homework2\SnakesAndLadders.
+Using the null game transition matrix to run the software for a sample size of 1000.  Using the DTMC project to run a simulation which simulates running the null game a thousand times.  Code found in IDS6938-SimulationTechniques\Homework2\SnakesAndLadders.  The main exist in test_dtcm.cpp.
 
-The modal can be found using the results of the DTMC results.  This game a modal for 
+The data file for Null Game dtcm exist in IDS6938-SimulationTechniques\Homework2\HW2Data\Part2\NullGame\MonteCarlo.  This folder contains:
+1) NullGame_dtcm_markov_results.txt - raw data file produce by the program.
+2) DTMC_Data.xlsx - raw data analyse and graphics were created.
+
+From the raw data analysis we found the modal # to finish the game is 28.  The data also provided the number the percentage of the number of moves necessary to finish the game as well as it cummulative percentage shown in figure 31.
+
+![](HW2Data/Part2/NullGame/MonteCarlo/NullGameDTMCStatistics.PNG?raw=true)
+Figure 32: Null Game finishing the game in n-moves and cummulative probability of finishing the game in n-moves. Data use is from the DTCM simulation results.
 
 * **(c) Simulate and analyze the results of Snakes and Ladders -10pts:**  Construct a new transition matrix based on the table:
 
@@ -233,6 +245,37 @@ Ladders From  | Ladders To | |  Snakes From  | Snakes To
 
 
 Run the same simulation and analyze your results similar to part (b) for the proper game of *Snakes and Ladders* for both methods. How often are the snakes and ladders used, how do the probability of finishing change, etc? What is the maximum and expected amount of moves for the game? Use charts and graphs to illustrate these points.
+
+* To do the vector multiplication and get the probability matrix for the Snake and Ladders game, Use the function void vectorMatrixMultiplication(bool matrixHealth, int rows, std::ofstream *file, Eigen::MatrixXf *matrixPTR).  This function is found in test_markov.cpp.  In IDS6938-SimulationTechniques\Homework2\HW2Data\Part2\SnakeAndLadders\Markov there are two files:
+1) SnakeAndLadders_markov_results.txt - Raw data file produce by the code.
+2) SnakeAndLadders_Markov_DataAnalysis.xlsx - Using the raw data file, use to analyse and create graphics.  Transition Matrix and Probability distribution matrix.
+
+From the Probability distribution matrix of the Snake and Ladders game produce the following statistics:
+
+![](HW2Data/Part2/SnakeAndLadders/Markov/SnakeAndLaddersMarkovStatistics.PNG?raw=true)
+Figure 33: Snakes and Ladders Game finishing the game in n-moves and cummulative probability of finishing the game in n-moves. Data use is from the Probability Distribution Matrix.
+
+Using the Snakes and Ladders game transition matrix to run the software for a sample size of 1000.  Using the DTMC project to run a simulation which simulates running the Snakes and Ladders game a thousand times.  Code found in IDS6938-SimulationTechniques\Homework2\SnakesAndLadders.  The main exist in test_dtcm.cpp.
+
+The data file for Snakes and Ladders Game for DTCM exist in IDS6938-SimulationTechniques\Homework2\HW2Data\Part2\SnakeAndLadders\MonteCarloDTCM.  This folder contains:
+1) ShootsAndLadders_dtcm_markov_results.txt - raw data file produce by the program.
+2) ShootsAndLadders_Data.xlsx - raw data analyse and graphics were created.
+3) SnakeAndLadders_dtcm_markov_300_results.txt
+4) ShootsAndLadders_Data_300_rolls.xlsx
+
+From the raw data analysis we found the modal # to finish the game is 16.  The data also provided the number the percentage of the number of moves necessary to finish the game as well as it cummulative percentage shown in figure 34.
+
+
+![](HW2Data/Part2/SnakeAndLadders/MonteCarloDTCM/SnakeAndLaddersDTMCStatistics.PNG?raw=true)
+Figure 34: Snakes and Ladders Game finishing the game in n-moves and cummulative probability of finishing the game in n-moves. Data use is from the DTCM simulation results.
+
+In a run which included a 1000 samples and rolls 300, the results show that the maximum number of moves needed to win the game was 160.
+
+It would probably be better to increase the number of simulations for DTMC, to smooth out some of the the data.
+
+![](HW2Data/Part2/SnakeAndLadders/MonteCarloDTCM/SnakeandLaddersUsage.PNG?raw=true)
+Figure 35: Shows the utilization of snake and ladders.
+
 * **(d) Think - 0pts:** If these games are built entirely on chance, do they require any strategy? Is it really a *game*, would you rather play games of chance or games of strategy?
 
 This is a phylosophical question.  As such is a simple answer.  Why we play a game?  Most people play games for entertainment.  So if it gives you entertainement it provided its purspose wheter it is considered a game or not.
@@ -245,7 +288,13 @@ This problem will look at queues and commonly used performance measures. For thi
 When a passanger arrives they have to wait in a queue to present their ID and ticket to the gate agent with all the other passengers. Once approved by the agent they will have to pass through a security check. Since this is Orlando, there are only 3 open metal/screening devices open and again passangers have to wait in a queue. After passing through security you again have to wait in a queue to board your plane.
 
 * **(a) - 4pts:** To start create the senario in the figure above in *main.cpp*. Checkin will have a *mu* of 53 and accept new arrivals, the security gates will have a *mu* of 20, and will not accept new arrivials, boarding will have a *mu* of 80. You will have to set up  the appropriate *MM1_Queue* objects to capture the functionality above.
+
+The setup for the scenarion refrence above can be found in the folder C:\RCP\UCF\IDS6938\MyRepository\IDS6938-SimulationTechniques\Homework2\queues in the main.cpp file.
+
 * **(b) - 4pts:** You want to add a check that your process is within an error range *is_within_error_range(float)* where the error range will be 0.002. You also want to process the next event, and add an external arrival where marked.
+
+This as well is located in mm1_queue.cpp in MM1_Queue:: initialize() function located in C:\RCP\UCF\IDS6938\MyRepository\IDS6938-SimulationTechniques\Homework2\queues/.
+
 * **(c) - 3pts:** in *mm1_queue.cpp* : add code to caculate the expected results for: 
   *  expected_server_utilization 
   *    expected idle prob
@@ -253,9 +302,15 @@ When a passanger arrives they have to wait in a queue to present their ID and ti
   *  expected number customers 
   * expected waiting time
   * expected response time 
-*  **(d) - 4pts:** Write code to call the functions to output and generate data from the airport senario. Plot and analyze the useful statistics/results in the program of your choice.  (Hint -  basically call  *.output();* on the MM1_Queue objects you create. Hint2 - two other use functions are *get_current_time()* and  *plot_results_output()* call intially on your intial MM1_Queue object.)  
+
+The code implementation for this section was added to 
+
+*  **(d) - 4pts:** Write code to call the functions to output and generate data from the airport senario. Plot and analyze the useful statistics/results in the program of your choice.  (Hint -  basically call  *.output();* on the MM1_Queue objects you create. Hint2 - two other use functions are *get_current_time()* and  *plot_results_output()* call intially on your intial MM1_Queue object.) 
+
+
 * **(e) - 15pts:** Download the personal edition of **[Anylogic](http://www.anylogic.com/)**, read through the [documentation](http://www.anylogic.com/learn-simulation) as needed, and set up the same type of simulation discussed above.
 
+The analogic model file can be found in C:\RCP\UCF\IDS6938\MyRepository\IDS6938-SimulationTechniques\Homework2\HW2Data\Part3\AnyLogicModel\Airport Checking in file Airport Checking.alp.
 
 ##Part 4 - Implementing Extra Features (10 pts)
 Implementing 2 features on the extra features list. Pick any feature on the "*extra features*" list below to customize your assignment to fit your interests. Please document this in your writeup. (*Note: These should total 10pts. You could successfully implement a feature worth 10pts or greater. This also fulfills this requirement. The features are assigned points based on difficulty. The 5pt features are more straightforward.*)
@@ -287,5 +342,10 @@ If you feel like going beyond the scope of the assignment, you should consider i
 ** Citations: **
 Chapter 2 RANDOM NUMBERS. (n.d.). Retrieved March 11, 2017, from https://www.usna.edu/Users/math/dphillip/sa421.s16/chapter02.pdf
 
-O'Neill, M. (n.d.). Using the PCG C Implementation. Retrieved March 29, 2017, from http://www.pcg-random.org/using-pcg-cpp.html
+Citation needed for shoots and ladders.
+
+
+More than 95% (cold be even higher)of the code use for this project has been provided by Dr. Kider.
+
+Support provided by students in IDS6938. You all have my thanks.
 
