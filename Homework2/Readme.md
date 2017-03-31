@@ -303,17 +303,33 @@ This as well is located in mm1_queue.cpp in MM1_Queue:: initialize() function lo
   * expected waiting time
   * expected response time 
 
-The code implementation for this section was added to 
+The code implementation for this section was added to mm1_queue.cpp in MM1_Queue::initialize() class member.
 
 *  **(d) - 4pts:** Write code to call the functions to output and generate data from the airport senario. Plot and analyze the useful statistics/results in the program of your choice.  (Hint -  basically call  *.output();* on the MM1_Queue objects you create. Hint2 - two other use functions are *get_current_time()* and  *plot_results_output()* call intially on your intial MM1_Queue object.) 
+
+The raw data generated can be found in C:\RCP\UCF\Modeling_and_Simulation\IDS6938_Spring2017\MyRepository\IDS6938-SimulationTechniques\Homework2\HW2Data\Part3\Data.
+
+The code was implemented in at the end main.cpp.  Also set the flag to collect the log file.
 
 
 * **(e) - 15pts:** Download the personal edition of **[Anylogic](http://www.anylogic.com/)**, read through the [documentation](http://www.anylogic.com/learn-simulation) as needed, and set up the same type of simulation discussed above.
 
 The analogic model file can be found in C:\RCP\UCF\IDS6938\MyRepository\IDS6938-SimulationTechniques\Homework2\HW2Data\Part3\AnyLogicModel\Airport Checking in file Airport Checking.alp.
 
+ ![Anylogic Representation Model](HW2Data/Part3/AnyLogicModel/AnalyticsModelView.PNG?raw=true)
+Figure 36: Anylogic Model of the Queues for part 3.
+
 ##Part 4 - Implementing Extra Features (10 pts)
 Implementing 2 features on the extra features list. Pick any feature on the "*extra features*" list below to customize your assignment to fit your interests. Please document this in your writeup. (*Note: These should total 10pts. You could successfully implement a feature worth 10pts or greater. This also fulfills this requirement. The features are assigned points based on difficulty. The 5pt features are more straightforward.*)
+
+This is the implementation from the extra poinst to be executed for this report * **(10 Points)** - Add a 2D visualization to AnyLogic for Part 3.
+The location of the anylogic model C:\RCP\UCF\IDS6938\MyRepository\IDS6938-SimulationTechniques\Homework2\HW2Data\Part3\AnyLogicModel\Airport Checking in file Airport Checking.alp.  The 2D representation is found underneath the model.  Also added some statistical graphs.
+
+ [![Anylogic Representation of 2d Model and graphs](HW2Data/Part3/AnyLogicModel/AnalyticsModelView2DPlusGraphs.PNG?raw=true)](https://youtu.be/MtZt16Uh85s)
+ 
+This is the implementation from the extra poinst to be executed for this report * **(10 Points)** - Add a 3D visualization to AnyLogic for Part 3.
+
+[![Anylogic Representation of 3d Model](HW2Data/Part3/AnyLogicModel/AnalyticsModel3DView.PNG?raw=true)](https://youtu.be/jtH7AAflDsg)
 
 ##Part 5 - Final Report (10 pts)
 Write up the results to the previous sections in the main *readme.md* in your forked repository. Turn in the URL for your fork in webcourses. Be visual. The report should contain the graphs and analysis requested. I have high expectations for the documentation here and you should allot the proper time to compose the writeup.
@@ -342,8 +358,7 @@ If you feel like going beyond the scope of the assignment, you should consider i
 ** Citations: **
 Chapter 2 RANDOM NUMBERS. (n.d.). Retrieved March 11, 2017, from https://www.usna.edu/Users/math/dphillip/sa421.s16/chapter02.pdf
 
-Citation needed for shoots and ladders.
-
+(n.d.). Retrieved March 30, 2017, from http://www.datagenetics.com/blog/november12011/
 
 More than 95% (cold be even higher)of the code use for this project has been provided by Dr. Kider.
 
