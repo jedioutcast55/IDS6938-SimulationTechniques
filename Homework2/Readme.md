@@ -309,6 +309,13 @@ The code implementation for this section was added to mm1_queue.cpp in MM1_Queue
 
 The raw data generated can be found in C:\RCP\UCF\Modeling_and_Simulation\IDS6938_Spring2017\MyRepository\IDS6938-SimulationTechniques\Homework2\HW2Data\Part3\Data.
 
+  	Data:		Avg Ser Time	Avg Wait Time		Min	Ser Time	Max Ser Time 	Min Wait T 	Max Wait T
+  	IDGate:		  0.002199948	0.019218924				0			0.139638		0.000001	0.208804
+    MetalScreen1: 0.015039598	0.055580806				0			0.329903		0.000001	0.549613
+    MetalScreen2: 0.015288807	0.058130064				0			0.504377		0.000005	0.641794
+	MetalScreen3: 0.015031557	0.057044217				0			0.416255		0.000002	0.539973
+  	BoardingGate  0				0.012629898				0			1.443681		0			0.131614
+
 The code was implemented in at the end main.cpp.  Also set the flag to collect the log file.
 
 
