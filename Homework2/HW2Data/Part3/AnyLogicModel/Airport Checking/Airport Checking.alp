@@ -1440,8 +1440,8 @@
 						<Parameter>
 							<Name><![CDATA[delayTime]]></Name>
 							<Value Class="CodeUnitValue">
-								<Code><![CDATA[.02]]></Code>
-								<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
+								<Code><![CDATA[10]]></Code>
+								<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
 							</Value>
 						</Parameter>
 						<Parameter>
@@ -1547,7 +1547,7 @@
 						<Parameter>
 							<Name><![CDATA[delayTime]]></Name>
 							<Value Class="CodeUnitValue">
-								<Code><![CDATA[(6/20)/14]]></Code>
+								<Code><![CDATA[1]]></Code>
 								<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
 							</Value>
 						</Parameter>
@@ -1654,7 +1654,7 @@
 						<Parameter>
 							<Name><![CDATA[delayTime]]></Name>
 							<Value Class="CodeUnitValue">
-								<Code><![CDATA[(6/20)/14]]></Code>
+								<Code><![CDATA[1]]></Code>
 								<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
 							</Value>
 						</Parameter>
@@ -1761,7 +1761,7 @@
 						<Parameter>
 							<Name><![CDATA[delayTime]]></Name>
 							<Value Class="CodeUnitValue">
-								<Code><![CDATA[(6/20)/14]]></Code>
+								<Code><![CDATA[1]]></Code>
 								<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
 							</Value>
 						</Parameter>
@@ -1868,8 +1868,8 @@
 						<Parameter>
 							<Name><![CDATA[delayTime]]></Name>
 							<Value Class="CodeUnitValue">
-								<Code><![CDATA[1]]></Code>
-								<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
+								<Code><![CDATA[20]]></Code>
+								<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
 							</Value>
 						</Parameter>
 						<Parameter>
