@@ -38,6 +38,7 @@ enum {PA, PB, PC, PD};		    // planes
 enum {RED, GREEN, BLUE};	    // colors
 enum {KA, KD, KS, ES};		    // phong coefficients
 
+
 //////////////////////////////////////////////////////////////////////////
 //PI
 //
@@ -264,7 +265,8 @@ inline void ClampAngle(float& angle)
 {
 	while (angle > M_PI)
 	{
-		angle -= M2_PI;
+		// angle -= M2_PI;
+		angle = angle - M2_PI;
 	}
 	while (angle < -M_PI)
 	{
@@ -275,6 +277,7 @@ inline void ClampAngle(float& angle)
 inline float AngleDiff(float angle0, float angle1)
 {
 	float value = angle0 - angle1;
+	
 	ClampAngle(value);
 	return value;
 }

@@ -245,11 +245,26 @@ void SIMAgent::InitValues()
 /*
 *	You should apply the control rules given desired velocity vd and desired orientation thetad.
 */
+
+/*
+* You should apply the control rules given desired velocity vd and desired orientation thetad.
+* Velocity control: input[0] = f = m * Kv0 * (vd - v)
+* Heading control: input[1] = tau = I * ( -Kv1 * thetaDot - Kp1 * theta + Kp1 * thetad)
+* This function sets input[0] and input[1] appropriately after being called.
+*/
 void SIMAgent::Control()
 {
 	/*********************************************
 	// TODO: Add code here
 	*********************************************/
+
+	Truncate(vd, -SIMAgent::MaxVelocity, SIMAgent::MaxVelocity);
+	input[0] = SIMAgent::Mass * SIMAgent::Kv0 * (vd - state[2]);
+	Truncate(input[0], -SIMAgent::MaxForce, SIMAgent::MaxForce);
+
+	double dangle = AngleDiff(state[1], thetad);
+	input[1] = SIMAgent::Inertia * (Kp1 * dangle - Kv1 * state[3]);
+	Truncate(input[1], -SIMAgent::MaxTorque, SIMAgent::MaxTorque);
 
 }
 
@@ -275,7 +290,24 @@ void SIMAgent::UpdateState()
 	/*********************************************
 	// TODO: Add code here
 	*********************************************/
+	for (int i = 0; i < dimState; i++) 
+	{
+		state[i] += deriv[i] * deltaT;
+	}
+	state[0] = 0.0;
 
+	Clamp(state[1], -M_PI, M_PI);
+	Truncate(state[2], -SIMAgent::MaxVelocity, SIMAgent::MaxVelocity);
+
+	vec2 GVelocity;
+	GVelocity[0] = state[2] * cos(state[1]);
+	GVelocity[1] = state[2] * sin(state[1]);
+	GPos += GVelocity;
+
+	Truncate(GPos[0], -1.0 * env->groundSize, env->groundSize);
+	Truncate(GPos[1], -1.0 * env->groundSize, env->groundSize);
+
+	Truncate(state[3], -SIMAgent::MaxAngVel, SIMAgent::MaxAngVel);
 }
 
 /*
@@ -292,8 +324,21 @@ vec2 SIMAgent::Seek()
 	// TODO: Add code here
 	*********************************************/
 	vec2 tmp;
+	vec2 returnVec;
+	double thetaj;
 
-	return tmp;
+	// Deisred velocity - the shortest path from the current position to the target
+	tmp = goal - GPos;
+	tmp.Normalize();
+
+	// Angle the agent should be targeting again.
+	thetaj = atan2(tmp[1], tmp[0]);
+
+	// Define how fast the agent moves in general, their MaxVelocity
+	returnVec[0] = (cos(thetaj) * SIMAgent::MaxVelocity);
+	returnVec[1] = (sin(thetaj) * SIMAgent::MaxVelocity);
+
+	return returnVec;
 }
 
 /*
@@ -311,7 +356,24 @@ vec2 SIMAgent::Flee()
 	*********************************************/
 	vec2 tmp;
 
-	return tmp;
+	vec2 returnVec;
+	double thetaj;
+
+	// Deisred velocity - the shortest path from the current position to the target
+	tmp = goal - GPos;
+	tmp.Normalize();
+
+	// Angle the agent should be targeting again.
+	thetaj = atan2(tmp[1], tmp[0]);
+
+	// To flee add PI to thetaj
+	thetaj = thetaj + M_PI;
+
+	// Define how fast the agent moves in general, their MaxVelocity
+	returnVec[0] = (cos(thetaj) * SIMAgent::MaxVelocity);
+	returnVec[1] = (sin(thetaj) * SIMAgent::MaxVelocity);
+
+	return returnVec;
 }
 
 /*
@@ -329,8 +391,35 @@ vec2 SIMAgent::Arrival()
 	// TODO: Add code here
 	*********************************************/
 	vec2 tmp;
+	vec2 returnVec;
+	double thetaj;
+	double vDesire;
+	double radius = 0.321;
 
-	return tmp;
+	// Deisred velocity - the shortest path from the current position to the target
+	tmp = goal - GPos;
+	tmp.Normalize();
+
+	if (tmp.Length() > 0.0)
+	{
+		// Angle the agent should be targeting again.
+		thetaj = atan2(tmp[1], tmp[0]);
+
+		// How fast the agent move in general, as the agent moves within the circle's radius
+		vDesire = tmp.Length() * (SIMAgent::MaxVelocity * (tmp.Length() / radius));
+
+		// Define how fast the agent moves in general, their MaxVelocity
+		returnVec[0] = (cos(thetaj) * vDesire);
+		returnVec[1] = (sin(thetaj) * vDesire);
+
+		return returnVec;
+	}
+	else
+	{
+		return GPos;
+	}
+
+	return returnVec;
 }
 
 /*

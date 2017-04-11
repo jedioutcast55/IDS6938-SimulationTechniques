@@ -176,6 +176,17 @@ inline void Truncate(float& value, float minV, float maxV){
 		if (value > maxV)
 			value = maxV;
 }
+
+
+inline void Clamp(float& value, float minV, float maxV) {
+	if (value < minV)
+		value = minV;
+	else
+		if (value > maxV)
+			value = maxV;
+}
+
+
 #endif // !defined(AGENT_H)
 
 
