@@ -280,8 +280,8 @@ void SIMAgent::FindDeriv()
 	*********************************************/
 	deriv[0] = state[2];
 	deriv[1] = state[3];
-	deriv[2] = input[0]/Mass;
-	deriv[3] = input[1] / Inertia - state[3];
+	deriv[2] = input[0]/Mass;   // Acceleration 
+	deriv[3] = (input[1] / Inertia) - state[3]; // Angular Velocity
 
 }
 
@@ -295,6 +295,19 @@ void SIMAgent::UpdateState()
 	/*********************************************
 	// TODO: Add code here
 	*********************************************/
+	/*
+	*	State Vector: 4 dimensions
+	*  0 : position in local coordinates. Useless.
+	*  1 : orientation angle in global coordinates.
+	*  2 : velocity in local coordinates.
+	*  3 : angular velocity in global coordinates.
+	*/
+
+	/*
+	*	Input Vector: 2 dimensions
+	*  0 : force
+	*  1 : torque
+	*/
 	for (int i = 0; i < dimState; i++) 
 	{
 		state[i] += deriv[i] * deltaT;
@@ -329,17 +342,14 @@ vec2 SIMAgent::Seek()
 	// TODO: Add code here
 	*********************************************/
 	vec2 tmp;
-	vec2 location;
+	vec2 position;
 
 	// Deisred velocity - the shortest path from the current position to the target
-	location = goal - GPos;
-	location.Normalize();
+	position = goal - GPos;
+	position.Normalize();
 
 	// Angle the agent should be targeting again.
-	thetad = atan2(location[1], location[0]);
-
-	// To flee add PI to thetad
-	thetad = thetad + M_PI;
+	thetad = atan2(position[1], position[0]) + M_PI;
 
 	vd = SIMAgent::MaxVelocity;
 
@@ -363,19 +373,14 @@ vec2 SIMAgent::Flee()
 	// TODO: Add code here
 	*********************************************/
 	vec2 tmp;
-	vec2 location;
+	vec2 position;
 	
-	
-
 	// Deisred velocity - the shortest path from the current position to the target
-	location = goal - GPos;
-	location.Normalize();
+	position = goal - GPos;
+	position.Normalize();
 
 	// Angle the agent should be targeting again.
-	thetad = atan2(location[1], location[0]);
-
-	// To flee add PI to thetad
-	//thetad = thetad + M_PI;
+	thetad = atan2(position[1], position[0]);
 
 	// Desire velocity
 	vd = SIMAgent::MaxVelocity;
@@ -401,26 +406,24 @@ vec2 SIMAgent::Arrival()
 	// TODO: Add code here
 	*********************************************/
 	vec2 tmp;
-	vec2 location;
+	vec2 position;
 	float vn;
 	//vec2 VelArrive;
 
 	// Deisred velocity - the shortest path from the current position to the target
-	location = goal - GPos;
-	//tmp.Normalize();
+	position = goal - GPos;
+	
 
 	// Angle the agent should be targeting again.
-	thetad = atan2(location[1], location[0]);
-
-	thetad = thetad + M_PI;
+	thetad = atan2(position[1], position[0]) + M_PI;
 
 	// How fast the agent move in general, as the agent moves within the circle's radius
-	vd = location.Length() * KArrival;
+	vd = position.Length() * KArrival;
 			
 	vn = (MaxVelocity * (vd / radius));
 
 	// Define how fast the agent moves in general, their MaxVelocity
-	if (location.Length() > 0.0)
+	if (position.Length() > 0.0)
 	{
 		tmp = vec2((cos(thetad) * vn), (sin(thetad) * vn));
 	}
@@ -447,24 +450,24 @@ vec2 SIMAgent::Departure()
 	// TODO: Add code here
 	*********************************************/
 	vec2 tmp;
-	vec2 location;
+	vec2 position;
 	float vn;
 	//vec2 VelArrive;
 
 	// Deisred velocity - the shortest path from the current position to the target
-	location = goal - GPos;
-	//tmp.Normalize();
+	position = goal - GPos;
+	
 
 	// Angle the agent should be targeting again.
-	thetad = atan2(location[1], location[0]);
+	thetad = atan2(position[1], position[0]);
 
 	// How fast the agent move in general, as the agent moves within the circle's radius
-	vd = location.Length() * KDeparture;
+	vd = position.Length() * KDeparture;
 
 	vn = (MaxVelocity * (vd / radius));
 
 	// Define how fast the agent moves in general, their MaxVelocity
-	if (location.Length() > 0.0)
+	if (position.Length() > 0.0)
 	{
 		//tmp = vec2((cos(thetad) * vn), (sin(thetad) * vn));
 		tmp = vec2((cos(thetad) * vd), (sin(thetad) * vd));
@@ -493,7 +496,29 @@ vec2 SIMAgent::Wander()
 	// TODO: Add code here
 	*********************************************/
 	vec2 tmp;
+	vec2 angleNormal;
+	vec2 rNoise;
+	vec2 Vdesired;
+	float randomAngle;
+	float vWander_noise;
+	float VdesiredM;
+	
+	// Acquire a random angle
+	randomAngle = (float(rand() % 360) / 180.0) * M_PI;
 
+	angleNormal = vec2(cos(randomAngle), sin(randomAngle));
+	rNoise = KNoise * angleNormal;
+	vWander_noise = sqrt((vWander[0] + rNoise[0])*(vWander[0] + rNoise[0]) + (vWander[1] + rNoise[1])*(vWander[1] + rNoise[1]));
+
+	vWander = KWander / vWander_noise * (vWander + rNoise);
+
+	Vdesired = v0 + vWander;
+	VdesiredM = sqrt(Vdesired[0] * Vdesired[0] + Vdesired[1] * Vdesired[1]);
+	vd = VdesiredM;
+
+	thetad = atan2(Vdesired[1], Vdesired[0]);
+
+	tmp = vec2((cos(thetad) * vd), (sin(thetad) * vd));
 
 	return tmp;
 }
@@ -516,8 +541,54 @@ vec2 SIMAgent::Avoid()
 	// TODO: Add code here
 	*********************************************/
 	vec2 tmp;
+	float vLocal;
+	vec2 obsGlobalPosition;
+	vec2 obsLocalPosition;
+	vec2 position;
+	vec2 Velarrive;
+	float velAvoidN;
 	
-	return tmp;
+	for (int i = 0; i < env->obstaclesNum; i++)
+	{
+		vLocal = abs(TAvoid * state[2]);
+		obsGlobalPosition = vec2(env->obstacles[i][0] - GPos[0], env->obstacles[i][1] - GPos[1]);
+		obsLocalPosition = WorldToLocal(obsGlobalPosition);
+
+		if (abs(obsLocalPosition[0]) > vLocal)
+		{
+			position = goal - GPos;
+			position = WorldToLocal(position);
+			thetad = atan2(position[1], position[0]);
+			Velarrive = KArrival * position;
+			vd = Velarrive.Length();
+			tmp = vec2((cos(thetad) * vd), (sin(thetad) * vd));
+			continue;
+		}
+
+		if (abs(obsLocalPosition[0]) <= vLocal)
+		{
+			if (abs(obsLocalPosition[1]) > (radius + abs(env->obstacles[i][2])))
+			{
+				position = goal - GPos;			
+				position = WorldToLocal(position);				
+				thetad = atan2(position[1], position[0]);
+				Velarrive = KArrival * position;
+				vd = Velarrive.Length();
+				tmp = vec2((cos(thetad) * vd), (sin(thetad) * vd));
+				continue;
+			}
+			if (abs(obsLocalPosition[1]) <= (radius + abs(env->obstacles[i][2])))
+			{
+				obsLocalPosition.Normalize();
+				velAvoidN = (KAvoid * MaxVelocity) / (1 + (obsLocalPosition.Length() - radius - env->obstacles[i][2]) * (obsLocalPosition.Length() - radius - env->obstacles[i][2]));
+				vd = abs(velAvoidN);			
+				//thetad = atan2(norm[1], norm[0]) + M_PI;
+				thetad = atan2(obsLocalPosition[1], obsLocalPosition[0]);
+				tmp = vec2((cos(thetad) * vd), (sin(thetad) * vd));
+				return tmp;
+			}
+		}
+	}
 }
 
 /*

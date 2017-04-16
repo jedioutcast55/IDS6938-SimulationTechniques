@@ -265,8 +265,7 @@ inline void ClampAngle(float& angle)
 {
 	while (angle > M_PI)
 	{
-		// angle -= M2_PI;
-		angle = angle - M2_PI;
+		angle -= M2_PI;
 	}
 	while (angle < -M_PI)
 	{
