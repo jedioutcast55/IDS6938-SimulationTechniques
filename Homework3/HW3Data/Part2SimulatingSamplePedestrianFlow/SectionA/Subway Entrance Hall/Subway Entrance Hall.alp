@@ -1897,6 +1897,21 @@
 				</Ground>
 
 			</Shapes>
+			<Controls>
+				<Control Type="Window3D">
+					<Id>1492458350238</Id>
+					<Name><![CDATA[window3d]]></Name>
+					<X>10</X><Y>620</Y>
+					<Width>980</Width>
+					<Height>480</Height>
+					<MakeDefaultViewArea>true</MakeDefaultViewArea>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<ShowLabel>false</ShowLabel>
+					<FollowCamera>false</FollowCamera>
+					<NavigationType>full</NavigationType>
+					<FarClippingDistance>2000</FarClippingDistance>
+				</Control>
+			</Controls>
 
 		</ActiveObjectClass>
 	</ActiveObjectClasses>	
