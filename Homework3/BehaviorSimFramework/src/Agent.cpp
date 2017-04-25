@@ -157,7 +157,6 @@ SIMAgent::SIMAgent(float* color, CEnvironment* env) {
 	v0[0] = cos(angle) * SIMAgent::MaxVelocity / 2.0;
 	v0[1] = sin(angle) * SIMAgent::MaxVelocity / 2.0;
 	SIMAgent::agents.push_back(this);
-	//thetad = 0.0;  // initialize angle.
 }
 
 void SIMAgent::SetInitState(float pos[], float angle)
@@ -281,7 +280,7 @@ void SIMAgent::FindDeriv()
 	deriv[0] = state[2];
 	deriv[1] = state[3];
 	deriv[2] = input[0]/Mass;   // Acceleration 
-	deriv[3] = (input[1] / Inertia); //- state[3]; Angular Velocity
+	deriv[3] = (input[1] / Inertia); // Angular Velocity
 
 }
 
@@ -346,11 +345,9 @@ vec2 SIMAgent::Seek()
 
 	// Deisred velocity - the shortest path from the current position to the target
 	position = goal - GPos;
-	//position.Normalize();
+	
 
 	// Angle the agent should be targeting again.
-	//thetad = atan2(position[1], position[0]) + M_PI;
-
 	thetad = atan2(position[1], position[0]);
 
 	vd = SIMAgent::MaxVelocity;
@@ -548,7 +545,6 @@ vec2 SIMAgent::Avoid()
 	
 	for (int i = 0; i < env->obstaclesNum; i++)
 	{
-		//vLocal = abs(TAvoid * state[2]);
 		vLocal = TAvoid * state[2];
 		obsGlobalPosition = vec2(env->obstacles[i][0] - GPos[0], env->obstacles[i][1] - GPos[1]);
 
@@ -565,28 +561,6 @@ vec2 SIMAgent::Avoid()
 			continue;
 		}
 
-		/*if (abs(obsLocalPosition[0]) <= vLocal)
-		{
-			if (abs(obsLocalPosition[1]) > (radius + abs(env->obstacles[i][2])))
-			{
-				position = goal - GPos;			
-				position = WorldToLocal(position);				
-				thetad = atan2(position[1], position[0]);
-				Velarrive = KArrival * position;
-				vd = Velarrive.Length();
-				tmp = vec2((cos(thetad) * vd), (sin(thetad) * vd));
-				continue;
-			}
-			if (abs(obsLocalPosition[1]) <= (radius + abs(env->obstacles[i][2])))
-			{
-				obsLocalPosition.Normalize();
-				velAvoidN = (KAvoid * MaxVelocity) / (1 + (obsLocalPosition.Length() - radius - env->obstacles[i][2]) * (obsLocalPosition.Length() - radius - env->obstacles[i][2]));
-				vd = abs(velAvoidN);			
-				thetad = atan2(obsLocalPosition[1], obsLocalPosition[0]);
-				thetad += M_PI;
-				tmp = vec2((cos(thetad) * vd), (sin(thetad) * vd));
-				return tmp;
-			} */
 
 			if (obsLocalPosition[0] <= vLocal)
 			{
@@ -702,7 +676,6 @@ vec2 SIMAgent::Alignment()
 			agentsV[0] += cos(agents[i]->state[1]) * agents[i]->state[2];
 			agentsV[1] += sin(agents[i]->state[1]) * agents[i]->state[2];
 
-			normAgentV += agentsV.Normalize();
 
 			// increment agentNum
 			agentNum += 1;
@@ -711,10 +684,7 @@ vec2 SIMAgent::Alignment()
 
 	// Calculate Alignment
 	VelAlignment =  (KAlign / agentNum) * agentsV;  // Avg velocity alignment
-	//VelAlignment = (KAlign / agentNum) * normAgentV;
-	//VelAlignment = (KAlign * normAgentV);
 	thetad = atan2(VelAlignment[1], VelAlignment[0]);
-	//thetad += M_PI;
 
 	vd = VelAlignment.Length();
 	
@@ -766,7 +736,6 @@ vec2 SIMAgent::Cohesion()
 	}
 
 	// Calculate separation
-	 //VelCohesion = KCohesion * ((agentsV / agentNum) - GPos);  // Calculate the avg cohesion velocity
 	VelCohesion = KCohesion * (agentsV / agentNum);  // Calculate the avg cohesion velocity
 	thetad = atan2(VelCohesion[1], VelCohesion[0]);
 	thetad += M_PI;
@@ -792,10 +761,9 @@ vec2 SIMAgent::Flocking()
 	*********************************************/
 	vec2 tmp;
 	vec2 velFlock;
-	float cSeparation = 300;
-	float cAlignment = 6.0;
+	float cSeparation = 330;
+	float cAlignment = 5.0;
 
-	//velFlock = (300 * Separation()) + (KCohesion * Cohesion()) + (6.0 * Alignment());
 	velFlock = (cSeparation * Separation()) + (KCohesion * Cohesion()) + (cAlignment * Alignment());
 	thetad = atan2(velFlock[1], velFlock[0]);
 	thetad += M_PI;
@@ -824,19 +792,20 @@ vec2 SIMAgent::Leader()
 	vec2 tmp;
 	vec2 velLeaderFollow;
 	float cSeparate = 0.1;
+	float cArrival = 1.0;
 
 	if ((GPos[0] == agents[0]->GPos[0]) && (GPos[1] == agents[0]->GPos[1]))
 	{
-		velLeaderFollow = Arrival();
+		velLeaderFollow = (cArrival * Arrival());
 	}
 	else
 	{
-		velLeaderFollow = (cSeparate * Separation()) + Arrival();
+		velLeaderFollow = (cSeparate * Separation()) + (cArrival * Arrival());
 	}
 
 	vd = velLeaderFollow.Length();
 	thetad = atan2(velLeaderFollow[1], velLeaderFollow[0]);
-	//thetad += M_PI;
+
 	tmp = vec2((cos(thetad)  * vd), (sin(thetad) * vd));
 
 	return tmp;
