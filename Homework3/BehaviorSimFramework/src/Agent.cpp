@@ -157,7 +157,7 @@ SIMAgent::SIMAgent(float* color, CEnvironment* env) {
 	v0[0] = cos(angle) * SIMAgent::MaxVelocity / 2.0;
 	v0[1] = sin(angle) * SIMAgent::MaxVelocity / 2.0;
 	SIMAgent::agents.push_back(this);
-	thetad = 0.0;  // initialize angle.
+	//thetad = 0.0;  // initialize angle.
 }
 
 void SIMAgent::SetInitState(float pos[], float angle)
@@ -229,18 +229,18 @@ void SIMAgent::InitValues()
 	SIMAgent::KSeparate, SIMAgent::KAlign, SIMAgent::KCohesion.
 	*********************************************/
 	Kv0 = 11.0;
-	Kp1 = 250.0;
-	Kv1 = 30.0;
-	KArrival = 0.1;
-	KDeparture = 10000.0;
-	KNoise = 10.0;
-	KWander = 8.0;
+	Kp1 = -45.0;
+	Kv1 = 13.0;
+	KArrival = 0.05;
+	KDeparture = 20.0;
+	KNoise = 11.0;
+	KWander = 8.5;
 	KAvoid = 1.2;
 	TAvoid = 23.0;
 	RNeighborhood = 750.0;
 	KSeparate = 950.0;
 	KAlign = 23.0;
-	KCohesion = 0.1;
+	KCohesion = 0.3;
 }
 
 /*
@@ -281,7 +281,7 @@ void SIMAgent::FindDeriv()
 	deriv[0] = state[2];
 	deriv[1] = state[3];
 	deriv[2] = input[0]/Mass;   // Acceleration 
-	deriv[3] = (input[1] / Inertia) - state[3]; // Angular Velocity
+	deriv[3] = (input[1] / Inertia); //- state[3]; Angular Velocity
 
 }
 
@@ -346,10 +346,12 @@ vec2 SIMAgent::Seek()
 
 	// Deisred velocity - the shortest path from the current position to the target
 	position = goal - GPos;
-	position.Normalize();
+	//position.Normalize();
 
 	// Angle the agent should be targeting again.
-	thetad = atan2(position[1], position[0]) + M_PI;
+	//thetad = atan2(position[1], position[0]) + M_PI;
+
+	thetad = atan2(position[1], position[0]);
 
 	vd = SIMAgent::MaxVelocity;
 
@@ -380,7 +382,7 @@ vec2 SIMAgent::Flee()
 	position.Normalize();
 
 	// Angle the agent should be targeting again.
-	thetad = atan2(position[1], position[0]);
+	thetad = atan2(position[1], position[0]) + M_PI;
 
 	// Desire velocity
 	vd = SIMAgent::MaxVelocity;
@@ -414,7 +416,7 @@ vec2 SIMAgent::Arrival()
 	
 
 	// Angle the agent should be targeting again.
-	thetad = atan2(position[1], position[0]) + M_PI;
+	thetad = atan2(position[1], position[0]);
 
 	// How fast the agent move in general, as the agent moves within the circle's radius
 	vd = position.Length() * KArrival;
@@ -458,7 +460,7 @@ vec2 SIMAgent::Departure()
 	
 
 	// Angle the agent should be targeting again.
-	thetad = atan2(position[1], position[0]);
+	thetad = atan2(position[1], position[0]) + M_PI;
 
 	// How fast the agent move in general, as the agent moves within the circle's radius
 	vd = position.Length() * KDeparture;
@@ -468,7 +470,6 @@ vec2 SIMAgent::Departure()
 	// Define how fast the agent moves in general, their MaxVelocity
 	if (position.Length() > 0.0)
 	{
-		//tmp = vec2((cos(thetad) * vn), (sin(thetad) * vn));
 		tmp = vec2((cos(thetad) * vd), (sin(thetad) * vd));
 	}
 	else
@@ -547,12 +548,13 @@ vec2 SIMAgent::Avoid()
 	
 	for (int i = 0; i < env->obstaclesNum; i++)
 	{
-		vLocal = abs(TAvoid * state[2]);
+		//vLocal = abs(TAvoid * state[2]);
+		vLocal = TAvoid * state[2];
 		obsGlobalPosition = vec2(env->obstacles[i][0] - GPos[0], env->obstacles[i][1] - GPos[1]);
 
 		obsLocalPosition = WorldToLocal(obsGlobalPosition);
 
-		if (abs(obsLocalPosition[0]) > vLocal)
+		if (abs(obsLocalPosition[0]) > vLocal)	
 		{
 			position = goal - GPos;
 			position = WorldToLocal(position);
@@ -563,7 +565,7 @@ vec2 SIMAgent::Avoid()
 			continue;
 		}
 
-		if (abs(obsLocalPosition[0]) <= vLocal)
+		/*if (abs(obsLocalPosition[0]) <= vLocal)
 		{
 			if (abs(obsLocalPosition[1]) > (radius + abs(env->obstacles[i][2])))
 			{
@@ -584,7 +586,29 @@ vec2 SIMAgent::Avoid()
 				thetad += M_PI;
 				tmp = vec2((cos(thetad) * vd), (sin(thetad) * vd));
 				return tmp;
-			}
+			} */
+
+			if (obsLocalPosition[0] <= vLocal)
+			{
+				if (obsLocalPosition[1] > (radius + env->obstacles[i][2]))
+				{
+					position = goal - GPos;
+					position = WorldToLocal(position);
+					thetad = atan2(position[1], position[0]);
+					Velarrive = KArrival * position;
+					vd = Velarrive.Length();
+					tmp = vec2((cos(thetad) * vd), (sin(thetad) * vd));
+					continue;
+				}
+				if (obsLocalPosition[1] <= (radius + env->obstacles[i][2]))
+				{
+					obsLocalPosition.Normalize();
+					velAvoidN = (KAvoid * MaxVelocity) / (1 + (obsLocalPosition.Length() - radius - env->obstacles[i][2]) * (obsLocalPosition.Length() - radius - env->obstacles[i][2]));
+					vd = abs(velAvoidN);
+					thetad = atan2(obsLocalPosition[1], obsLocalPosition[0]);
+					tmp = vec2((cos(thetad) * vd), (sin(thetad) * vd));
+					return tmp;
+				}
 		}
 	}
 }
@@ -630,7 +654,6 @@ vec2 SIMAgent::Separation()
 	// Calculate separation
 	VelSeparate = KSeparate * agentsV;
 	thetad = atan2(VelSeparate[1], VelSeparate[0]);
-	thetad += M_PI;
 
 	vd = VelSeparate.Length();
 	
@@ -663,6 +686,7 @@ vec2 SIMAgent::Alignment()
 	vec2 agentPosV;
 	vec2 VelAlignment;
 	vec2 normAgentV;
+	float lRadius = 7500;
 
 
 	// Go through all the agents:
@@ -673,7 +697,7 @@ vec2 SIMAgent::Alignment()
 		agentPosY = GPos[1] - agents[i]->GPos[1];
 		agentPosV = vec2(agentPosX, agentPosY);
 
-		if (((agentPosX != 0.0) || (agentPosY != 0.0)) && (agentPosV.Length() < RNeighborhood))
+		if (((agentPosX != 0.0) || (agentPosY != 0.0)) && (agentPosV.Length() < lRadius))
 		{
 			agentsV[0] += cos(agents[i]->state[1]) * agents[i]->state[2];
 			agentsV[1] += sin(agents[i]->state[1]) * agents[i]->state[2];
@@ -686,8 +710,9 @@ vec2 SIMAgent::Alignment()
 	}
 
 	// Calculate Alignment
-	//VelAlignment =  (KAlign / agentNum) * agentsV;  // Avg velocity alignment
-	VelAlignment = (KAlign * normAgentV) / agentNum;
+	VelAlignment =  (KAlign / agentNum) * agentsV;  // Avg velocity alignment
+	//VelAlignment = (KAlign / agentNum) * normAgentV;
+	//VelAlignment = (KAlign * normAgentV);
 	thetad = atan2(VelAlignment[1], VelAlignment[0]);
 	//thetad += M_PI;
 
@@ -741,8 +766,8 @@ vec2 SIMAgent::Cohesion()
 	}
 
 	// Calculate separation
-	// VelCohesion = KCohesion * ((agentsV / agentNum) - GPos);  // Calculate the avg cohesion velocity
-	VelCohesion = KCohesion * ((agentsV / agentNum) - GPos);  // Calculate the avg cohesion velocity
+	 //VelCohesion = KCohesion * ((agentsV / agentNum) - GPos);  // Calculate the avg cohesion velocity
+	VelCohesion = KCohesion * (agentsV / agentNum);  // Calculate the avg cohesion velocity
 	thetad = atan2(VelCohesion[1], VelCohesion[0]);
 	thetad += M_PI;
 
@@ -767,9 +792,11 @@ vec2 SIMAgent::Flocking()
 	*********************************************/
 	vec2 tmp;
 	vec2 velFlock;
+	float cSeparation = 300;
+	float cAlignment = 6.0;
 
 	//velFlock = (300 * Separation()) + (KCohesion * Cohesion()) + (6.0 * Alignment());
-	velFlock = (KSeparate * Separation()) + (KCohesion * Cohesion()) + (KAlign * Alignment());
+	velFlock = (cSeparation * Separation()) + (KCohesion * Cohesion()) + (cAlignment * Alignment());
 	thetad = atan2(velFlock[1], velFlock[0]);
 	thetad += M_PI;
 
@@ -795,20 +822,21 @@ vec2 SIMAgent::Leader()
 	// TODO: Add code here
 	*********************************************/
 	vec2 tmp;
-	vec2 velLeader;
+	vec2 velLeaderFollow;
+	float cSeparate = 0.1;
 
 	if ((GPos[0] == agents[0]->GPos[0]) && (GPos[1] == agents[0]->GPos[1]))
 	{
-		velLeader = Arrival();
+		velLeaderFollow = Arrival();
 	}
 	else
 	{
-		velLeader = (0.1 * Separation()) + Arrival();	
+		velLeaderFollow = (cSeparate * Separation()) + Arrival();
 	}
 
-	vd = velLeader.Length();
-	thetad = atan2(velLeader[1], velLeader[0]);
-	thetad += M_PI;
+	vd = velLeaderFollow.Length();
+	thetad = atan2(velLeaderFollow[1], velLeaderFollow[0]);
+	//thetad += M_PI;
 	tmp = vec2((cos(thetad)  * vd), (sin(thetad) * vd));
 
 	return tmp;
