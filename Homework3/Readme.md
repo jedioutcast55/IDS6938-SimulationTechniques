@@ -161,11 +161,23 @@ With 13 lines as security checkpoints, and 12 check tickets line.  We see the fo
 
 The PDM shows the high traffic comming from the transportation methods of the monorail and the ferry.  It also show very block traffic at the security point.  With the other area of high traffic being ticket check lines.  The graph show on this model that approximate 2500 people made it to the entrance.  This is a little less than 50%.
 
+To improve the situation, we take a look at incresing the security checkpoint lines to 22 total and 20 ticket lines.  Everything else remain the same.
+
+Results of run#2:
+[![Anylogic MK Entrance Model](HW3Data/Part2SimulatingSamplePedestrianFlow/SectionC/Run_2IncreaseSecurityandTicketCheckpoints.PNG)](https://youtu.be/lPFRB2z7V6Y)
+
+The firs noticible change from the PDM is that the security checkpoints and ticket check points still high traffic as expected.  However we see a decrease in traffic.  In the security checkpoint is a noticeable change.  As to statistics the graph shows that nearly 4000 guest went throug security, and more than 3000 guest enter the park. The simulation states that there is a 12% improvement over the previous configuration.  
+
+In all this is good system to approximate reasonable expectations, but as any model the more acccurate data, the closer the results will be to the real thing.  This simulationcan be use also to change around the capacity and the rate of the modes of transportation, however time has not allow me to explore this and other options.
+
 
 Note: I could not find a more detailed statistics on the pedestrian traffic at Disney(tm) to validate my model, however can still be useful to spot trouble zones.
 
 Citations:
  - More than 90% of code was provided by Dr. Kider or derivatives from modules on Canva.
  - Work in collaboration with students at the class (bouncing of ideas) Mark, Sarah, Julie, Odnnie, Rachel, Charles, and others in class that I do not know their names.  I believe a talk to almost everyone in the class.
- - 
+ - [1]
+ - [2]
+ - [3]
+ - [4]
 
