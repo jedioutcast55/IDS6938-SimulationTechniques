@@ -115,15 +115,39 @@ The goal of this part of the assigment is to simulate the pedestrain flow for va
 
 ![](images/flow.png?raw=true)
 
+I am utilizing AnyLogic 8 Personal Learning Edition 8.0.4, Build: 8.0.4.201703301625 x64 for this section of the HW3.
+
 **(a) - 0 points**: Follow the Anylogic example for the [Subway Entrance example](https://help.anylogic.com/index.jsp?topic=/com.xj.anylogic.help/html/_PL/tutorial/Subway_Entrance.html). Create the appropriate [boundaries and walls](https://help.anylogic.com/index.jsp?topic=/com.xj.anylogic.help/html/markup/Wall.html), and the display ther pedestrian density map, [statistics](https://help.anylogic.com/index.jsp?nav=/4_1_5), [2D and 3D animations](https://help.anylogic.com/index.jsp?topic=/com.xj.anylogic.help/html/_PL/reference/Animation.html).
 
 
 
 ![](images/density.png?raw=true)
 
+For section (a) the work can be found in the following folder: \IDS6938-SimulationTechniques\Homework3\HW3Data\Part2SimulatingSamplePedestrianFlow\SectionA\Subway Entrance Hall
+
 **(b) - 20 points**: Create a maze. Generate the pdm, stats, and animations like before. Vary [parameters in your agents](https://help.anylogic.com/index.jsp?topic=/com.xj.anylogic.help/html/_PL/reference/Attributes.html) to give them different behaviors and show the pedistrians change how they navigate the maze.
+The maze utilize is a simple maze with the goal to get the princess to her castle.  Constuct a model of the maze on Anylogic.  The behavior model in anylogic is strighforward.  For every instance a choice has to be made, the model provides equal averages for all the options.   
+
+The fisrt test run, the model input was at a rate of 1000 pricesses per hour.  This model has 2D and 3D viewing of the maze.  The graphs also show that less than 50% of the pricessess reached the castle.  This is most likely due to the bottle neck cause by to many pricesses in the maze at the same time.
+
+[![Anylogic Maze Model 1000 Agents](HW3Data/Part2SimulatingSamplePedestrianFlow/SectionB/AnyLogicMazeModelRun1000.PNG)](https://youtu.be/F0aVPVDOysA)
+Figure 13: Maze Anylogic simulation for rate of 1000 agents per hour.
+
+The run shows the pedestrian density map and plot graph of how many has reach at each end of the maze.  The indication is the rate is to much for this maze to handle as you can see a battle neck between end1 and end2.
+
+
+The second run, I decided to reduce the rate to only 100 princesses an hour.  At this rate there shold not be any bottle neck.  The run is also shown in both 2D and 3D.
+
+[![Anylogic Maze Model 100 Agents](HW3Data/Part2SimulatingSamplePedestrianFlow/SectionB/AnyLogicMazeModelRun100.PNG)](https://youtu.be/tvMDvipFXwQ)
+Figure 14: Maze Anylogic simulation for rate of 100 agents per hour.
+
+In the second run we see expected results, there is not bottle neck.  PDM shows still that there is heavy traffic going towards end1 and 2.  This make sense since there are more options on this route.  We can see from the graph that a little bit above 60% of the princesses made it to the castle.
 
 **(c) - 30 points**: Model and analyze a building (or floor/outdoor space/stadium) on campus. (There is help on piazza how to find rough building plans - we expect something plausible). Create a senario: evacuation, daily office routine, special event, normal egress.... etc., and model and design your own experiment to determine if the building design suits the needs of its users. Start with photographs of your site, describe your site, describe your senario and hypothesis. Then use an agent-based pedistrian simulation to visualize your experiment's results.
 
 
+Citations:
+ - More than 90% of code was provided by Dr. Kider or derivatives from modules on Canva.
+ - Work in collaboration with students at the class (bouncing of ideas) Mark, Sarah, Julie, Odnnie, Rachel, Charles, and others in class that I do not know their names.  I believe a talk to almost everyone in the class.
+ - 
 
