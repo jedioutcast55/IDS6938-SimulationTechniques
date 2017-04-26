@@ -182,7 +182,7 @@ Also there are embeded videos within most pictures, I tried to test them but did
 
 Citations:
  - More than 90% of code was provided by Dr. Kider or derivatives from modules on Canvas.
- - Work in collaboration with students at the class (bouncing of ideas) Mark, Sarah, Julie, Odnnie, Rachel, Charles, and others in class that I do not know their names.  I believe a talk to almost everyone in the class.
+ - Work in collaboration with students at the class (bouncing of ideas) Mark, Sarah, Julie, Odnnie, Rachel, Charles, and others in class that I do not know their names.  I believe I talk to almost everyone in the class.
  - [1] Magic Kingdom tops 20 million in 2015 theme park attendance report. (n.d.). Retrieved April 25, 2017, from http://www.themeparkinsider.com/flume/201605/5084/
  - [2] Walt Disney World Calendar. (n.d.). Retrieved April 25, 2017, from http://www.wdwmagic.com/calendar.htm
  - [3] Walt Disney World Monorail System. (2017, April 20). Retrieved April 25, 2017, from https://en.wikipedia.org/wiki/Walt_Disney_World_Monorail_System
