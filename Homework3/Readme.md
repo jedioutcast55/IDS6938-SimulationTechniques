@@ -64,49 +64,49 @@ I have implemented 6 types of individual agent behaviors in the Agent.cpp file. 
 
 The following video will show the six different behaviors with one individual, ten individuals, and 50 individuals.  The video will show the behaviors in the following order:
 1.	Seek
-![](HW3Data/Part1/IndividualBehavior/SeekImage.PNG?raw=true)
+[![Agent Seek](HW3Data/Part1/IndividualBehavior/SeekImage.PNG?raw=true)](https://youtu.be/iQonY81tPrE)
 Figure 2: Video Access to Agent Individual Behavior: Seek. With the number of Agents from 1, 10, and  50.
 
 2.	Flee
-![](HW3Data/Part1/IndividualBehavior/FleeImage.PNG?raw=true)
+[![Agent Flee](HW3Data/Part1/IndividualBehavior/FleeImage.PNG?raw=true)](https://youtu.be/eKPVPQfmRcc)
 Figure 3: Video Access to Agent Individual Behavior: Flee. With the number of Agents from 1, 10, and  50.
 
 3.	Arrival 
-![](HW3Data/Part1/IndividualBehavior/ArrivalImage.PNG?raw=true)
+[![Agent Arrival](HW3Data/Part1/IndividualBehavior/ArrivalImage.PNG?raw=true)](https://youtu.be/MmhvjYgr-vA)
 Figure 4: Video Access to Agent Individual Behavior: Arrival. With the number of Agents from 1, 10, and  50.
 
 4.	Departure
-![](HW3Data/Part1/IndividualBehavior/DepartureImage.PNG?raw=true)
+[![Agent Departure](HW3Data/Part1/IndividualBehavior/DepartureImage.PNG?raw=true)](https://youtu.be/5tKlot2yVLw)
 Figure 5: Video Access to Agent Individual Behavior: Departure. With the number of Agents from 1, 10, and  50.
 
 5.	Wander
-![](HW3Data/Part1/IndividualBehavior/WanderImage.PNG?raw=true)
+[![Agent Wander](HW3Data/Part1/IndividualBehavior/WonderImage.PNG?raw=true)](https://youtu.be/L_D9QYE14o8)
 Figure 6: Video Access to Agent Individual Behavior: Wonder. With the number of Agents from 1, 10, and  50.
 
 6.	Avoid
-![](HW3Data/Part1/IndividualBehavior/AvoidImage.PNG?raw=true)
+[![Agent Avoid](HW3Data/Part1/IndividualBehavior/AvoidImage.PNG?raw=true)](https://youtu.be/mExtPyF0Mfo)
 Figure 7: Video Access to Agent Individual Behavior: Avoid. With the number of Agents from 1, 10, and  50.
 
 
 **(c) - 20 points**: Implement the functions for the following group behaviors: 
 * Seperation
-![](HW3Data/Part1/GroupBehavior/SeparationImage.PNG?raw=true)
+[![Agent Separation](HW3Data/Part1/GroupBehavior/SeparationImage.PNG?raw=true)](https://youtu.be/aKX10xZCKTw)
 Figure 8: Video Access to Agent Group Behavior: Separation. With the number of Agents from 10 and  50.
 
 * Cohesion 
-![](HW3Data/Part1/GroupBehavior/AlignmentImage.PNG?raw=true)
+[![Agent Cohesion](HW3Data/Part1/GroupBehavior/CohesionImage.PNG?raw=true)](https://youtu.be/SXytivl735I)
 Figure 9: Video Access to Agent Group Behavior: Alignment. With the number of Agents from 10 and  50.
 
 * Alignment 
-![](HW3Data/Part1/GroupBehavior/CohesionImage.PNG?raw=true)
+[![Agent Alignment](HW3Data/Part1/GroupBehavior/AlignmentImage.PNG?raw=true)](https://youtu.be/y4bljVzbrhM)
 Figure 10: Video Access to Agent Group Behavior: Cohesion. With the number of Agents from 10 and  50.
 
 * Flocking
-![](HW3Data/Part1/GroupBehavior/FlockingImage.PNG?raw=true)
+[![Agent Flocking](HW3Data/Part1/GroupBehavior/FlockingImage.PNG?raw=true)](https://youtu.be/eRMbi1mF_Ic)
 Figure 11: Video Access to Agent Group Behavior: Flocking. With the number of Agents from 10 and  50.
 
 * Leader Following
-![](HW3Data/Part1/GroupBehavior/LeaderImage.PNG?raw=true)
+[![Agent Leader](HW3Data/Part1/GroupBehavior/LeaderImage.PNG?raw=true)](https://youtu.be/uXEVnTjJmDs)
 Figure 12: Video Access to Agent Group Behavior: Leader. With the number of Agents from 10 and  50.
 
 # Part 2 - Simulating a simple pedestrian flow
@@ -116,6 +116,8 @@ The goal of this part of the assigment is to simulate the pedestrain flow for va
 ![](images/flow.png?raw=true)
 
 **(a) - 0 points**: Follow the Anylogic example for the [Subway Entrance example](https://help.anylogic.com/index.jsp?topic=/com.xj.anylogic.help/html/_PL/tutorial/Subway_Entrance.html). Create the appropriate [boundaries and walls](https://help.anylogic.com/index.jsp?topic=/com.xj.anylogic.help/html/markup/Wall.html), and the display ther pedestrian density map, [statistics](https://help.anylogic.com/index.jsp?nav=/4_1_5), [2D and 3D animations](https://help.anylogic.com/index.jsp?topic=/com.xj.anylogic.help/html/_PL/reference/Animation.html).
+
+
 
 ![](images/density.png?raw=true)
 
