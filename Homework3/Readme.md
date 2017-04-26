@@ -171,9 +171,9 @@ Results of run#2:
 [![Anylogic MK Entrance Model](HW3Data/Part2SimulatingSamplePedestrianFlow/SectionC/Run_2IncreaseSecurityandTicketCheckpoints.PNG)](https://youtu.be/lPFRB2z7V6Y)
 Figure 16: Second Run of MK Entrance model with adjustment to security and ticket checkpoints.
 
-The firs noticible change from the PDM is that the security checkpoints and ticket check points still high traffic as expected.  However we see a decrease in traffic.  In the security checkpoint is a noticeable change.  As to statistics the graph shows that nearly 4000 guest went throug security, and more than 3000 guest enter the park. The simulation states that there is a 12% improvement over the previous configuration.  
+The firs noticible change from the PDM is that the security checkpoints and ticket check points still high traffic as expected.  However we see a decrease in traffic bottlenecks.  In the security checkpoint is a noticeable change.  As to statistics the graph shows that nearly 4000 guest went throug security, and more than 3000 guest enter the park. The simulation states that there is a 12% improvement over the previous configuration.  
 
-In all this is good system to approximate reasonable expectations, but as any model the more acccurate data, the closer the results will be to the real thing.  This simulationcan be use also to change around the capacity and the rate of the modes of transportation, however time has not allow me to explore this and other options.
+In all this is good system to approximate reasonable expectations, but as any model the more acccurate data, the closer the results will be to the real thing.  This simulation can be use also to change around the capacity and the rate of the modes of transportation, however time has not allow for me to explore this and other options.
 
 
 Note: I could not find a more detailed statistics on the pedestrian traffic at Disney(tm) to validate my model, however can still be useful to spot trouble zones.
@@ -181,7 +181,7 @@ Note: I could not find a more detailed statistics on the pedestrian traffic at D
 Also there are embeded videos within most pictures, I tried to test them but did not seem to work!!
 
 Citations:
- - More than 90% of code was provided by Dr. Kider or derivatives from modules on Canva.
+ - More than 90% of code was provided by Dr. Kider or derivatives from modules on Canvas.
  - Work in collaboration with students at the class (bouncing of ideas) Mark, Sarah, Julie, Odnnie, Rachel, Charles, and others in class that I do not know their names.  I believe a talk to almost everyone in the class.
  - [1] Magic Kingdom tops 20 million in 2015 theme park attendance report. (n.d.). Retrieved April 25, 2017, from http://www.themeparkinsider.com/flume/201605/5084/
  - [2] Walt Disney World Calendar. (n.d.). Retrieved April 25, 2017, from http://www.wdwmagic.com/calendar.htm
