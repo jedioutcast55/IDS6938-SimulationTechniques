@@ -145,6 +145,24 @@ In the second run we see expected results, there is not bottle neck.  PDM shows 
 
 **(c) - 30 points**: Model and analyze a building (or floor/outdoor space/stadium) on campus. (There is help on piazza how to find rough building plans - we expect something plausible). Create a senario: evacuation, daily office routine, special event, normal egress.... etc., and model and design your own experiment to determine if the building design suits the needs of its users. Start with photographs of your site, describe your site, describe your senario and hypothesis. Then use an agent-based pedistrian simulation to visualize your experiment's results.
 
+The scenario I have selected to model, is the pedestrian traffic at the entrance to the Magic Kingdom™.  There are three major transportation to reach the entrance of World Disney World™ (WDW) Magic Kingdom (MK).  These are by monorail, by ferry and by bus.  These three mode of transportation brings the bulk of the 20.5 million visitors a year to the MK[1].  Using this number, we estimate that MK has a daily visit an average of 56,164 guests.  The current park hours for MK are from 9:00 AM to till 10:00 PM[2].  With an average of 5,106 guest an hour.  This video shows the entrance to the park (https://www.youtube.com/watch?v=iJ93s9XpC8o).
+
+As anyone who has visit the park, the entrance and exit to the mode of transportation is a high transit area.  There are other two traffic areas that can easily become congested.  One is the security checkpoint.  The security checkpoint is where your security personnel check your bags for things that are not allow to bring to the park.  There is a line for which people without bags may go in directly.  The second-high traffic location after the security checkpoint, is the ticket verification lines.  This is where Disney’s employees check your ticket for verification.  After the ticket verification guest, can continue to the entrance to the MK.  There are other sections within this area that guests visits, like will call, bathrooms, customer service, and small stores.
+
+I have collected some information in regards to the monorail, ferry and bus systems.
+The Monorail is a Mark IV with the capacity of 360 Guest per train.  If we speculate to have approximate 3000 guest ride the monorail per hour the model needs to simulate of about to ten arrivals of the monorail [3].  
+The other method of transportation is the ferry.  The ferry transport guest through the waterway at WDW.  Ferries has the capacity of 600 guest with a wait-time between 10 to 20 mins [4].  
+The next is the bus, usually use by guest staying on Disney™ properties.  The estimate the bus to come every 20 minutes.
+
+The model have the three transportation methods, the security checkpoin, ticket checkpoint, will call, bathrooms, store, and customer service, with the end being the entrance to MK.  Base on this data I ran my model.
+[![Anylogic MK Entrance Model](HW3Data/Part2SimulatingSamplePedestrianFlow/SectionC/EntranceToTheMagicKingdomTrafficAnalysis.PNG)](https://youtu.be/FpvdrWmqQu4)
+I have decided to use the rate of 5106 guest per hour on my simulation to see the results.  With the monorail 2900 guest an hour, bus at 306 guest an hour, and ferry 1900 guest an hour.
+With 13 lines as security checkpoints, and 12 check tickets line.  We see the following results from the run of this simulation.
+
+The PDM shows the high traffic comming from the transportation methods of the monorail and the ferry.  It also show very block traffic at the security point.  With the other area of high traffic being ticket check lines.  The graph show on this model that approximate 2500 people made it to the entrance.  This is a little less than 50%.
+
+
+Note: I could not find a more detailed statistics on the pedestrian traffic at Disney(tm) to validate my model, however can still be useful to spot trouble zones.
 
 Citations:
  - More than 90% of code was provided by Dr. Kider or derivatives from modules on Canva.
